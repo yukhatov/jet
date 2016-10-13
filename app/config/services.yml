@@ -1,9 +1,13 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+#    parameter1: 1
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+#    app.jet.api:
+#        class: AppBundle\Services\JetApi
+#        arguments: ["%parameter1%"]
+
+    app.jet.api:
+            class: AppBundle\Services\JetApi
+#            arguments: ["%parameter1%"]

@@ -13,7 +13,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
         return $this->render('default/index.html.twig', array());
         /*return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
@@ -47,6 +46,17 @@ class DefaultController extends Controller
             ->findAll();
 
         return $this->render('default/providers.html.twig', array('providers' => $providers));
+    }
+
+    /**
+     * @Route("//orders")
+     */
+    public function ordersAction()
+    {
+        $api = $this->get('app.jet.api');
+        $orders = $api->getAllOrders();
+
+        return $this->render('default/orders.html.twig', array('orders' => $orders));
     }
 
     /**

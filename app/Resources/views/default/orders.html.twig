@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div clas="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Orders:</div>
+                <!-- Table -->
+                <table class="table table-bordered table-hover">
+                    <theader class="center">
+                        <th>Id</th>
+                    </theader>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order['orderId'] }}</td>
+                            </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
