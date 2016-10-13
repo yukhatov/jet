@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div clas="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Providers:</div>
+                <!-- Table -->
+                <table class="table table-bordered table-hover">
+                    <theader class="center">
+                        <th>Id</th>
+                        <th>Title</th>
+                    </theader>
+                        {% for provider in providers %}
+                            <tr>
+                                <td>{{ provider.getProviderId() }}</td>
+                                <td><a href='/brands/{{ provider.getProviderId() }}'>{{ provider.getProviderTitle() }}</a></td>
+                            </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

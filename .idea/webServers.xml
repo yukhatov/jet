@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6939db6f-1ca3-4061-b891-8a0921c3d0b1" name="108.59.12.8" url="http://108.59.12.8">
+        <fileTransfer host="108.59.12.8" port="21" username="vitaly">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
