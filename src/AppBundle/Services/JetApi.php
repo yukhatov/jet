@@ -8,7 +8,7 @@
 
 namespace AppBundle\Services;
 
-require (__DIR__ . '/../../../../jet_api/jetmain.php');
+//require (__DIR__ . '/../../../../jet_api/jetmain.php');
 
 class JetApi
 {
@@ -21,8 +21,8 @@ class JetApi
 
     public function getAllOrders()
     {
-        $controll = new \ApiController();
-        $orders = $controll->getAllOrders();
+       // $controll = new \jetApiOrders();
+        $orders = []/*$controll->getAllOrders()*/;
 
         return $orders;
     }

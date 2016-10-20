@@ -56,6 +56,10 @@ class DefaultController extends Controller
         $api = $this->get('app.jet.api');
         $orders = $api->getAllOrders();
 
+        echo "\n";
+        print_r($orders);
+        die('stop');
+
         return $this->render('default/orders.html.twig', array('orders' => $orders));
     }
 
