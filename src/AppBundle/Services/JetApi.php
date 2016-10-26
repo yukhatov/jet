@@ -21,8 +21,8 @@ class JetApi
 
     public function getAllOrders()
     {
-       // $controll = new \jetApiOrders();
-        $orders = []/*$controll->getAllOrders()*/;
+        $controll = new \jetApiOrders();
+        $orders = $controll->getAllOrders();
 
         return $orders;
     }

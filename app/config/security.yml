@@ -32,3 +32,4 @@ security:
             # require ROLE_ADMIN for /admin*
             - { path: ^/admin, roles: ROLE_ADMIN }
             - { path: ^/providers, roles: ROLE_ADMIN }
+            - { path: ^/orders, roles: ROLE_ADMIN }

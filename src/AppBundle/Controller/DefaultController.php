@@ -49,21 +49,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("//orders")
-     */
-    public function ordersAction()
-    {
-        $api = $this->get('app.jet.api');
-        $orders = $api->getAllOrders();
-
-        echo "\n";
-        print_r($orders);
-        die('stop');
-
-        return $this->render('default/orders.html.twig', array('orders' => $orders));
-    }
-
-    /**
      * @Route("//brands/{provider}"), requirements={"provider": "\d+"}
      */
     public function brandsAction($provider = null)
@@ -79,10 +64,6 @@ class DefaultController extends Controller
                 ->findBy(['provider_id' => $provider]);
         }
 
-
-
         return $this->render('default/brands.html.twig', array('brands' => $brands));
     }
-
-
 }

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div clas="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Orders:</div>
+                <!-- Table -->
+                <table class="table table-bordered table-hover">
+                    <theader class="center">
+                        <th>Id</th>
+                        <th>Status</th>
+                        <th>Shipping method</th>
+                        <th>Recipient</th>
+                        <th>Address</th>
+                        <th>Details</th>
+                    </theader>
+                        {% for order in orders %}
+                            <tr>
+                                    <td>{{ order.getId() }}</td>
+                                    <td>{{ order.getStatus() }}</td>
+                                    <td>{{ order.getRequestShippingMethod() }}</td>
+                                    <td>{{ order.getRecipientName() }}</td>
+                                    <td>{{ order.getAddressLine() }}</td>
+                                    <td align="center"><a href='/orders/{{ order.getId() }}'><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
+                            </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
