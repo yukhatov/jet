@@ -2,6 +2,8 @@
 
 {% block body %}
 
+    {% form_theme form 'Form/bootstrap_3_horizontal_layout.html.twig' %}
+
     <div clas="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -13,6 +15,7 @@
                         <th>Id</th>
                         <th>Status</th>
                         <th>Shipping method</th>
+                        <th>Tracking number</th>
                         <th>Recipient</th>
                         <th>Phone</th>
                         <th>Address</th>
@@ -24,6 +27,7 @@
                                 <td>{{ order.getId() }}</td>
                                 <td>{{ order.getStatus() }}</td>
                                 <td>{{ order.getRequestShippingMethod() }}</td>
+                                <td>{{ order.getShipmentTrackingNumber() }}</td>
                                 <td>{{ order.getRecipientName() }}</td>
                                 <td>{{ order.getRecipientPhoneNumber() }}</td>
                                 <td>{{ order.getAddressLine() }}</td>
@@ -57,7 +61,7 @@
                             <td align="center">
                                 <select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}">
                                     {% for value in item.getSelectValues %}
-                                        {% if(value == item.getSelectedValue())%}
+                                        {% if(value == item.getSelectedValue()) %}
                                             <option selected>{{ value }}</option>
                                         {% else %}
                                             <option>{{ value }}</option>
@@ -70,6 +74,35 @@
                         </tr>
                     {% endfor %}
                 </table>
+            </div>
+
+            <div class="btn-group pull-right">
+                {% if(order.getShipmentTrackingNumber()) %}
+                    <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
+                {% else %}
+                    <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
+                {% endif %}
+
+                <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accepted</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    {% for status in statuses %}
+                        <li class="approve-order" data-status-id="{{ status.getId() }}"><a href="#">{{ status.getTitle() }}</a></li>
+                    {% endfor %}
+                </ul>
+
+                <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
+            </div>
+        </div>
+
+        <div class="col-md-7" style="display: none;" id="order-form">
+            <div class="panel panel-default">
+                <div class="panel-heading">Ship order form:</div>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

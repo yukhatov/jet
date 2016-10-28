@@ -8,6 +8,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -16,6 +17,28 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Order
 {
+    const DEFAULT_CARIER_PICK_UP_DATE = 259200; // tree days
+    const DEFAULT_EXPECTED_DELIVERY_DATE = 864000; // ten days
+
+    public function __construct()
+    {
+        $time = new \DateTime();
+
+        $timestampNow = $time->getTimestamp();
+        $timestampCarier= $timestampNow + self::DEFAULT_CARIER_PICK_UP_DATE;
+        $timestampDelivery= $timestampNow + self::DEFAULT_EXPECTED_DELIVERY_DATE;
+
+        $this->setResponseShipmentDate($time);
+
+        $time = new \DateTime();
+        $time->setTimestamp($timestampCarier);
+        $this->setCarrierPickUpDate($time);
+
+        $time = new \DateTime();
+        $time->setTimestamp($timestampDelivery);
+        $this->setExpectedDeliveryDate($time);
+    }
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -62,6 +85,33 @@ class Order
      * @ORM\Column(type="string", length=255)
      */
     private $address_zip_code;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $shipment_tracking_number;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="integer")
+     */
+    private $response_shipment_date;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $expected_delivery_date;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $carrier_pick_up_date;
 
     /**
      * @return mixed
@@ -213,5 +263,92 @@ class Order
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShipmentTrackingNumber()
+    {
+        return $this->shipment_tracking_number;
+    }
+
+    /**
+     * @param mixed $shipment_tracking_number
+     */
+    public function setShipmentTrackingNumber($shipment_tracking_number)
+    {
+        $this->shipment_tracking_number = $shipment_tracking_number;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponseShipmentDate()
+    {
+        return $this->response_shipment_date;
+    }
+
+    /**
+     * @param mixed $response_shipment_date
+     */
+    public function setResponseShipmentDate($response_shipment_date)
+    {
+        $this->response_shipment_date = $response_shipment_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpectedDeliveryDate()
+    {
+        return $this->expected_delivery_date;
+    }
+
+    /**
+     * @param mixed $expected_delivery_date
+     */
+    public function setExpectedDeliveryDate($expected_delivery_date)
+    {
+        $this->expected_delivery_date = $expected_delivery_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCarrierPickUpDate()
+    {
+        return $this->carrier_pick_up_date;
+    }
+
+    /**
+     * @param mixed $carrier_pick_up_date
+     */
+    public function setCarrierPickUpDate($carrier_pick_up_date)
+    {
+        $this->carrier_pick_up_date = $carrier_pick_up_date;
+    }
+
+    public function ship(Order $orderModel)
+    {
+        if($orderModel->getShipmentTrackingNumber())
+        {
+            $this->setShipmentTrackingNumber($orderModel->getShipmentTrackingNumber());
+        }
+
+        if($orderModel->getCarrierPickUpDate())
+        {
+            $this->setCarrierPickUpDate($orderModel->getCarrierPickUpDate()->getTimestamp());
+        }
+
+        if($orderModel->getExpectedDeliveryDate())
+        {
+            $this->setExpectedDeliveryDate($orderModel->getExpectedDeliveryDate()->getTimestamp());
+        }
+
+        if($orderModel->getResponseShipmentDate())
+        {
+            $this->setResponseShipmentDate($orderModel->getResponseShipmentDate()->getTimestamp());
+        }
     }
 }
