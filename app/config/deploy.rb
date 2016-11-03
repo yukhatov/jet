@@ -1,4 +1,4 @@
-set :application, "jet"
+    set :application, "jet"
 set :domain,      "108.59.12.8"
 set :user,        "ebay"
 set :port,        "10022"
@@ -20,6 +20,7 @@ set :webserver_user, "www-data"
 set :permission_method, :acl
 set :use_set_permissions, false
 
+set :copy_vendors, true
 set :use_composer, true
 set :update_vendors, true
 set :vendors_mode, "install"

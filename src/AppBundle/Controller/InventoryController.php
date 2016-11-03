@@ -16,24 +16,8 @@ class InventoryController extends Controller
     /**
      * @Route("//inventory")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-        /*$sortColumn = 'id';
-
-        if($request->get('sort'))
-        {
-            $sortColumn = $request->get('sort');
-        }
-
-        $inventoryRep = $this->getDoctrine()
-            ->getRepository('AppBundle:InventoryItem');
-
-        $query = $inventoryRep->createQueryBuilder('i')
-            ->orderBy('i.' . $sortColumn, 'ASC')
-            ->getQuery();
-
-        $inventory = $query->getResult();*/
-
         $inventory = $this->getDoctrine()
             ->getRepository('AppBundle:InventoryItem')
             ->findAll();
