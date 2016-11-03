@@ -331,6 +331,11 @@ class Order
 
     public function ship(Order $orderModel)
     {
+        if($this->getShipmentTrackingNumber())
+        {
+            return false;
+        }
+
         if($orderModel->getShipmentTrackingNumber())
         {
             $this->setShipmentTrackingNumber($orderModel->getShipmentTrackingNumber());
@@ -350,5 +355,7 @@ class Order
         {
             $this->setResponseShipmentDate($orderModel->getResponseShipmentDate()->getTimestamp());
         }
+
+        return true;
     }
 }
