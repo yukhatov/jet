@@ -94,6 +94,14 @@ function validateForm(e)
         e.preventDefault();
 
         return false;
+    }else{
+        if(isNaN(tackingNumber))
+        {
+            alert('Tracking number must consist of digits only!');
+            e.preventDefault();
+
+            return false;
+        }
     }
 
     return true;
