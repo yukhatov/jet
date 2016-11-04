@@ -21,7 +21,7 @@ class OrderController extends Controller
     const ACTION_TYPE_CANCEL = 'try_cancel_order';
 
     /**
-     * @Route("//orders")
+     * @Route("/orders", name="orders")
      */
     public function listAction()
     {
@@ -33,7 +33,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("//orders/{id}")
+     * @Route("/orders/{id}", name="order")
      */
     public function showAction($id, Request $request)
     {

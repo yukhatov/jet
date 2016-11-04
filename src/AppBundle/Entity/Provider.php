@@ -31,7 +31,7 @@ class Provider {
     /**
      * @return mixed
      */
-    public function getProviderId()
+    public function getId()
     {
         return $this->provider_id;
     }

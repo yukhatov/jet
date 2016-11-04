@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class InventoryController extends Controller
 {
     /**
-     * @Route("//inventory")
+     * @Route("/inventory", name="inventory")
      */
     public function listAction()
     {

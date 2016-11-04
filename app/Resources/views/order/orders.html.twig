@@ -24,7 +24,7 @@
                                     <td>{{ order.getRequestShippingMethod() }}</td>
                                     <td>{{ order.getRecipientName() }}</td>
                                     <td>{{ order.getAddressLine() }}</td>
-                                    <td align="center"><a href='/orders/{{ order.getId() }}'><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
+                                    <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
                             </tr>
                         {% endfor %}
                 </table>

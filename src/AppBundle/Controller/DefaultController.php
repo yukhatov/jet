@@ -14,9 +14,6 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render('default/index.html.twig', array());
-        /*return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ));*/
     }
 
     /**
@@ -37,7 +34,7 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', array('name' => 'Admin'));
     }
     /**
-     * @Route("//providers")
+     * @Route("/providers", name="providers")
      */
     public function providersAction()
     {
@@ -49,7 +46,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("//brands/{provider}"), requirements={"provider": "\d+"}
+     * @Route("/brands/{provider}", name="brands", requirements={"provider": "\d+"})
      */
     public function brandsAction($provider = null)
     {
