@@ -3,6 +3,8 @@
  */
 
 $(document).ready(function(){
-	  $("#inventory-table").dataTable();
+    $("#orders-table").dataTable({
+        "order": [[0, "desc"]]
+    } );
 });
 

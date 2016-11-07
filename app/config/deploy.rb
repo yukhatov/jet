@@ -20,13 +20,13 @@ set :webserver_user, "www-data"
 set :permission_method, :acl
 set :use_set_permissions, false
 
-set :copy_vendors, true
+# set :composer_options,  "--no-dev --verbose --prefer-dist --optimize-autoloader --no-progress"
+set :copy_vendors, false
 set :use_composer, true
 set :update_vendors, true
-set :vendors_mode, "install"
 set :dump_assetic_assets, true
 
-set :repository,  "git@bitbucket.org:projektcs/jet-new.git"
+set :repository,  "git@bitbucket.org:projektcs/jet.git"
 
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`

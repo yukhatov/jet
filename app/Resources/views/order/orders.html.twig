@@ -4,36 +4,43 @@
 
     <div clas="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Orders:</div>
-                <!-- Table -->
-                <table class="table table-bordered table-hover">
-                    <theader class="center">
-                        <th>Id</th>
+                <table id="orders-table" class="table table-striped table-bordered">
+                    <thead>
+                        <th>Order date</th>
                         <th>Status</th>
+                        <th>Merchant order</th>
                         <th>Shipping method</th>
+                        <th>Tracking number</th>
                         <th>Recipient</th>
                         <th>Address</th>
+                        <th>Delivery date</th>
                         <th>Details</th>
-                    </theader>
+                    </thead>
                         {% for order in orders %}
                             <tr>
-                                    <td>{{ order.getId() }}</td>
-                                    <td>{{ order.getStatus() }}</td>
-                                    <td>{{ order.getRequestShippingMethod() }}</td>
-                                    <td>{{ order.getRecipientName() }}</td>
-                                    <td>{{ order.getAddressLine() }}</td>
+                                    <td>{{ order.orderPlacedDate }}</td>
+                                    <td>{{ order.status }}</td>
+                                    <td>{{ order.referenceOrderId }}</td>
+                                    <td>{{ order.requestShippingMethod }}</td>
+                                    <td>{{ order.shipmentTrackingNumber }}</td>
+                                    <td>{{ order.recipientName }}</td>
+                                    <td>{{ order.addressLine }}</td>
+                                    <td>{{ order.getExpectedDeliveryDate('DATE') }}</td>
                                     <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
                             </tr>
                         {% endfor %}
                 </table>
-            </div>
         </div>
     </div>
 
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+{% endblock %}
 
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/orders.js') }}"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 {% endblock %}

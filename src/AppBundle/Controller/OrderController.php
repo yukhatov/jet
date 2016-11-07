@@ -27,7 +27,7 @@ class OrderController extends Controller
     {
         $orders = $this->getDoctrine()
             ->getRepository('AppBundle:Order')
-            ->findAll();
+            ->findBy([], ['inner_order_placed_date' => 'DESC']);
 
         return $this->render('order/orders.html.twig', array('orders' => $orders));
     }
@@ -51,19 +51,12 @@ class OrderController extends Controller
 
         $orderModel = new Order();
         $form = $this->createFormBuilder($orderModel)
-            ->add('shipment_tracking_number', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Tracking number'))
-            ->add('response_shipment_date', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', array('label' => 'Response shipment date'))
-            ->add('carrier_pick_up_date', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType' , array('label' => 'Carrier pick up date'))
-            ->add('expected_delivery_date', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', array('label' => 'Expected delivery date'))
+            ->add('shipment_tracking_number', /*TextType::class*/'Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Tracking number'))
+            ->add('response_shipment_date', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('label' => 'Response shipment date'))
+            ->add('carrier_pick_up_date', 'Symfony\Component\Form\Extension\Core\Type\DateType' , array('label' => 'Carrier pick up date'))
+            ->add('expected_delivery_date', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('label' => 'Expected delivery date'))
             ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array('label' => 'Ship'))
             ->getForm();
-        /*$form = $this->createFormBuilder($orderModel)
-            ->add('shipment_tracking_number', TextType::class, array('label' => 'Tracking number'))
-            ->add('response_shipment_date', DateTimeType::class, array('label' => 'Response shipment date'))
-            ->add('carrier_pick_up_date', DateTimeType::class, array('label' => 'Carrier pick up date'))
-            ->add('expected_delivery_date', DateTimeType::class, array('label' => 'Expected delivery date'))
-            ->add('save', SubmitType::class, array('label' => 'Ship'))
-            ->getForm();*/
 
         $form->handleRequest($request);
 

@@ -59,6 +59,11 @@ class Order
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $reference_order_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $recipient_name;
 
     /**
@@ -85,6 +90,11 @@ class Order
      * @ORM\Column(type="string", length=255)
      */
     private $address_zip_code;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $inner_order_placed_date;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -127,14 +137,6 @@ class Order
     public function setStatus($status)
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrderPlacedDate()
-    {
-        return $this->order_placed_date;
     }
 
     /**
@@ -298,14 +300,6 @@ class Order
     }
 
     /**
-     * @return mixed
-     */
-    public function getExpectedDeliveryDate()
-    {
-        return $this->expected_delivery_date;
-    }
-
-    /**
      * @param mixed $expected_delivery_date
      */
     public function setExpectedDeliveryDate($expected_delivery_date)
@@ -357,5 +351,34 @@ class Order
         }
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderPlacedDate()
+    {
+        return date("Y-m-d H:i", $this->inner_order_placed_date);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpectedDeliveryDate($mode = 'TIMESTAMP')
+    {
+        if($mode != 'TIMESTAMP')
+        {
+            return date("Y-m-d H:i", intval($this->expected_delivery_date));
+        }
+
+        return $this->expected_delivery_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReferenceOrderId()
+    {
+        return $this->reference_order_id;
     }
 }
