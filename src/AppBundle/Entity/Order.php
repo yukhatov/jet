@@ -9,6 +9,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity
@@ -47,9 +48,19 @@ class Order
     private $id;
 
     /**
+     * @OneToMany(targetEntity="OrderItem", mappedBy="order")
+     */
+    private $items;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $base_price;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -380,5 +391,26 @@ class Order
     public function getReferenceOrderId()
     {
         return $this->reference_order_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    public function getItemsCount()
+    {
+        return count( $this->items );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBasePrice()
+    {
+        return $this->base_price;
     }
 }

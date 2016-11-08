@@ -8,6 +8,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity
@@ -21,6 +23,11 @@ class InventoryItem
      * @ORM\Id
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $sku;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -66,6 +73,36 @@ class InventoryItem
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $whole_price;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $color_title;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $color_code;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $size1;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $size2;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $size3;
 
     /**
      * @ORM\Column(type="integer")
@@ -158,5 +195,61 @@ class InventoryItem
     public function getStockCount()
     {
         return $this->stock_count;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWholePrice()
+    {
+        return $this->whole_price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColorTitle()
+    {
+        return $this->color_title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColorCode()
+    {
+        return $this->color_code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSize1()
+    {
+        return $this->size1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSize2()
+    {
+        return $this->size2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSize3()
+    {
+        return $this->size3;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSku()
+    {
+        return $this->sku;
     }
 }

@@ -8,6 +8,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity
@@ -24,9 +27,19 @@ class OrderItem
     private $id ;
 
     /**
+     * @ManyToOne(targetEntity="Order", inversedBy="items")
+     */
+    private $order;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $order_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $merchant_sku;
 
     /**
      * @ORM\Column(type="decimal")
@@ -47,11 +60,6 @@ class OrderItem
      * @ORM\Column(type="integer")
      */
     private $final_quantity;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $merchant_sku;
 
     /**
      * @ORM\Column(type="string")
@@ -152,5 +160,13 @@ class OrderItem
         }else{
             return $this->getQuantity();
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInventoryItem()
+    {
+        return $this->inventoryItem;
     }
 }

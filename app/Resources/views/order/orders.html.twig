@@ -11,6 +11,7 @@
                         <th>Merchant order</th>
                         <th>Shipping method</th>
                         <th>Tracking number</th>
+                        <th>QTY.</th>
                         <th>Recipient</th>
                         <th>Address</th>
                         <th>Delivery date</th>
@@ -23,6 +24,7 @@
                                     <td>{{ order.referenceOrderId }}</td>
                                     <td>{{ order.requestShippingMethod }}</td>
                                     <td>{{ order.shipmentTrackingNumber }}</td>
+                                    <td>{{ order.itemsCount }}</td>
                                     <td>{{ order.recipientName }}</td>
                                     <td>{{ order.addressLine }}</td>
                                     <td>{{ order.getExpectedDeliveryDate('DATE') }}</td>

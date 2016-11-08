@@ -6,27 +6,31 @@
         <div class="col-md-12">
                 <table id="inventory-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
-                        <th><a>Id</a></th>
-                        <th><a>Title</a></th>
-                        <th><a>Status</a></th>
                         <th><a>Brand</a></th>
                         <th><a>Provider</a></th>
+                        <th><a>Title</a></th>
+                        <th><a>UPC</a></th>
+                        <th><a>Color</a></th>
+                        <th><a>Color Code</a></th>
+                    {#<th><a>Status</a></th>#}
+                        <th><a>Whole Price</a></th>
                         <th><a>Price</a></th>
                         <th><a>Stock Count</a></th>
-                        <th><a>UPC</a></th>
                         <th><a>Created At</a></th>
                     </thead>
                     <tbody>
                         {% for item in inventory %}
                             <tr>
-                                    <td>{{ item.getId() }}</td>
-                                    <td>{{ item.getTitle() }}</td>
-                                    <td>{{ item.getStatus() }} {% if item.getSubStatus() %}: {{ item.getSubStatus() }} {% endif %}</td>
                                     <td>{{ item.getBrandName() }}</td>
                                     <td>{{ item.getProviderName() }}</td>
+                                    <td>{{ item.getTitle() }}</td>
+                                    <td>{{ item.upc }}</td>
+                                    <td>{{ item.colorTitle }}</td>
+                                    <td>{{ item.colorCode }}</td>
+                                    {#<td>{{ item.getStatus() }} {% if item.getSubStatus() %}: {{ item.getSubStatus() }} {% endif %}</td>#}
+                                    <td>Whole price</td>
                                     <td>${{ item.getPrice() }}</td>
                                     <td>{{ item.getStockCount() }}</td>
-                                    <td>{{ item.getUpc() }}</td>
                                     <td>{{ item.getCreatedDate() }}</td>
                             </tr>
                         {% endfor %}
