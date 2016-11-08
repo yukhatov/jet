@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\InventoryItem;
 use AppBundle\Entity\Order;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -45,9 +46,24 @@ class OrderController extends Controller
             ->getRepository('AppBundle:OrderItem')
             ->findBy(['order_id' => $id]);
 
+
         $statuses = $this->getDoctrine()
             ->getRepository('AppBundle:Status')
             ->findAll();
+
+        $relatedInventoryItems = array();
+
+        foreach ($items as $item) {
+            $inventoryItem = $this->getDoctrine()
+                ->getRepository('AppBundle:InventoryItem')
+                ->findOneBy(['sku' => $item->getMerchantSku()]);
+
+            if($inventoryItem)
+            {
+                $item->setHasRelatedInventoryItem(true);
+                $relatedInventoryItems[$item->getMerchantSku()] = $inventoryItem;
+            }
+        }
 
         $orderModel = new Order();
         $form = $this->createFormBuilder($orderModel)
@@ -72,7 +88,7 @@ class OrderController extends Controller
             $this->actionCreate(strval($order->getId()), self::ACTION_TYPE_SHIP);
         }
 
-        return $this->render('order/order.html.twig', array('order' => $order, 'items' => $items, 'statuses' => $statuses, 'form' => $form->createView()));
+        return $this->render('order/order.html.twig', array('order' => $order, 'items' => $items, 'inventoryItems' => $relatedInventoryItems, 'statuses' => $statuses, 'form' => $form->createView()));
     }
 
     /**

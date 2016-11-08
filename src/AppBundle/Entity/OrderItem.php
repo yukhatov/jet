@@ -66,6 +66,8 @@ class OrderItem
      */
     private $product_title;
 
+    private $hasRelatedInventoryItem = false;
+
     /**
      * @return mixed
      */
@@ -163,10 +165,19 @@ class OrderItem
     }
 
     /**
-     * @return mixed
+     * @return boolean
      */
-    public function getInventoryItem()
+    public function hasRelatedInventoryItem()
     {
-        return $this->inventoryItem;
+        return $this->hasRelatedInventoryItem;
     }
+
+    /**
+     * @param boolean $hasRelatedInventoryItem
+     */
+    public function setHasRelatedInventoryItem($hasRelatedInventoryItem)
+    {
+        $this->hasRelatedInventoryItem = $hasRelatedInventoryItem;
+    }
+
 }

@@ -46,16 +46,29 @@
                     <theader class="center">
                         <th>Id</th>
                         <th>Title</th>
+                        <th>Color</th>
+                        <th>Color code</th>
+                        <th>UPC</th>
                         <th>Price</th>
                         <th>Shipping cost</th>
                         <th>Quantity</th>
-                        <th>Merchant SKU</th>
                         <th>Action</th>
                     </theader>
                     {% for item in items %}
                         <tr>
                             <td>{{ item.getId() }}</td>
                             <td>{{ item.getTitle() }}</td>
+
+                            {% if( item.hasRelatedInventoryItem() ) %}
+                                <td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].upc }}</td>
+                            {% else %}
+                                <td><font color="#A4A4A4">Not found in inventory</font></td>
+                                <td><font color="#A4A4A4">Not found in inventory</font></td>
+                                <td><font color="#A4A4A4">Not found in inventory</font></td>
+                            {% endif %}
+
                             <td>${{ item.getPrice() }}</td>
                             <td>{{ item.getShippingCost() }}</td>
                             <td align="center">
@@ -69,7 +82,7 @@
                                     {% endfor %}
                                 </select>
                             </td>
-                            <td>{{ item.getMerchantSku() }}</td>
+
                             <td align="center"><button type="button" class="btn btn-default" id="button-save">Save</button></td>
                         </tr>
                     {% endfor %}
