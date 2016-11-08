@@ -6,7 +6,7 @@ use AppBundle\Entity\InventoryItem;
 use AppBundle\Entity\Order;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,10 +42,13 @@ class OrderController extends Controller
             ->getRepository('AppBundle:Order')
             ->findOneBy(['id' => $id]);
 
+        if(!$order){
+            return new RedirectResponse($this->generateUrl('orders'));
+        }
+
         $items = $this->getDoctrine()
             ->getRepository('AppBundle:OrderItem')
             ->findBy(['order_id' => $id]);
-
 
         $statuses = $this->getDoctrine()
             ->getRepository('AppBundle:Status')

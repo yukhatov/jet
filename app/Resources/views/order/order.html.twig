@@ -44,7 +44,6 @@
                 <!-- Table -->
                 <table class="table table-bordered table-hover">
                     <theader class="center">
-                        <th>Id</th>
                         <th>Title</th>
                         <th>Color</th>
                         <th>Color code</th>
@@ -56,7 +55,6 @@
                     </theader>
                     {% for item in items %}
                         <tr>
-                            <td>{{ item.getId() }}</td>
                             <td>{{ item.getTitle() }}</td>
 
                             {% if( item.hasRelatedInventoryItem() ) %}
