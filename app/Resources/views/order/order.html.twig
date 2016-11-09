@@ -88,22 +88,15 @@
             </div>
 
             <div class="btn-group pull-right">
-                {% if(order.getShipmentTrackingNumber()) %}
-                    <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
+                {% if(order.status == 'created' or order.status == 'ready') %}
+                    <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
                 {% else %}
-                    <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
+                    {% if(order.getShipmentTrackingNumber() or order.status == 'inprogress' or order.status == 'complete') %}
+                        <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
+                    {% else %}
+                        <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
+                    {% endif %}
                 {% endif %}
-
-                <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accepted</button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    {% for status in statuses %}
-                        <li class="approve-order" data-status-id="{{ status.getId() }}"><a href="#">{{ status.getTitle() }}</a></li>
-                    {% endfor %}
-                </ul>
-
                 <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
             </div>
         </div>
