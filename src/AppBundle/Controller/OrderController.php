@@ -71,9 +71,9 @@ class OrderController extends Controller
         $orderModel = new Order();
         $form = $this->createFormBuilder($orderModel)
             ->add('shipment_tracking_number', /*TextType::class*/'Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Tracking number'))
-            ->add('response_shipment_date', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('label' => 'Response shipment date'))
-            ->add('carrier_pick_up_date', 'Symfony\Component\Form\Extension\Core\Type\DateType' , array('label' => 'Carrier pick up date'))
-            ->add('expected_delivery_date', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('label' => 'Expected delivery date'))
+            ->add('response_shipment_date', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('label' => 'Response shipment date', 'format' => 'ddMMMyyyy'))
+            ->add('carrier_pick_up_date', 'Symfony\Component\Form\Extension\Core\Type\DateType' , array('label' => 'Carrier pick up date', 'format' => 'ddMMMyyyy'))
+            ->add('expected_delivery_date', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('label' => 'Expected delivery date', 'format' => 'ddMMMyyyy'))
             ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array('label' => 'Ship'))
             ->getForm();
 
