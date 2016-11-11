@@ -5,34 +5,34 @@
 
     <div clas="row">
         <div class="col-md-12">
-                <table id="orders-table" class="table table-striped table-bordered">
-                    <thead>
-                        <th>Order date</th>
-                        <th>Status</th>
-                        <th>Merchant order</th>
-                        <th>Shipping method</th>
-                        <th>Tracking number</th>
-                        <th>QTY.</th>
-                        <th>Recipient</th>
-                        <th>Address</th>
-                        <th>Delivery date</th>
-                        <th>Details</th>
-                    </thead>
-                        {% for order in orders %}
-                            <tr>
-                                    <td>{{ order.orderPlacedDate }}</td>
-                                    <td>{{ order.status }}</td>
-                                    <td>{{ order.referenceOrderId }}</td>
-                                    <td>{{ order.requestShippingMethod }}</td>
-                                    <td>{{ order.shipmentTrackingNumber }}</td>
-                                    <td>{{ order.itemsCount }}</td>
-                                    <td>{{ order.recipientName }}</td>
-                                    <td>{{ order.addressLine }}</td>
-                                    <td>{{ order.getExpectedDeliveryDate('DATE') }}</td>
-                                    <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
-                            </tr>
-                        {% endfor %}
-                </table>
+            <table id="orders-table" class="table table-striped table-bordered">
+                <thead>
+                    <th>Order date</th>
+                    <th>Status</th>
+                    <th>Merchant order</th>
+                    <th>Shipping method</th>
+                    <th>Tracking number</th>
+                    <th>QTY.</th>
+                    <th>Recipient</th>
+                    <th>Address</th>
+                    <th>Delivery date</th>
+                    <th>Details</th>
+                </thead>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.orderPlacedDate }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.referenceOrderId }}</td>
+                            <td>{{ order.requestShippingMethod }}</td>
+                            <td>{{ order.shipmentTrackingNumber }}</td>
+                            <td>{{ order.itemsCount }}</td>
+                            <td>{{ order.recipientName }}</td>
+                            <td>{{ order.addressLine }}</td>
+                            <td>{{ order.getExpectedDeliveryDate('DATE') }}</td>
+                            <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
+                        </tr>
+                    {% endfor %}
+            </table>
         </div>
     </div>
 
