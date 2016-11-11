@@ -37,6 +37,7 @@ body {
 }
 .navbar .dropdown-menu .divider {
 	height: 0;
+	margin: 0;
 }
 .navbar .caret {
 	margin-left: 12px;
@@ -44,6 +45,13 @@ body {
 }
 
 /* orders table */
+#orders-table_filter {
+	font-size: 12px;
+	font-weight: 600;
+}
+#orders-table_filter .filter-by-status {
+	display: inline-block;
+}
 #orders-table {
 	font-size: 13px;
 	background-color: #fff;
