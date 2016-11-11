@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
  * @ORM\Entity
@@ -21,6 +22,7 @@ class InventoryItem
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -251,5 +253,149 @@ class InventoryItem
     public function getSku()
     {
         return $this->sku;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $sku
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+    }
+
+    /**
+     * @param mixed $fj_status
+     */
+    public function setFjStatus($fj_status)
+    {
+        $this->fj_status = $fj_status;
+    }
+
+    /**
+     * @param mixed $fj_sub_status
+     */
+    public function setFjSubStatus($fj_sub_status)
+    {
+        $this->fj_sub_status = $fj_sub_status;
+    }
+
+    /**
+     * @param mixed $brand_name
+     */
+    public function setBrandName($brand_name)
+    {
+        $this->brand_name = $brand_name;
+    }
+
+    /**
+     * @param mixed $provider_name
+     */
+    public function setProviderName($provider_name)
+    {
+        $this->provider_name = $provider_name;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param mixed $upc
+     */
+    public function setUpc($upc)
+    {
+        $this->upc = $upc;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @param mixed $whole_price
+     */
+    public function setWholePrice($whole_price)
+    {
+        $this->whole_price = $whole_price;
+    }
+
+    /**
+     * @param mixed $color_title
+     */
+    public function setColorTitle($color_title)
+    {
+        $this->color_title = $color_title;
+    }
+
+    /**
+     * @param mixed $color_code
+     */
+    public function setColorCode($color_code)
+    {
+        $this->color_code = $color_code;
+    }
+
+    /**
+     * @param mixed $size1
+     */
+    public function setSize1($size1)
+    {
+        $this->size1 = $size1;
+    }
+
+    /**
+     * @param mixed $size2
+     */
+    public function setSize2($size2)
+    {
+        $this->size2 = $size2;
+    }
+
+    /**
+     * @param mixed $size3
+     */
+    public function setSize3($size3)
+    {
+        $this->size3 = $size3;
+    }
+
+    /**
+     * @param mixed $stock_count
+     */
+    public function setStockCount($stock_count)
+    {
+        $this->stock_count = $stock_count;
     }
 }

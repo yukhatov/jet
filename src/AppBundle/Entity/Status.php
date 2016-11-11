@@ -8,6 +8,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
  * @ORM\Entity
@@ -18,6 +19,7 @@ class Status{
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -53,5 +55,21 @@ class Status{
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

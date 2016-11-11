@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
  * @ORM\Entity
@@ -123,14 +124,14 @@ class Order
     /**
      * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $expected_delivery_date;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $carrier_pick_up_date;
 
@@ -412,5 +413,37 @@ class Order
     public function getBasePrice()
     {
         return $this->base_price;
+    }
+
+    /**
+     * @param mixed $inner_order_placed_date
+     */
+    public function setInnerOrderPlacedDate($inner_order_placed_date)
+    {
+        $this->inner_order_placed_date = $inner_order_placed_date;
+    }
+
+    /**
+     * @param mixed $base_price
+     */
+    public function setBasePrice($base_price)
+    {
+        $this->base_price = $base_price;
+    }
+
+    /**
+     * @param mixed $reference_order_id
+     */
+    public function setReferenceOrderId($reference_order_id)
+    {
+        $this->reference_order_id = $reference_order_id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }
