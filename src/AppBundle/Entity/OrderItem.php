@@ -59,7 +59,7 @@ class OrderItem
     private $request_order_quantity;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $final_quantity;
 
