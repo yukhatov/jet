@@ -1,5 +1,5 @@
 body {
-	font-family: 'OpenSans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	color: #6c6c6c;
@@ -103,4 +103,11 @@ body {
 	-khtml-opacity: 0.6;
 	-moz-opacity: 0.6;
 	opacity: 0.6;
+}
+div.dataTables_wrapper div.dataTables_filter {
+	text-align: left;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+	margin-left: 0;
+	margin-right: 20px;
 }
