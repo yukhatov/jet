@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
  * @ORM\Entity
@@ -22,6 +23,7 @@ class OrderItem
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue
      */
 
     private $id ;
@@ -178,6 +180,70 @@ class OrderItem
     public function setHasRelatedInventoryItem($hasRelatedInventoryItem)
     {
         $this->hasRelatedInventoryItem = $hasRelatedInventoryItem;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $order_id
+     */
+    public function setOrderId($order_id)
+    {
+        $this->order_id = $order_id;
+    }
+
+    /**
+     * @param mixed $merchant_sku
+     */
+    public function setMerchantSku($merchant_sku)
+    {
+        $this->merchant_sku = $merchant_sku;
+    }
+
+    /**
+     * @param mixed $order_item_price
+     */
+    public function setOrderItemPrice($order_item_price)
+    {
+        $this->order_item_price = $order_item_price;
+    }
+
+    /**
+     * @param mixed $order_item_shipping_cost
+     */
+    public function setOrderItemShippingCost($order_item_shipping_cost)
+    {
+        $this->order_item_shipping_cost = $order_item_shipping_cost;
+    }
+
+    /**
+     * @param mixed $request_order_quantity
+     */
+    public function setRequestOrderQuantity($request_order_quantity)
+    {
+        $this->request_order_quantity = $request_order_quantity;
+    }
+
+    /**
+     * @param mixed $product_title
+     */
+    public function setProductTitle($product_title)
+    {
+        $this->product_title = $product_title;
+    }
+
+    /**
+     * @param mixed $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
     }
 
 }
