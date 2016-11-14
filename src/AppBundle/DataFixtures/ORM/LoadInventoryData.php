@@ -15,10 +15,12 @@ class LoadInventoryItemData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $this->newInventoryItem($manager);
+        $this->newInventoryItem($manager, 'D378333');
+        $this->newInventoryItem($manager, 'D378334');
+        $this->newInventoryItem($manager, 'D378335');
     }
 
-    private function newInventoryItem(ObjectManager $manager)
+    private function newInventoryItem(ObjectManager $manager, $sku)
     {
         $item = new InventoryItem();
         $item->setTitle('Ray Ban RB 3300');
@@ -28,7 +30,7 @@ class LoadInventoryItemData implements FixtureInterface
         $item->setCreated(1479704400);
         $item->setPrice(99.9);
         $item->setProviderName('Luxotica');
-        $item->setSku('D378333');
+        $item->setSku($sku);
         $item->setWholePrice(66.6);
         $item->setStockCount(2);
         $item->setFjStatus('Created');
