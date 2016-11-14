@@ -17,9 +17,11 @@ class LoadOrderItemData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $id = 1;
+
         $order1 = $this->newOrder($id, $manager);
         $order2 = $this->newOrder($id + 1, $manager);
         $order3 = $this->newOrder($id + 2, $manager);
+
         $this->newItem($order1, $manager);
         $this->newItem($order1, $manager);
         $this->newItem($order2, $manager);
