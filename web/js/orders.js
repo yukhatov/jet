@@ -1,11 +1,7 @@
-/**
- * Created by artur on 03.11.16.
- */
-
-$(document).ready(function(){
+$(document).ready(function() {
 
 	$("#orders-table").dataTable({
-		"dom": 'lftr',				// https://datatables.net/reference/option/dom
+		"dom": 'ftrl',				// https://datatables.net/reference/option/dom
 		"order": [[0, "desc"]],
 		"iDisplayLength": 50,
 		// columns sorting
@@ -32,7 +28,7 @@ $(document).ready(function(){
 							.draw();
 					} )
 					.wrap('<div class="filter-by-status">')
-					.before( "<span>Status </span>" );
+					.before( '<span>Status </span>' );
  
 				column.data().unique().sort().each( function ( d, j ) {
 					select.append( '<option value="'+d+'">'+d+'</option>' )
@@ -40,4 +36,5 @@ $(document).ready(function(){
 			} );
 		}
 	});
+
 });
