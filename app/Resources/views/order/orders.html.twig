@@ -15,6 +15,9 @@
                         <th>QTY.</th>
                         <th>Recipient</th>
                         <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip code</th>
                         <th>Delivery date</th>
                         <th>Details</th>
                     </thead>
@@ -28,6 +31,9 @@
                                     <td>{{ order.itemsCount }}</td>
                                     <td>{{ order.recipientName }}</td>
                                     <td>{{ order.addressLine }}</td>
+                                    <td>{{ order.getAddressCity() }}</td>
+                                    <td>{{ order.getAddressState() }}</td>
+                                    <td>{{ order.getAddressZipCode() }}</td>
                                     <td>{{ order.getExpectedDeliveryDate('DATE') }}</td>
                                     <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
                             </tr>

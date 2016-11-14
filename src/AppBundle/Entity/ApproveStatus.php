@@ -12,10 +12,10 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="jet_status")
+ * @ORM\Table(name="jet_approve_status")
  */
 
-class Status{
+class ApproveStatus{
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id

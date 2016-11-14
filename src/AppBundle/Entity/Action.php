@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Action
 {
-    public function __construct($orderId, $actionType, Status $status = null)
+    public function __construct($orderId, $actionType, ApproveStatus $status = null)
     {
         if($status){
             $actionBody = ['acknowledgement_status' => $status->getStatus(), 'order_id' => $orderId];

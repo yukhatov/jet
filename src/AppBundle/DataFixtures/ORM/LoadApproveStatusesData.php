@@ -7,15 +7,15 @@
  */
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Status;
+use AppBundle\Entity\ApproveStatus;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadStatusData implements FixtureInterface
+class LoadApproveStatusData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $status = new Status();
+        $status = new ApproveStatus();
         $status->setTitle('Accepted');
         $status->setStatus('accepted');
 

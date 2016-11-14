@@ -3,6 +3,10 @@
  */
 
 $(document).ready(function(){
-	  $("#inventory-table").dataTable();
+	  $("#inventory-table").dataTable(
+		  {
+			  "iDisplayLength": 50
+		  }
+	  );
 });
 

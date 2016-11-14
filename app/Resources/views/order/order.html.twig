@@ -89,10 +89,20 @@
             </div>
 
             <div class="btn-group pull-right">
-                {% if(order.status == 'created' or order.status == 'ready') %}
+                {% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
                     <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+                {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_READY')) %}
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                                <li id="ship-order"><a href="#">Ship Order</a></li>
+                        </ul>
+                    </div>
                 {% else %}
-                    {% if(order.getShipmentTrackingNumber() or order.status == 'inprogress' or order.status == 'complete') %}
+                    {% if(order.getShipmentTrackingNumber() or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_IN_PROGRESS') or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE')) %}
                         <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
                     {% else %}
                         <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>

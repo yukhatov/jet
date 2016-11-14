@@ -4,7 +4,8 @@
 
 $(document).ready(function(){
     $("#orders-table").dataTable({
-        "order": [[0, "desc"]]
+        "order": [[0, "desc"]],
+        "iDisplayLength": 50
     } );
 });
 

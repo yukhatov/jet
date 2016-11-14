@@ -51,7 +51,7 @@ class OrderController extends Controller
             ->findBy(['order_id' => $id]);
 
         $statuses = $this->getDoctrine()
-            ->getRepository('AppBundle:Status')
+            ->getRepository('AppBundle:ApproveStatus')
             ->findAll();
 
         $relatedInventoryItems = array();
@@ -155,7 +155,7 @@ class OrderController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $status = $this->getDoctrine()
-            ->getRepository('AppBundle:Status')
+            ->getRepository('AppBundle:ApproveStatus')
             ->findOneBy(['id' => $statusId]);
 
         $action = new Action($orderId, $actionType, $status);
