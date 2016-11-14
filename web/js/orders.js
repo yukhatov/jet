@@ -1,13 +1,11 @@
 $(document).ready(function() {
 
 	$("#orders-table").dataTable({
-		"dom": 'ftirpl',				// https://datatables.net/reference/option/dom
+		// "dom": 'ftirpl',
+		"dom": "ftr" +				// https://datatables.net/reference/option/dom
+					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
 		"iDisplayLength": 50,
-		// columns sorting
-		// "oLanguage": {
-		// 	"sSearch": ""
-		// },
 		"language": {				// search filter
 			search: "_INPUT_",
 			searchPlaceholder: "Search Orders"
@@ -22,13 +20,14 @@ $(document).ready(function() {
 						var val = $.fn.dataTable.util.escapeRegex(
 							$(this).val()
 						);
- 
 						column
 							.search( val ? '^'+val+'$' : '', true, false )
 							.draw();
 					} )
-					.wrap('<div class="filter-by-status">')
-					.before( '<span>Status </span>' );
+					.wrap('<div class="column-filter">');
+				var title = $( column.header() ).text();			// get column's title
+				select.before('<span>' +title+ ' </span>');		// set column's title before its filter
+
  
 				column.data().unique().sort().each( function ( d, j ) {
 					select.append( '<option value="'+d+'">'+d+'</option>' )

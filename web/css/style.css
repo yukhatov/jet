@@ -56,9 +56,6 @@ body {
 	font-size: 12px;
 	font-weight: 600;
 }
-#orders-table_filter .filter-by-status {
-	display: inline-block;
-}
 #orders-table {
 	font-size: 13px;
 	background-color: #fff;
@@ -118,11 +115,8 @@ body {
 
 /* inventory table */
 #inventory-table_filter {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
-}
-#inventory-table_filter .filter-by-status {
-	display: inline-block;
 }
 #inventory-table {
 	font-size: 13px;
@@ -190,6 +184,15 @@ div.dataTables_wrapper div.dataTables_filter input {
 	margin-right: 20px;
 	border: 1px solid #bababa;
 }
-.dataTables_length {
+.column-filter {
+	display: inline-block;
+}
+.column-filter:not(:last-of-type) {
+	margin-right: 20px;
+}
+div.dataTables_wrapper div.dataTables_paginate {
+	text-align: center;
+}
+div.dataTables_wrapper div.dataTables_length {
 	text-align: right;
 }
