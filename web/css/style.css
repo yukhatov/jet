@@ -114,3 +114,6 @@ div.dataTables_wrapper div.dataTables_filter input {
 	margin-left: 0;
 	margin-right: 20px;
 }
+.dataTables_length {
+	text-align: right;
+}
