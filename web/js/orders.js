@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$("#orders-table").dataTable({
-		"dom": 'ftrl',				// https://datatables.net/reference/option/dom
+		"dom": 'ftirpl',				// https://datatables.net/reference/option/dom
 		"order": [[0, "desc"]],
 		"iDisplayLength": 50,
 		// columns sorting

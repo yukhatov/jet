@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   $("#inventory-table").dataTable({
-		"dom": 'ftrl',				// https://datatables.net/reference/option/dom
+		"dom": 'ftirpl',				// https://datatables.net/reference/option/dom
 		"order": [[0, "desc"]],
 	  "iDisplayLength": 50,
 		"language": {				// search filter

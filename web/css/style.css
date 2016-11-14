@@ -107,6 +107,72 @@ body {
 	-moz-opacity: 0.6;
 	opacity: 0.6;
 }
+
+/* inventory table */
+#inventory-table_filter {
+	font-size: 12px;
+	font-weight: 600;
+}
+#inventory-table_filter .filter-by-status {
+	display: inline-block;
+}
+#inventory-table {
+	font-size: 13px;
+	background-color: #fff;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+#inventory-table thead {
+	background: #E7E7E7;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#inventory-table thead tr th,
+#inventory-table tbody tr td {
+	border-color: transparent;
+	text-align: center;
+	padding: 4px 8px;
+}
+.input-sm {
+	border-radius: 0;
+}
+#inventory-table thead th.sorting:after,
+#inventory-table thead th.sorting_desc:after,
+#inventory-table thead th.sorting_asc:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	bottom: auto;
+	right: 8px;
+	visibility: visible;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+#inventory-table thead th.sorting_desc:after {
+	margin-top: -2px;
+	border-top: 4px solid #000;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: none;
+	filter: alpha(opacity=60);
+	-khtml-opacity: 0.6;
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+#inventory-table thead th.sorting_asc:after {
+	margin-top: -2px;
+	border-top: none;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid #000;
+	filter: alpha(opacity=60);
+	-khtml-opacity: 0.6;
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+
 div.dataTables_wrapper div.dataTables_filter {
 	text-align: left;
 }
