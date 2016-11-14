@@ -5,7 +5,7 @@
 $(document).ready(function(){
 
 	$("#orders-table").dataTable({
-		"dom": 'ftr',				// https://datatables.net/reference/option/dom
+		"dom": 'lftr',				// https://datatables.net/reference/option/dom
 		"order": [[0, "desc"]],
 		"iDisplayLength": 50,
 		// columns sorting
