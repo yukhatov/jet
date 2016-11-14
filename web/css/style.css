@@ -12,7 +12,7 @@ body {
 }
 
 .navbar {
-	background: #E8E8E8;
+	background: #e8e8e8;
 }
 .navbar .navbar-nav>li>a {
 	color: #666666;
@@ -25,6 +25,12 @@ body {
 	font-weight: 600;
 	color: #fff;
 	background: #999;
+}
+.navbar .navbar-brand,
+.navbar .navbar-brand:hover
+ {
+	color: #8200ff;
+	font-weight: 700;
 }
 .navbar .dropdown-menu>li>a {
 	padding: 8px 20px;
@@ -44,6 +50,7 @@ body {
 	border-top-color: #999;
 }
 
+
 /* orders table */
 #orders-table_filter {
 	font-size: 12px;
@@ -58,16 +65,16 @@ body {
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 #orders-table thead {
-	background: #E7E7E7;
+	background: #e7e7e7;
 	font-size: 10px;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 #orders-table thead tr th,
 #orders-table tbody tr td {
-	border-color: transparent;
 	text-align: center;
 	padding: 4px 8px;
+	border: none;
 }
 .input-sm {
 	border-radius: 0;
@@ -108,9 +115,10 @@ body {
 	opacity: 0.6;
 }
 
+
 /* inventory table */
 #inventory-table_filter {
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
 }
 #inventory-table_filter .filter-by-status {
@@ -119,19 +127,17 @@ body {
 #inventory-table {
 	font-size: 13px;
 	background-color: #fff;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+	border: 1px solid #e5e5e5;
 }
 #inventory-table thead {
-	background: #E7E7E7;
-	font-size: 10px;
-	font-weight: bold;
-	text-transform: uppercase;
+	background: #f7f7f7;
+	font-size: 12px;
 }
 #inventory-table thead tr th,
 #inventory-table tbody tr td {
-	border-color: transparent;
-	text-align: center;
+	text-align: left;
 	padding: 4px 8px;
+	border: none;
 }
 .input-sm {
 	border-radius: 0;
@@ -171,6 +177,9 @@ body {
 	-moz-opacity: 0.6;
 	opacity: 0.6;
 }
+#inventory-table tbody tr td {
+	border-top: 1px solid #e5e5e5;
+}
 
 
 div.dataTables_wrapper div.dataTables_filter {
@@ -179,6 +188,7 @@ div.dataTables_wrapper div.dataTables_filter {
 div.dataTables_wrapper div.dataTables_filter input {
 	margin-left: 0;
 	margin-right: 20px;
+	border: 1px solid #bababa;
 }
 .dataTables_length {
 	text-align: right;
