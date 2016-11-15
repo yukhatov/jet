@@ -34,7 +34,7 @@
                             <td>{{ order.getShipmentTrackingNumber() }}</td>
                             <td>${{ order.basePrice }}</td>
                             <td>{{ order.getRecipientName() }}</td>
-                            <td>{{ order.getAddressLine() }}</td>
+                            <td>{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}</td>
                             <td>{{ order.getAddressCity() }}</td>
                             <td>{{ order.getAddressState() }}</td>
                             <td>{{ order.getAddressZipCode() }}</td>
@@ -94,8 +94,12 @@
             </div>
 
             <div class="btn-group pull-right">
-                {% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
+                {% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_REJECTED')) %}
+                    <button type="button" class="btn btn-info approve-order disabled" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+                    <button type="button" class="btn btn-warning disabled" style="width: 170px" id="cancel-order">Cancel Order</button>
+                {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
                     <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_READY')) %}
                     <div class="btn-group" role="group" aria-label="...">
                         <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
@@ -103,17 +107,17 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                                <li id="ship-order"><a href="#">Ship Order</a></li>
+                            <li id="ship-order"><a href="#">Ship Order</a></li>
                         </ul>
                     </div>
+                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
+                {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_IN_PROGRESS') or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE')) %}
+                    <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
+                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% else %}
-                    {% if(order.getShipmentTrackingNumber() or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_IN_PROGRESS') or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE')) %}
-                        <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
-                    {% else %}
-                        <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
-                    {% endif %}
+                    <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
+                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% endif %}
-                <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
             </div>
         </div>
 

@@ -91,6 +91,12 @@ class Order
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $address_address2;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $address_city;
 
     /**
@@ -210,7 +216,7 @@ class Order
     /**
      * @return mixed
      */
-    public function getAddressLine()
+    public function getAddressLine1()
     {
         return $this->address_address1;
     }
@@ -218,9 +224,25 @@ class Order
     /**
      * @param mixed $address_address1
      */
-    public function setAddressLine($address_address1)
+    public function setAddressLine1($address_address1)
     {
         $this->address_address1 = $address_address1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddressLine2()
+    {
+        return $this->address_address2;
+    }
+
+    /**
+     * @param mixed $address_address2
+     */
+    public function setAddressLine2($address_address2)
+    {
+        $this->address_address2 = $address_address2;
     }
 
     /**
