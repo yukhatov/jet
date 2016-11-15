@@ -22,6 +22,10 @@ $('#button-save').on('click', function(){
 });
 
 $('.approve-order').on('click', function(){
+    if($(this).hasClass('disabled')){
+        return;
+    }
+
     var statusId = $(this).data('status-id'),
         orderId = $('#select-quantity').data('order-id');
 
@@ -44,6 +48,10 @@ $('.approve-order').on('click', function(){
 });
 
 $('#cancel-order').on('click', function(){
+    if($(this).hasClass('disabled')){
+        return;
+    }
+
     var orderId = $('#select-quantity').data('order-id');
 
     $.ajax({

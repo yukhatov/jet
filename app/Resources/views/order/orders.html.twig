@@ -31,11 +31,11 @@
                                     <td>{{ order.shipmentTrackingNumber }}</td>
                                     <td>{{ order.itemsCount }}</td>
                                     <td>{{ order.recipientName }}</td>
-                                    <td>{{ order.addressLine }}</td>
+                                    <td>{{ order.addressLine1 }} {{ order.addressLine2 }}</td>
                                     <td>{{ order.getAddressCity() }}</td>
                                     <td>{{ order.getAddressState() }}</td>
                                     <td>{{ order.getAddressZipCode() }}</td>
-                                    <td>{{ order.getExpectedDeliveryDate('DATE') }}</td>
+                                    <td>{{ (order.getExpectedDeliveryDate() != 0) ? order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
                                     <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
                             </tr>
                         {% endfor %}
