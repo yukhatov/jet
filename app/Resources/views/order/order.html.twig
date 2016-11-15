@@ -8,12 +8,14 @@
 
     <div clas="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="order-data">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><b>Order: {{ order.referenceOrderId }}</b></div>
+                <div class="order-title">
+                    <span>Order: {{ order.referenceOrderId }}</span>
+                </div>
                 <!-- Table -->
-                <table class="table table-bordered table-hover">
-                    <theader class="center">
+                <table class="table">
+                    <thead class="center">
                         <th>Status</th>
                         <th>Shipping method</th>
                         <th>Tracking number</th>
@@ -24,28 +26,30 @@
                         <th>State</th>
                         <th>Zip code</th>
                         <th>Phone</th>
-                    </theader>
+                    </thead>
+                    <tbody>
                         <tr>
-                                <td>{{ order.getStatus() }}</td>
-                                <td>{{ order.getRequestShippingMethod() }}</td>
-                                <td>{{ order.getShipmentTrackingNumber() }}</td>
-                                <td>${{ order.basePrice }}</td>
-                                <td>{{ order.getRecipientName() }}</td>
-                                <td>{{ order.getAddressLine() }}</td>
-                                <td>{{ order.getAddressCity() }}</td>
-                                <td>{{ order.getAddressState() }}</td>
-                                <td>{{ order.getAddressZipCode() }}</td>
-                                <td>{{ order.getRecipientPhoneNumber() }}</td>
+                            <td>{{ order.getStatus() }}</td>
+                            <td>{{ order.getRequestShippingMethod() }}</td>
+                            <td>{{ order.getShipmentTrackingNumber() }}</td>
+                            <td>${{ order.basePrice }}</td>
+                            <td>{{ order.getRecipientName() }}</td>
+                            <td>{{ order.getAddressLine() }}</td>
+                            <td>{{ order.getAddressCity() }}</td>
+                            <td>{{ order.getAddressState() }}</td>
+                            <td>{{ order.getAddressZipCode() }}</td>
+                            <td>{{ order.getRecipientPhoneNumber() }}</td>
                         </tr>
+                    </tbody>
                 </table>
             </div>
 
-            <div class="panel panel-default">
+            <div class="order-items panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Items:</div>
                 <!-- Table -->
                 <table class="table table-bordered table-hover">
-                    <theader class="center">
+                    <thead class="center">
                         <th>Title</th>
                         <th>Color</th>
                         <th>Color code</th>
@@ -54,7 +58,7 @@
                         <th>Shipping cost</th>
                         <th>Quantity</th>
                         <th>Action</th>
-                    </theader>
+                    </thead>
                     {% for item in items %}
                         <tr>
                             <td>{{ item.getTitle() }}</td>

@@ -28,11 +28,10 @@ $(document).ready(function() {
 				var title = $( column.header() ).text();			// get column's title
 				select.before('<span>' +title+ ' </span>');		// set column's title before its filter
 
- 
 				column.data().unique().sort().each( function ( d, j ) {
 					select.append( '<option value="'+d+'">'+d+'</option>' )
-				} );
-			} );
+				});
+			});
 		}
 	});
 

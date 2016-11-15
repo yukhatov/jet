@@ -11,3 +11,8 @@
 /composer.phar
 /web/bundles/
 /.idea
+# ignore all files for gulp.js usage
+gulpfile.js
+package.json
+node_modules/
+lexxl/

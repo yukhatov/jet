@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
-  $("#inventory-table").dataTable({
+	$("#inventory-table").dataTable({
 		// "dom": 'ftirpl',
 		"dom": "ftr" +				// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
-	  "iDisplayLength": 50,
+		"iDisplayLength": 50,
 		"language": {				// search filter
 			search: "_INPUT_",
 			searchPlaceholder: "Search Orders"
@@ -33,6 +33,6 @@ $(document).ready(function() {
 				});
 			});
 		}
-  });
+	});
 
 });
