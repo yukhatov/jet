@@ -35,4 +35,8 @@ $(document).ready(function() {
 		}
 	});
 
+	// pagination styling
+	$('ul.pagination li:first a').html('<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>');
+	$('ul.pagination li:last a').html('<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>');
+
 });
