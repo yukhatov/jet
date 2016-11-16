@@ -31,9 +31,15 @@
 
                                         <ul class="nav navbar-nav">
 
-                                            <li {% if activeTab|default('') == 'inventory' %} class="active"{% endif %} ><a href="{{ path('inventory') }}">Inventory</a></li>
-                                            <li {% if activeTab|default('') == 'providers' %} class="active"{% endif %} ><a href="{{ path('providers') }}">Providers</a></li>
-                                            <li {% if activeTab|default('') == 'orders' %} class="active"{% endif %} ><a href="{{ path('orders') }}">Orders</a></li>
+                                            <li {% if activeTab|default('') == 'inventory' %} class="active"{% endif %} >
+                                                <a href="{{ path('inventory') }}"><i class="fa fa-lg fa-shopping-bag" aria-hidden="true"></i>Inventory</a>
+                                            </li>
+                                            <li {% if activeTab|default('') == 'providers' %} class="active"{% endif %} >
+                                                <a href="{{ path('providers') }}"><i class="fa fa-lg fa-users" aria-hidden="true"></i>Providers</a>
+                                            </li>
+                                            <li {% if activeTab|default('') == 'orders' %} class="active"{% endif %} >
+                                                <a href="{{ path('orders') }}"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>Orders</a>
+                                            </li>
 
                                             <form class="navbar-form navbar-left">
                                                 <div class="form-group">
