@@ -25,11 +25,19 @@ class ProcessController extends Controller
             ->findAll();
 
         foreach ($processes as $process) {
-            if ($process->isRunNeeded()) {
+            if (/*$process->isRunNeeded()*/true) {
                 $this->updateTime($process);
 
                 $action = $process->getAction();
-                $this->$action();
+
+                if(method_exists(new ProcessController(), $action))
+                {
+                    $this->$action();
+
+                }else{
+                    echo "\n";
+                    print_r('Undefined action!');
+                }
             }
         }
 

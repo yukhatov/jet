@@ -20,6 +20,7 @@ class LoadOrderStatusData implements FixtureInterface
         $this->newStatus($manager, 'Acknowledged', 'acknowledged');
         $this->newStatus($manager, 'In progress', 'inprogress');
         $this->newStatus($manager, 'Complete', 'complete');
+        $this->newStatus($manager, 'Rejected', 'rejected');
     }
 
     private function newStatus(ObjectManager $manager, $title, $statusCode){

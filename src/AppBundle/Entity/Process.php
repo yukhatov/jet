@@ -100,7 +100,7 @@ class Process
         $now->setDate(1970, 1, 1);
         $todayMidnight = mktime(0, 0, 0, date('n'), date('j'),date('Y'));
 
-        if($this->getTimeStart()->getTimeStamp() <= $now->getTimestamp() and $this->getTimeLastAccess()->getTimeStamp() <= $todayMidnight)
+        if($this->getTimeStart()->getTimeStamp() <= $now->getTimestamp() and  ( !$this->getTimeLastAccess() or $this->getTimeLastAccess()->getTimeStamp() <= $todayMidnight ))
         {
             return true;
         }

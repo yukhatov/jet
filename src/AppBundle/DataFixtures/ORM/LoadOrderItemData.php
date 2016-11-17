@@ -47,7 +47,8 @@ class LoadOrderItemData implements FixtureInterface
     private function newOrder($id, ObjectManager $manager)
     {
         $order = new Order();
-        $order->setAddressLine('21342 sw Roellich Ave');
+        $order->setAddressLine1('21342 sw Roellich Ave');
+        $order->setAddressLine2('2B');
         $order->setId($id);
         $order->setStatus('created');
         $order->setAddressCity('Toronto');

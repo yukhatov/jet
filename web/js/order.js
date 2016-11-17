@@ -1,6 +1,10 @@
 /**
  * Created by artur on 24.10.16.
  */
+$('#button-back').on('click', function(){
+    window.location.replace("/orders");
+});
+
 $('#button-save').on('click', function(){
     var selectedQuantity = $('#select-quantity').val(),
         itemId = $('#select-quantity').data('item-id'),
