@@ -91,7 +91,7 @@ class OrderItem
      */
     public function getPrice()
     {
-        return $this->order_item_price;
+        return number_format($this->order_item_price, 2);
     }
 
     /**
@@ -123,7 +123,7 @@ class OrderItem
      */
     public function getShippingCost()
     {
-        return $this->order_item_shipping_cost;
+        return number_format($this->order_item_shipping_cost, 2);
     }
 
     /**

@@ -156,7 +156,7 @@ class InventoryItem
      */
     public function getPrice()
     {
-        return $this->price;
+        return number_format($this->price, 2);
     }
 
     /**
@@ -204,7 +204,7 @@ class InventoryItem
      */
     public function getWholePrice()
     {
-        return $this->whole_price;
+        return number_format($this->whole_price, 2);
     }
 
     /**

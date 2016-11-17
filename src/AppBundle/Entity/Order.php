@@ -434,7 +434,7 @@ class Order
      */
     public function getBasePrice()
     {
-        return $this->base_price;
+        return number_format($this->base_price, 2);
     }
 
     /**

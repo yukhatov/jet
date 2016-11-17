@@ -30,7 +30,7 @@
                             <td>{{ item.colorTitle }}</td>
                             <td>{{ item.colorCode }}</td>
                             {#<td>{{ item.getStatus() }} {% if item.getSubStatus() %}: {{ item.getSubStatus() }} {% endif %}</td>#}
-                            <td>Whole price</td>
+                            <td>${{ item.getWholePrice() }}</td>
                             <td>${{ item.getPrice() }}</td>
                             <td>{{ item.getStockCount() }}</td>
                             <td>{{ item.getCreatedDate() }}</td>

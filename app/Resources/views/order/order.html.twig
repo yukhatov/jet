@@ -72,7 +72,7 @@
                             {% endif %}
 
                             <td>${{ item.getPrice() }}</td>
-                            <td>{{ item.getShippingCost() }}</td>
+                            <td>${{ item.getShippingCost() }}</td>
                             <td>
                                 <select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}">
                                     {% for value in item.getSelectValues %}
