@@ -2,13 +2,17 @@ $(document).ready(function() {
 
 	$("#orders-table").dataTable({
 		// "dom": 'ftirpl',
-		"dom": "ftr" +				// https://datatables.net/reference/option/dom
+		"dom": "ftr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
 		"iDisplayLength": 50,
-		"language": {				// search filter
-			search: "_INPUT_",
-			searchPlaceholder: "Search Orders"
+		"language": {
+			search: "_INPUT_",				// search filter
+			searchPlaceholder: "Search Orders",
+			"paginate": {							// pagination
+				"previous": '<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>',
+				"next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
+			}
 		},
 		initComplete: function () {
 			this.api().columns([1]).every( function () {
@@ -34,9 +38,5 @@ $(document).ready(function() {
 			});
 		}
 	});
-
-	// pagination styling
-	$('ul.pagination li:first a').html('<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>');
-	$('ul.pagination li:last a').html('<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>');
 
 });
