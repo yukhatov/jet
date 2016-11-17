@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('/css/style.min.css') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
@@ -31,9 +31,15 @@
 
                                         <ul class="nav navbar-nav">
 
-                                            <li {% if activeTab|default('') == 'inventory' %} class="active"{% endif %} ><a href="{{ path('inventory') }}">Inventory</a></li>
-                                            <li {% if activeTab|default('') == 'providers' %} class="active"{% endif %} ><a href="{{ path('providers') }}">Providers</a></li>
-                                            <li {% if activeTab|default('') == 'orders' %} class="active"{% endif %} ><a href="{{ path('orders') }}">Orders</a></li>
+                                            <li {% if activeTab|default('') == 'inventory' %} class="active"{% endif %} >
+                                                <a href="{{ path('inventory') }}"><i class="fa fa-lg fa-shopping-bag" aria-hidden="true"></i>Inventory</a>
+                                            </li>
+                                            <li {% if activeTab|default('') == 'providers' %} class="active"{% endif %} >
+                                                <a href="{{ path('providers') }}"><i class="fa fa-lg fa-users" aria-hidden="true"></i>Providers</a>
+                                            </li>
+                                            <li {% if activeTab|default('') == 'orders' %} class="active"{% endif %} >
+                                                <a href="{{ path('orders') }}"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>Orders</a>
+                                            </li>
                                             <li {% if activeTab|default('') == 'reports' %} class="active dropdown"{% else %} class="dropdown" {% endif %}>
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports<span class="caret"></span></a>
                                                 <ul class="dropdown-menu">

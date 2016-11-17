@@ -28,12 +28,15 @@ $(document).ready(function() {
 				var title = $( column.header() ).text();			// get column's title
 				select.before('<span>' +title+ ' </span>');		// set column's title before its filter
 
- 
 				column.data().unique().sort().each( function ( d, j ) {
 					select.append( '<option value="'+d+'">'+d+'</option>' )
-				} );
-			} );
+				});
+			});
 		}
 	});
+
+	// pagination styling
+	$('ul.pagination li:first a').html('<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>');
+	$('ul.pagination li:last a').html('<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>');
 
 });

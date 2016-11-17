@@ -8,12 +8,12 @@
 
     <div clas="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="order-data">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><b>Order: {{ order.referenceOrderId }}</b></div>
+                <div class="order-data-title">Order: {{ order.referenceOrderId }}</div>
                 <!-- Table -->
-                <table class="table table-bordered table-hover">
-                    <theader class="center">
+                <table class="table">
+                    <thead class="center">
                         <th>Status</th>
                         <th>Shipping method</th>
                         <th>Tracking number</th>
@@ -24,7 +24,8 @@
                         <th>State</th>
                         <th>Zip code</th>
                         <th>Phone</th>
-                    </theader>
+                    </thead>
+                    <tbody>
                         <tr>
                             <td>{{ order.getStatus() }}</td>
                             <td>{{ order.getRequestShippingMethod() }}</td>
@@ -37,15 +38,16 @@
                             <td>{{ order.getAddressZipCode() }}</td>
                             <td>{{ order.getRecipientPhoneNumber() }}</td>
                         </tr>
+                    </tbody>
                 </table>
             </div>
 
-            <div class="panel panel-default">
+            <div class="order-items">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Items:</div>
+                <div class="order-items-title">Items:</div>
                 <!-- Table -->
-                <table class="table table-bordered table-hover">
-                    <theader class="center">
+                <table class="table">
+                    <thead class="center">
                         <th>Title</th>
                         <th>Color</th>
                         <th>Color code</th>
@@ -53,8 +55,8 @@
                         <th>Price</th>
                         <th>Shipping cost</th>
                         <th>Quantity</th>
-                        <th>Action</th>
-                    </theader>
+                        <th style="text-align:center;">Action</th>
+                    </thead>
                     {% for item in items %}
                         <tr>
                             <td>{{ item.getTitle() }}</td>
@@ -64,14 +66,14 @@
                                 <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
                                 <td>{{ inventoryItems[item.merchantSku].upc }}</td>
                             {% else %}
-                                <td><font color="#A4A4A4">Not found in inventory</font></td>
-                                <td><font color="#A4A4A4">Not found in inventory</font></td>
-                                <td><font color="#A4A4A4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
                             {% endif %}
 
                             <td>${{ item.getPrice() }}</td>
                             <td>{{ item.getShippingCost() }}</td>
-                            <td align="center">
+                            <td>
                                 <select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}">
                                     {% for value in item.getSelectValues %}
                                         {% if(value == item.getSelectedValue()) %}
@@ -82,23 +84,25 @@
                                     {% endfor %}
                                 </select>
                             </td>
-
-                            <td align="center"><button type="button" class="btn btn-default" id="button-save">Save</button></td>
+                            <td style="text-align:center;">
+                                <button type="button" class="btn btn-purple" id="button-save">Save</button>
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
 
-            <div class="btn-group pull-right">
+            {# <div class="btn-group pull-right"> #}
+            <div>
                 {% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_REJECTED')) %}
-                    <button type="button" class="btn btn-info approve-order disabled" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
-                    <button type="button" class="btn btn-warning disabled" style="width: 170px" id="cancel-order">Cancel Order</button>
+                    <button type="button" class="btn btn-cyan approve-order disabled" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept Order</button>
+                    <button type="button" class="btn btn-orange disabled pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
-                    <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
-                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
+                    <button type="button" class="btn btn-cyan approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_READY')) %}
                     <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-info approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+                        <button type="button" class="btn btn-cyan approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
@@ -106,13 +110,13 @@
                             <li id="ship-order"><a href="#">Ship Order</a></li>
                         </ul>
                     </div>
-                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
+                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_IN_PROGRESS') or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE')) %}
                     <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
-                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
+                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% else %}
                     <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
-                    <button type="button" class="btn btn-warning" style="width: 170px" id="cancel-order">Cancel Order</button>
+                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
                 {% endif %}
             </div>
         </div>

@@ -6,40 +6,40 @@
 
     <div clas="row">
         <div class="col-md-12">
-                <table id="orders-table" class="table table-hover">
-                    <thead>
-                        <th>Order date</th>
-                        <th>Status</th>
-                        <th>Merchant order</th>
-                        <th>Shipping method</th>
-                        <th>Tracking number</th>
-                        <th>QTY.</th>
-                        <th>Recipient</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip code</th>
-                        <th>Delivery date</th>
-                        <th>Details</th>
-                    </thead>
-                        {% for order in orders %}
-                            <tr>
-                                    <td>{{ order.orderPlacedDate }}</td>
-                                    <td>{{ order.status }}</td>
-                                    <td>{{ order.referenceOrderId }}</td>
-                                    <td>{{ order.requestShippingMethod }}</td>
-                                    <td>{{ order.shipmentTrackingNumber }}</td>
-                                    <td>{{ order.itemsCount }}</td>
-                                    <td>{{ order.recipientName }}</td>
-                                    <td>{{ order.addressLine1 }} {{ order.addressLine2 }}</td>
-                                    <td>{{ order.getAddressCity() }}</td>
-                                    <td>{{ order.getAddressState() }}</td>
-                                    <td>{{ order.getAddressZipCode() }}</td>
-                                    <td>{{ (order.getExpectedDeliveryDate() != 0) ? order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
-                                    <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
-                            </tr>
-                        {% endfor %}
-                </table>
+            <table id="orders-table" class="table table-hover">
+                <thead>
+                    <th>Order date</th>
+                    <th>Status</th>
+                    <th>Merchant order</th>
+                    <th>Shipping method</th>
+                    <th>Tracking number</th>
+                    <th>QTY.</th>
+                    <th>Recipient</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip code</th>
+                    <th>Delivery date</th>
+                    <th>Details</th>
+                </thead>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.orderPlacedDate }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.referenceOrderId }}</td>
+                            <td>{{ order.requestShippingMethod }}</td>
+                            <td>{{ order.shipmentTrackingNumber }}</td>
+                            <td>{{ order.itemsCount }}</td>
+                            <td>{{ order.recipientName }}</td>
+                            <td>{{ order.addressLine1 }} {{ order.addressLine2 }}</td>
+                            <td>{{ order.getAddressCity() }}</td>
+                            <td>{{ order.getAddressState() }}</td>
+                            <td>{{ order.getAddressZipCode() }}</td>
+                            <td>{{ (order.getExpectedDeliveryDate() != 0) ? order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
+                            <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
+                        </tr>
+                    {% endfor %}
+            </table>
         </div>
     </div>
 
