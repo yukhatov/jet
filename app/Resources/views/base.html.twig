@@ -34,6 +34,12 @@
                                             <li {% if activeTab|default('') == 'inventory' %} class="active"{% endif %} ><a href="{{ path('inventory') }}">Inventory</a></li>
                                             <li {% if activeTab|default('') == 'providers' %} class="active"{% endif %} ><a href="{{ path('providers') }}">Providers</a></li>
                                             <li {% if activeTab|default('') == 'orders' %} class="active"{% endif %} ><a href="{{ path('orders') }}">Orders</a></li>
+                                            <li {% if activeTab|default('') == 'reports' %} class="active dropdown"{% else %} class="dropdown" {% endif %}>
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports<span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="{{ path('instock') }}">Instock</a></li>
+                                                </ul>
+                                            </li>
 
                                             <form class="navbar-form navbar-left">
                                                 <div class="form-group">

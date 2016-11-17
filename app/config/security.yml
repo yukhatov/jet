@@ -34,3 +34,5 @@ security:
             - { path: ^/providers, roles: ROLE_ADMIN }
             - { path: ^/orders, roles: ROLE_ADMIN }
             - { path: ^/inventory, roles: ROLE_ADMIN }
+            - { path: ^/check, roles: ROLE_ADMIN }
+            - { path: ^/instock, roles: ROLE_ADMIN }
