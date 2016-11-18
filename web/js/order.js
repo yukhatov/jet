@@ -121,29 +121,30 @@ function validateForm(e)
     return true;
 }
 
-$('#tracking-number').on('blur', function(e) {
+/*$('#tracking-number').on('blur', function(e) {
     console.log('test');
-});
+});*/
 
 function saveTN(e){
     if(e.keyCode === 13){
         var tn = $('#tracking-number').val();
 
-        /*var data = {};
+        var data = {};
         data['tn'] = $('#tracking-number').val();
+        data['orderId'] = $('#select-quantity').data('order-id');
 
         $.ajax({
             'type': 'post',
-            'url': '/cancel',
+            'url': '/edit',
             'dataType': 'json',
             'data': data
         }).success(function(json) {
             if(json.success){
-                notification(true);
+                console.log('saved');
             }else{
-                notification(false);
+                console.log('fail');
             }
-        });*/
+        });
     }
 }
 

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\InventoryItem;
+use AppBundle\Entity\OrderStatus;
 use AppBundle\Entity\Order;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -100,9 +101,21 @@ class OrderController extends Controller
      */
     public function editAction(Request $request)
     {
-        echo "\n";
-        print_r('1');
-        die('stop');
+        $success = false;
+
+        if($request->get('orderId') != null) {
+            $order = $this->getDoctrine()
+                ->getRepository('AppBundle:Order')
+                ->findOneBy(['id' => $request->get('orderId')]);
+
+            if($order and $order->getStatus() == OrderStatus::STATUS_COMPLETE)
+            {
+
+                $success = true;
+            }
+        }
+
+        return new JsonResponse(array('success' => $success));
     }
 
     /**

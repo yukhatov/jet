@@ -18,7 +18,7 @@ class LoadOrderItemData implements FixtureInterface
     {
         $id = 1;
 
-        $order1 = $this->newOrder($id, $manager);
+        $order1 = $this->newOrder($id, $manager, 'complete');
         $order2 = $this->newOrder($id + 1, $manager);
         $order3 = $this->newOrder($id + 2, $manager);
 
@@ -44,13 +44,13 @@ class LoadOrderItemData implements FixtureInterface
         $manager->flush();
     }
 
-    private function newOrder($id, ObjectManager $manager)
+    private function newOrder($id, ObjectManager $manager, $status = 'created')
     {
         $order = new Order();
         $order->setAddressLine1('21342 sw Roellich Ave');
         $order->setAddressLine2('2B');
         $order->setId($id);
-        $order->setStatus('created');
+        $order->setStatus($status);
         $order->setAddressCity('Toronto');
         $order->setAddressState('TR');
         $order->setAddressZipCode('54000');
