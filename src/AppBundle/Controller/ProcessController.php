@@ -47,8 +47,18 @@ class ProcessController extends Controller
     public function updateBrand()
     {
         echo "\n";
-        print_r('update');
-        die('stop');
+        print_r('Brands');
+    }
+
+    public function updateProvider()
+    {
+        $pders = $this->getDoctrine()
+            ->getRepository('AppBundle:AMZProvider')
+            ->findAll();
+
+        if(!count($pders)){
+            return;
+        }
     }
 
     private function updateTime(Process $process)

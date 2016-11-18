@@ -34,7 +34,7 @@ class Process
     private $timeStart;
 
     /**
-     * @ORM\Column(type="datetime", name="timeLastAccess")
+     * @ORM\Column(type="datetime", name="timeLastAccess", nullable=true)
      */
     private $timeLastAccess;
 

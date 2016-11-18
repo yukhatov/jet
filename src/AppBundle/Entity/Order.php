@@ -121,6 +121,11 @@ class Order
     private $shipment_tracking_number;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $updated_shipment_tracking_number;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
      * @ORM\Column(type="integer")
@@ -467,5 +472,21 @@ class Order
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedShipmentTrackingNumber()
+    {
+        return $this->updated_shipment_tracking_number;
+    }
+
+    /**
+     * @param mixed $updated_shipment_tracking_number
+     */
+    public function setUpdatedShipmentTrackingNumber($updated_shipment_tracking_number)
+    {
+        $this->updated_shipment_tracking_number = $updated_shipment_tracking_number;
     }
 }

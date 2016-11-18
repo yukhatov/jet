@@ -30,11 +30,17 @@
                         <tr>
                             <td>{{ order.getStatus() }}</td>
                             <td>{{ order.getRequestShippingMethod() }}</td>
-                            <td class="tracking-number">
-                                <label>
-                                    <input type="text" value="{{ order.getShipmentTrackingNumber() }}">
-                                </label>
-                            </td>
+
+                            {% if order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE') %}
+                                <td class="tracking-number editable" >
+                                    <label>
+                                        <input id="tracking-number" type="text" value="{{ order.getShipmentTrackingNumber() }}" onkeypress="saveTN(event)">
+                                    </label>
+                                </td>
+                            {% else %}
+                                <td>{{ order.getShipmentTrackingNumber }}</td>
+                            {% endif %}
+
                             <td>${{ order.basePrice }}</td>
                             <td>{{ order.getRecipientName() }}</td>
                             <td>{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}</td>
@@ -90,7 +96,7 @@
                                 </select>
                             </td>
                             <td style="text-align:center;">
-                                <button type="button" class="btn btn-purple" id="button-save">Save</button>
+                                <button type="button" class="btn btn-purple button-save">Save</button>
                             </td>
                         </tr>
                     {% endfor %}

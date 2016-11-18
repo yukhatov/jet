@@ -5,10 +5,10 @@ $('#button-back').on('click', function(){
     window.location.replace("/orders");
 });
 
-$('#button-save').on('click', function(){
-    var selectedQuantity = $('#select-quantity').val(),
-        itemId = $('#select-quantity').data('item-id'),
-        orderId = $('#select-quantity').data('order-id');
+$('.button-save').on('click', function(){
+    var selectedQuantity = $(this).parent().closest('tr').find('#select-quantity').val(),
+        itemId = $(this).parent().closest('tr').find('#select-quantity').data('item-id'),
+        orderId = $(this).parent().closest('tr').find('#select-quantity').data('order-id');
 
     var data = {};
     data['orderId'] = orderId;
@@ -17,7 +17,7 @@ $('#button-save').on('click', function(){
 
     $.ajax({
         'type': 'post',
-        'url': orderId + '/items/' + itemId + '/edit/' + selectedQuantity,
+        'url': "/editItem",
         'dataType': 'json',
         'data': data
     }).success(function(json) {
@@ -39,7 +39,7 @@ $('.approve-order').on('click', function(){
 
     $.ajax({
         'type': 'post',
-        'url': orderId + '/approve',
+        'url': '/approve',
         'dataType': 'json',
         'data': data
     }).success(function(json) {
@@ -56,12 +56,14 @@ $('#cancel-order').on('click', function(){
         return;
     }
 
-    var orderId = $('#select-quantity').data('order-id');
+    var data = {};
+    data['orderId'] = $('#select-quantity').data('order-id');
 
     $.ajax({
-        'type': 'get',
-        'url': orderId + '/cancel',
+        'type': 'post',
+        'url': '/cancel',
         'dataType': 'json',
+        'data': data
     }).success(function(json) {
         if(json.success){
             notification(true);
@@ -117,6 +119,32 @@ function validateForm(e)
     }
 
     return true;
+}
+
+$('#tracking-number').on('blur', function(e) {
+    console.log('test');
+});
+
+function saveTN(e){
+    if(e.keyCode === 13){
+        var tn = $('#tracking-number').val();
+
+        /*var data = {};
+        data['tn'] = $('#tracking-number').val();
+
+        $.ajax({
+            'type': 'post',
+            'url': '/cancel',
+            'dataType': 'json',
+            'data': data
+        }).success(function(json) {
+            if(json.success){
+                notification(true);
+            }else{
+                notification(false);
+            }
+        });*/
+    }
 }
 
 function notification(flag)

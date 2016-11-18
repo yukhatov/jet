@@ -2,57 +2,50 @@
 /**
  * Created by PhpStorm.
  * User: artur
- * Date: 17.11.16
- * Time: 16:21
+ * Date: 11.10.16
+ * Time: 14:42
  */
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="jet_brand")
+ * @ORM\Table(name="amz_glasses_brand")
  */
 
-class Brand {
+class AMZBrand {
 
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
      */
-    private $id;
+    private $brand_id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private $brand_title;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $providerId;
-
-    /**
-     * @ManyToOne(targetEntity="Provider", inversedBy="brands")
-     */
-    private $provider;
+    private $provider_id;
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getBrandId()
     {
-        return $this->id;
+        return $this->brand_id;
     }
 
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getBrandTitle()
     {
-        return $this->title;
+        return $this->brand_title;
     }
 
 }

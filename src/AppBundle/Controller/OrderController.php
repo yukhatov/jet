@@ -20,6 +20,7 @@ class OrderController extends Controller
     const ACTION_TYPE_AKNOWLEDGE = 'try_acknowledge';
     const ACTION_TYPE_SHIP = 'try_ship_order';
     const ACTION_TYPE_CANCEL = 'try_cancel_order';
+    const ACTION_TYPE_UPDATE = 'try_update_order';
 
     /**
      * @Route("/orders", name="orders")
@@ -95,9 +96,19 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("//orders/{orderId}/items/{itemId}/edit/{quantity}")
+     * @Route("/edit")
      */
-    public function editAction(Request $request)//вынести в контроллер
+    public function editAction(Request $request)
+    {
+        echo "\n";
+        print_r('1');
+        die('stop');
+    }
+
+    /**
+     * @Route("/editItem")
+     */
+    public function editItemAction(Request $request)//вынести в контроллер
     {
         if($request->get('quantity') != null and $request->get('orderId') != null and $request->get('itemId') != null)
         {
@@ -119,7 +130,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("//orders/{orderId}/approve")
+     * @Route("/approve")
      */
     public function approveAction(Request $request)
     {
@@ -135,7 +146,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("//orders/{orderId}/cancel")
+     * @Route("/cancel")
      */
     public function cancelAction(Request $request)
     {

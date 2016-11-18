@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: artur
- * Date: 10.10.16
- * Time: 13:45
+ * Date: 17.11.16
+ * Time: 16:21
  */
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="amz_glasses_provider")
+ * @ORM\Table(name="jet_provider")
  */
 
 class Provider {
@@ -20,36 +20,46 @@ class Provider {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue
      */
-    private $provider_id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $provider_title;
+    private $title;
+
+    /**
+     * @OneToMany(targetEntity="Brand", mappedBy="provider")
+     */
+    private $brands;
 
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->provider_id;
+        return $this->id;
     }
 
     /**
      * @return mixed
      */
-    public function getProviderTitle()
+    public function getTitle()
     {
-        return $this->provider_title;
+        return $this->title;
     }
 
     /**
-     * @param mixed $provider_title
+     * @param mixed $title
      */
-    public function setProviderTitle($provider_title)
+    public function setTitle($title)
     {
-        $this->provider_title = $provider_title;
+        $this->title = $title;
     }
 
+    public function getBrands()
+    {
+        return $this->brands;
+    }
 }
