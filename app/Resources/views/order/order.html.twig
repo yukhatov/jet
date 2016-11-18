@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="order-data">
                 <!-- Default panel contents -->
-                <button class="btn btn-purple" id="button-back">Back</button>
+                <button class="btn btn-purple pull-right" id="button-back">Back</button>
                 <div class="order-data-title">Order: {{ order.referenceOrderId }}</div>
                 <!-- Table -->
                 <table class="table">
@@ -30,7 +30,11 @@
                         <tr>
                             <td>{{ order.getStatus() }}</td>
                             <td>{{ order.getRequestShippingMethod() }}</td>
-                            <td>{{ order.getShipmentTrackingNumber() }}</td>
+                            <td class="tracking-number">
+                                <label>
+                                    <input type="text" value="{{ order.getShipmentTrackingNumber() }}">
+                                </label>
+                            </td>
                             <td>${{ order.basePrice }}</td>
                             <td>{{ order.getRecipientName() }}</td>
                             <td>{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}</td>
