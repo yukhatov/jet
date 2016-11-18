@@ -103,13 +103,17 @@ class OrderController extends Controller
     {
         $success = false;
 
-        if($request->get('orderId') != null) {
+        if($request->get('orderId') != null and $request->get('tn') != null) {
             $order = $this->getDoctrine()
                 ->getRepository('AppBundle:Order')
                 ->findOneBy(['id' => $request->get('orderId')]);
 
             if($order and $order->getStatus() == OrderStatus::STATUS_COMPLETE)
             {
+                $order->setUpdatedShipmentTrackingNumber($request->get('tn'));
+
+                $this->getDoctrine()->getEntityManager()->persist($order);
+                $this->getDoctrine()->getEntityManager()->flush();
 
                 $success = true;
             }
