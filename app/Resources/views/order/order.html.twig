@@ -2,6 +2,7 @@
 
 {% block body %}
     {% set activeTab = 'orders' %}
+    {% if order.updatedShipmentTrackingNumber %} {% set trackingNumber = order.updatedShipmentTrackingNumber  %} {% else %} {% set trackingNumber = order.shipmentTrackingNumber %}{% endif %}
     {{ parent() }}
 
     {% form_theme form 'Form/bootstrap_3_horizontal_layout.html.twig' %}
@@ -34,11 +35,11 @@
                             {% if order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE') %}
                                 <td class="tracking-number editable" >
                                     <label>
-                                        <input id="tracking-number" type="text" value="{{ order.getShipmentTrackingNumber() }}" onkeypress="saveTN(event)">
+                                        <input id="tracking-number" type="text" value="{{ trackingNumber }}" onkeypress="saveTN(event)">
                                     </label>
                                 </td>
                             {% else %}
-                                <td>{{ order.getShipmentTrackingNumber }}</td>
+                                <td>{{ trackingNumber }}</td>
                             {% endif %}
 
                             <td>${{ order.basePrice }}</td>
