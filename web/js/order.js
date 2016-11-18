@@ -135,7 +135,7 @@ function saveTN(e){
 
         $.ajax({
             'type': 'post',
-            'url': 'edit',
+            'url': '/edit',
             'dataType': 'json',
             'data': data
         }).success(function(json) {
