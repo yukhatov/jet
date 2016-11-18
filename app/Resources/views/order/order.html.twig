@@ -35,6 +35,7 @@
                                 <td class="tracking-number editable" >
                                     <label>
                                         <input id="tracking-number" type="text" value="{{ order.getShipmentTrackingNumber() }}" onkeypress="saveTN(event)">
+                                        <span class="info-text">Saved</span>
                                     </label>
                                 </td>
                             {% else %}
@@ -96,7 +97,7 @@
                                 </select>
                             </td>
                             <td style="text-align:center;">
-                                <button type="button" class="btn btn-purple button-save">Save</button>
+                                <button type="button" class="btn btn-purple button-save">Save changes</button>
                             </td>
                         </tr>
                     {% endfor %}

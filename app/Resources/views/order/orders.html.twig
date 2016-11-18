@@ -36,7 +36,7 @@
                             <td>{{ order.getAddressZipCode() }}</td>
                             <td>{{ (order.getExpectedDeliveryDate() != 0) ? order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
                             <td>{{ order.requestShippingMethod }}</td>
-                            <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><i class="fa fa-bars" aria-hidden="true"></i></a></td>
+                            <td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
                         </tr>
                     {% endfor %}
             </table>
