@@ -121,12 +121,12 @@ function validateForm(e)
     return true;
 }
 
-/*$('#tracking-number').on('blur', function(e) {
-    console.log('test');
-});*/
+$('#tracking-number').on('blur', function(e) {
+    saveTN(e);
+});
 
 function saveTN(e){
-    if(e.keyCode === 13){
+    if(e.keyCode === 13 || e.type == 'blur'){
         var tn = $('#tracking-number').val();
 
         var data = {};
@@ -140,9 +140,11 @@ function saveTN(e){
             'data': data
         }).success(function(json) {
             if(json.success){
-                console.log('saved');
-            }else{
-                console.log('fail');
+                $(".info-text").fadeIn();
+
+                setTimeout(function(){
+                    $(".info-text").fadeOut(1000);
+                }, 1000);
             }
         });
     }

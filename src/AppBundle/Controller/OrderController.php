@@ -115,7 +115,7 @@ class OrderController extends Controller
                 $this->getDoctrine()->getEntityManager()->persist($order);
                 $this->getDoctrine()->getEntityManager()->flush();
 
-                $success = true;
+                $success = $this->actionCreate($request->get('orderId'), self::ACTION_TYPE_UPDATE);
             }
         }
 
