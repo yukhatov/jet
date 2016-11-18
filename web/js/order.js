@@ -2,7 +2,7 @@
  * Created by artur on 24.10.16.
  */
 $('#button-back').on('click', function(){
-    window.location.replace("/orders");
+    window.history.back();
 });
 
 $('.button-save').on('click', function(){
@@ -135,7 +135,7 @@ function saveTN(e){
 
         $.ajax({
             'type': 'post',
-            'url': '/edit',
+            'url': 'edit',
             'dataType': 'json',
             'data': data
         }).success(function(json) {
