@@ -17,7 +17,7 @@ $('.button-save').on('click', function(){
 
     $.ajax({
         'type': 'post',
-        'url': "/editItem",
+        'url': Routing.generate('editItem'),
         'dataType': 'json',
         'data': data
     }).success(function(json) {
@@ -39,7 +39,7 @@ $('.approve-order').on('click', function(){
 
     $.ajax({
         'type': 'post',
-        'url': '/approve',
+        'url': Routing.generate('approve'),
         'dataType': 'json',
         'data': data
     }).success(function(json) {
@@ -61,7 +61,7 @@ $('#cancel-order').on('click', function(){
 
     $.ajax({
         'type': 'post',
-        'url': '/cancel',
+        'url': Routing.generate('cancel'),
         'dataType': 'json',
         'data': data
     }).success(function(json) {
@@ -135,7 +135,7 @@ function saveTN(e){
 
         $.ajax({
             'type': 'post',
-            'url': '/edit',
+            'url': Routing.generate('edit'),
             'dataType': 'json',
             'data': data
         }).success(function(json) {

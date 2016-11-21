@@ -97,7 +97,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/edit")
+     * @Route("/edit", options={"expose"=true}, name="edit")
      */
     public function editAction(Request $request)
     {
@@ -123,7 +123,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/editItem")
+     * @Route("/editItem", options={"expose"=true}, name="editItem")
      */
     public function editItemAction(Request $request)//вынести в контроллер
     {
@@ -147,7 +147,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/approve")
+     * @Route("/approve", options={"expose"=true}, name="approve")
      */
     public function approveAction(Request $request)
     {
@@ -163,7 +163,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/cancel")
+     * @Route("/cancel", options={"expose"=true}, name="cancel")
      */
     public function cancelAction(Request $request)
     {
