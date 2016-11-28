@@ -8,6 +8,6 @@ services:
 #        class: AppBundle\Services\JetApi
 #        arguments: ["%parameter1%"]
 
-    app.jet.api:
-            class: AppBundle\Services\JetApi
+    app.jet.process:
+            class: AppBundle\Controller\ProcessController
 #            arguments: ["%parameter1%"]
