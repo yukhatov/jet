@@ -15,16 +15,17 @@ class LoadProcessData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $this->newProcess($manager, 'updateBrand');
-        $this->newProcess($manager, 'updateProvider');
+        $this->newProcess($manager, 1, 'updateBrandAndProvider');
+        $this->newProcess($manager, 2, 'reportInstock');
     }
 
-    private function newProcess(ObjectManager $manager, $action){
+    private function newProcess(ObjectManager $manager, $id, $action){
         $time = new \DateTime();
         $time->setDate(1970, 1, 1);
         $time->setTime(14, 00, 00);
 
         $process = new Process();
+        $process->setId($id);
         $process->setAction($action);
         $process->setTimeStart($time);
 

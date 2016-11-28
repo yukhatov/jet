@@ -58,7 +58,7 @@ class DefaultController extends Controller
         }else{
             $brands = $this->getDoctrine()
                 ->getRepository('AppBundle:Brand')
-                ->findBy(['provider_id' => $provider]);
+                ->findBy(['providerId' => $provider]);
         }
 
         return $this->render('default/brands.html.twig', array('brands' => $brands));

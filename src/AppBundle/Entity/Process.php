@@ -19,7 +19,6 @@ class Process
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -104,5 +103,13 @@ class Process
         {
             return true;
         }
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }

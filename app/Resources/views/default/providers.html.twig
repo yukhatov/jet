@@ -18,7 +18,7 @@
                         {% for provider in providers %}
                             <tr>
                                 <td>{{ provider.id }}</td>
-                                <td><a href="{{ path('brands', { 'provider' : provider.id }) }}">{{ provider.getProviderTitle() }}</a></td>
+                                <td><a href="{{ path('brands', { 'provider' : provider.id }) }}">{{ provider.getTitle() }}</a></td>
                             </tr>
                         {% endfor %}
                 </table>

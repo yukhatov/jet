@@ -9,7 +9,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
-use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
@@ -45,6 +45,17 @@ class InventoryItem
      * @ORM\Column(type="string", length=255)
      */
     private $brand_name;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $brand_id;
+
+    /**
+     * @ManyToOne(targetEntity="Brand", inversedBy="inventoyItems")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -397,5 +408,21 @@ class InventoryItem
     public function setStockCount($stock_count)
     {
         $this->stock_count = $stock_count;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param mixed $brand
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
     }
 }

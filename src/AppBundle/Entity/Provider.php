@@ -20,7 +20,6 @@ class Provider {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -61,5 +60,13 @@ class Provider {
     public function getBrands()
     {
         return $this->brands;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }
