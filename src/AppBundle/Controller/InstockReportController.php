@@ -9,7 +9,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\ReportInstock;
 use AppBundle\Entity\Provider;
-use AppBundle\Entity\Forms\ReportForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Ob\HighchartsBundle\Highcharts\Highchart;

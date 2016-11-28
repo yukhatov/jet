@@ -49,6 +49,36 @@ class Order
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $jet_defined_order_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $merchant_order_id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $reference_order_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fulfillment_node;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $alt_order_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hash_email;
+
+    /**
      * @OneToMany(targetEntity="OrderItem", mappedBy="order")
      */
     private $items;
@@ -57,6 +87,11 @@ class Order
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $exception_state;
 
     /**
      * @ORM\Column(type="float")
@@ -71,7 +106,17 @@ class Order
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $reference_order_id;
+    private $request_service_level;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $request_ship_by;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $request_delivery_by;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -110,9 +155,64 @@ class Order
     private $address_zip_code;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $inner_order_placed_date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $order_transmission_date;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $jet_request_directed_cancel;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $item_fees;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $item_tax;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $item_shipping_cost;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $item_shipping_tax;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adjustment_name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adjustment_type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $commission_id;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $commission_value;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $request_shipping_carrier;
 
     /**
      * @ORM\Column(type="string", length=255)

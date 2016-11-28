@@ -27,9 +27,39 @@ class InventoryItem
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $bullet_1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $bullet_2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $main_image_url;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fulfillment_node_id;
+
+    /**
+     * @ORM\Column(type="string", length=15, unique=true)
      */
     private $sku;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $asin;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $upc;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -71,11 +101,6 @@ class InventoryItem
      * @ORM\Column(type="string", length=255)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $upc;
 
     /**
      * @ORM\Column(type="integer", length=50)
@@ -121,6 +146,11 @@ class InventoryItem
      * @ORM\Column(type="integer")
      */
     private $stock_count;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $last_update;
 
     /**
      * @return mixed

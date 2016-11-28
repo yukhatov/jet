@@ -41,6 +41,16 @@ class OrderItem
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $jet_defined_order_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $order_item_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $merchant_sku;
 
     /**
@@ -54,6 +64,11 @@ class OrderItem
     private $order_item_shipping_cost;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $alt_order_item_id;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $request_order_quantity;
@@ -62,6 +77,36 @@ class OrderItem
      * @ORM\Column(type="integer", nullable=true)
      */
     private $final_quantity;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $request_order_cancel_qty;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $item_tax_code;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $img_url;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price_adjustment;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $item_fees;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $regulatory_fees;
 
     /**
      * @ORM\Column(type="string")
