@@ -54,12 +54,12 @@ class OrderItem
     private $merchant_sku;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true, options={"default":0})
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $order_item_price;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true, options={"default":0})
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $order_item_shipping_cost;
 
