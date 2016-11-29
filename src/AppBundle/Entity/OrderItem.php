@@ -54,12 +54,12 @@ class OrderItem
     private $merchant_sku;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, options={"default":0})
      */
     private $order_item_price;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, options={"default":0})
      */
     private $order_item_shipping_cost;
 
@@ -94,17 +94,17 @@ class OrderItem
     private $img_url;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $price_adjustment;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $item_fees;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $regulatory_fees;
 

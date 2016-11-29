@@ -94,7 +94,7 @@ class Order
     private $exception_state;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2,  nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2,  nullable=true, options={"default":0})
      */
     private $base_price;
 
@@ -170,22 +170,22 @@ class Order
     private $jet_request_directed_cancel;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $item_fees;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $item_tax;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $item_shipping_cost;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $item_shipping_tax;
 
@@ -205,7 +205,7 @@ class Order
     private $commission_id;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"default":0})
      */
     private $commission_value;
 
