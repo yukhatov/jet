@@ -44,6 +44,7 @@ class Order
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
+     * @GeneratedValue
      */
 
     private $id;
@@ -153,6 +154,11 @@ class Order
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address_zip_code;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $order_placed_date;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
