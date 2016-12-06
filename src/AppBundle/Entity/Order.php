@@ -537,7 +537,18 @@ class Order
 
     public function getItemsCount()
     {
-        return count( $this->items );
+        $count = 0;
+
+        foreach ( $this->items as $item) {
+            if( ($item->getFinalQuantity()) )
+            {
+                $count += $item->getFinalQuantity();
+            }else{
+                $count += $item->getQuantity();
+            }
+        }
+
+        return $count;
     }
 
     /**
