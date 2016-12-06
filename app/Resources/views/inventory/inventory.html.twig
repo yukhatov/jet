@@ -33,6 +33,8 @@
                     <th>Provider</th>
                     <th>Title</th>
                     <th>UPC</th>
+                    <th>SKU</th>
+                    <th>ASIN</th>
                     <th>Color</th>
                     <th>Color Code</th>
                     <th>Size</th>
@@ -49,6 +51,8 @@
                             <td>{{ item.getProvider().getTitle() }}</td>
                             <td>{{ item.getTitle() }}</td>
                             <td>{{ item.upc }}</td>
+                            <td>{{ item.sku }}</td>
+                            <td>{{ item.asin }}</td>
                             <td>{{ item.colorTitle }}</td>
                             <td>{{ item.colorCode }}</td>
                             {#<td>{{ item.size1 }} / {{ item.size2 }} / {{ item.size3 }}</td>#}
