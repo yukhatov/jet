@@ -14,14 +14,43 @@ use Symfony\Component\HttpFoundation\Request;
 class InventoryController extends Controller
 {
     /**
-     * @Route("/inventory", name="inventory")
+     * @Route("/inventory/{providerId}/{brandId}", options={"expose"=true}, name="inventory")
      */
-    public function listAction()
+    public function listAction($providerId = 0, $brandId = 0)
     {
-        $inventory = $this->getDoctrine()
-            ->getRepository('AppBundle:InventoryItem')
+        $params = $this->getParameters($providerId, $brandId);
+
+        $providers = $this->getDoctrine()
+            ->getRepository('AppBundle:Provider')
             ->findAll();
 
-        return $this->render('inventory/inventory.html.twig', array('inventory' => $inventory));
+        $brands = $this->getDoctrine()
+            ->getRepository('AppBundle:Brand')
+            ->findBy(['providerId' => $providerId]);
+
+        if($brandId){
+            $inventory = $this->getDoctrine()
+                ->getRepository('AppBundle:InventoryItem')
+                ->findBy(['brand_id' => $brandId]);
+        }else{
+            if($providerId)
+            {
+                $inventory = $this->getDoctrine()
+                    ->getRepository('AppBundle:InventoryItem')
+                    ->findBy(['provider_id' => $providerId]);
+            }else{
+                $inventory = $this->getDoctrine()
+                    ->getRepository('AppBundle:InventoryItem')
+                    ->findAll();
+            }
+        }
+
+        return $this->render('inventory/inventory.html.twig', array('inventory' => $inventory, 'providers' => $providers, 'brands' => $brands, 'params' => $params));
+    }
+
+    private function getParameters($providerId, $brandId){
+        return ['selectedProvider' => $providerId,
+                'selectedBrand' => $brandId
+        ];
     }
 }

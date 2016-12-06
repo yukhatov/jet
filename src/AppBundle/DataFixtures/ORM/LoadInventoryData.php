@@ -31,6 +31,8 @@ class LoadInventoryItemData implements FixtureInterface
         $item->setTitle('Ray Ban RB 3300');
         $item->setBrandName($brand->getTitle());
         $item->setBrand($brand);
+        $item->setProvider($brand->getProvider());
+        $item->setProviderId($brand->getProvider()->getId());
         $item->setColorCode('030');
         $item->setColorTitle('Tortoise');
         $item->setCreated(1479704400);

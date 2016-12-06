@@ -34,6 +34,11 @@ class Provider {
     private $brands;
 
     /**
+     * @OneToMany(targetEntity="InventoryItem", mappedBy="provider")
+     */
+    private $inventoryItems;
+
+    /**
      * @return mixed
      */
     public function getId()

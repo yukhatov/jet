@@ -77,15 +77,26 @@ class InventoryItem
     private $brand_name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $brand_id;
 
     /**
      * @ManyToOne(targetEntity="Brand", inversedBy="inventoyItems")
-     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
      */
     private $brand;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $provider_id;
+
+    /**
+     * @ManyToOne(targetEntity="Provider", inversedBy="inventoyItems")
+     * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
+     */
+    private $provider;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -462,5 +473,37 @@ class InventoryItem
     public function setBrand($brand)
     {
         $this->brand = $brand;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProviderId()
+    {
+        return $this->provider_id;
+    }
+
+    /**
+     * @param mixed $provider_id
+     */
+    public function setProviderId($provider_id)
+    {
+        $this->provider_id = $provider_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @param mixed $provider
+     */
+    public function setProvider($provider)
+    {
+        $this->provider = $provider;
     }
 }

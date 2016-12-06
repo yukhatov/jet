@@ -15,7 +15,7 @@ $(document).ready(function() {
 			}
 		},
 		initComplete: function () {
-			this.api().columns([0, 1]).every( function () {
+			/*this.api().columns([0, 1]).every( function () {
 				var column = this;
 				var select = $('<select><option value=""></option></select>')
 					.appendTo('#inventory-table_filter')
@@ -38,8 +38,20 @@ $(document).ready(function() {
 						.append( '<option value="'+d+'">'+d+'</option>' )
 						.find('option:first').text('All');
 				});
-			});
+			});*/
 		}
 	});
 
 });
+
+$('select[name=provider], select[name=brand]').change(function(){
+	filter();
+});
+
+function filter()
+{
+	var selectedProvider = $('select[name=provider] option:selected').val(),
+		selectedBrand = $('select[name=brand] option:selected').val();
+
+	window.location.href = Routing.generate('inventory') + '/' + selectedProvider + '/' + selectedBrand;
+}

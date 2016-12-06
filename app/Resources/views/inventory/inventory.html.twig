@@ -6,6 +6,27 @@
 
     <div clas="row">
         <div class="col-md-12">
+            <select class="form-control" name="provider">
+                <option value="0">All providers</option>
+                {% for provider in providers %}
+                    {% if(provider.getId() == params['selectedProvider']) %}
+                        <option value="{{ provider.getId() }}" selected>{{ provider.getTitle() }}</option>
+                    {% else %}
+                        <option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <select class="form-control" name="brand">
+                <option value="0">All brands</option>
+                {% for brand in brands %}
+                    {% if(brand.getId() == params['selectedBrand']) %}
+                        <option value="{{ brand.getId() }}" selected>{{ brand.getTitle() }}</option>
+                    {% else %}
+                        <option value="{{ brand.getId() }}">{{ brand.getTitle() }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
             <table id="inventory-table" class="table">
                 <thead>
                     <th>Brand</th>
@@ -23,8 +44,8 @@
                 <tbody>
                     {% for item in inventory %}
                         <tr>
-                            <td>{{ item.getBrandName() }}</td>
-                            <td>{{ item.getProviderName() }}</td>
+                            <td>{{ item.getBrand().getTitle() }}</td>
+                            <td>{{ item.getProvider().getTitle() }}</td>
                             <td>{{ item.getTitle() }}</td>
                             <td>{{ item.upc }}</td>
                             <td>{{ item.colorTitle }}</td>
