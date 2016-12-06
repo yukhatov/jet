@@ -297,6 +297,14 @@ class InventoryItem
     }
 
     /**
+     * @return mixed
+     */
+    public function getAsin()
+    {
+        return $this->asin;
+    }
+
+    /**
      * @param mixed $id
      */
     public function setId($id)

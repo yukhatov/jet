@@ -53,7 +53,7 @@ class InstockReportController extends Controller
 
         if(!$from and !$to)
         {
-            $this->fromDate = date("Y-m-d", time() - 604800); //last week by derfault
+            $this->fromDate = date("Y-m-d", time() - 604800); //last week by default
             $this->toDate = date("Y-m-d", time());
         }else{
             $this->fromDate = $from;

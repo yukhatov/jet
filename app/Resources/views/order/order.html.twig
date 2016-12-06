@@ -65,6 +65,8 @@
                         <th>Color</th>
                         <th>Color code</th>
                         <th>UPC</th>
+                        <th>SKU</th>
+                        <th>ASIN</th>
                         <th>Price</th>
                         <th>Shipping cost</th>
                         <th>Quantity</th>
@@ -78,7 +80,11 @@
                                 <td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
                                 <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
                                 <td>{{ inventoryItems[item.merchantSku].upc }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].sku }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].asin }}</td>
                             {% else %}
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
