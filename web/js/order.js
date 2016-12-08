@@ -1,6 +1,10 @@
 /**
  * Created by artur on 24.10.16.
  */
+$(document).ready(function() {
+    new Clipboard('#button-copy');
+});
+
 $('#button-back').on('click', function(){
     window.history.back();
 });

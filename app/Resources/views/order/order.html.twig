@@ -11,6 +11,12 @@
         <div class="col-md-12">
             <div class="order-data">
                 <!-- Default panel contents -->
+                <button class="btn btn-purple pull-right" id="button-copy" data-clipboard-text=
+"{{ order.getRecipientName() }}
+{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}
+{{ order.getAddressCity() }}, {{ order.getAddressState() }} {{ order.getAddressZipCode() }}"
+                >Copy address</button>
+
                 <button class="btn btn-purple pull-right" id="button-back">Back</button>
                 <div class="order-data-title">Order: {{ order.referenceOrderId }}</div>
                 <!-- Table -->
@@ -160,6 +166,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/order.js') }}"></script>
 {% endblock %}
 
