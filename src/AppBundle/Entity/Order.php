@@ -492,7 +492,9 @@ class Order
 
         if($orderModel->getResponseShipmentDate())
         {
-            $this->setResponseShipmentDate($orderModel->getResponseShipmentDate()->getTimestamp());
+            $todayMidnight = mktime(0, 0, 0, date('n'), date('j'),date('Y'));
+
+            $this->setResponseShipmentDate($orderModel->getResponseShipmentDate()->getTimestamp() + (time() - $todayMidnight));
         }
 
         return true;

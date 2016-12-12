@@ -8,6 +8,8 @@
 
 namespace AppBundle\Controller;
 
+ini_set('max_execution_time', '9999999');
+
 use AppBundle\Entity\Brand;
 use AppBundle\Entity\Provider;
 use AppBundle\Entity\ReportInstock;
