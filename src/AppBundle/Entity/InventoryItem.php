@@ -74,6 +74,16 @@ class InventoryItem
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $fj_sub_status_1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fj_sub_status_2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $brand_name;
 
     /**
