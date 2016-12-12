@@ -8,7 +8,7 @@ $(document).ready(function() {
 		"pageLength": 50,
 		"language": {
 			search: "_INPUT_",				// search filter
-			searchPlaceholder: 'Search Orders',
+			searchPlaceholder: 'Search',
 			"paginate": {							// pagination
 				"previous": '<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>',
 				"next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'

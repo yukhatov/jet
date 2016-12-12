@@ -67,7 +67,7 @@
                 <!-- Table -->
                 <table class="table">
                     <thead class="center">
-                        <th>Title</th>
+                        <th>Title / Jet interpretation title</th>
                         <th>Color</th>
                         <th>Color code</th>
                         <th>Size</th>
@@ -81,12 +81,11 @@
                     </thead>
                     {% for item in items %}
                         <tr>
-                            <td>
-                                <p class="main-title">{{ item.getTitle() }}</p>
-                                <p class="sub-title">{{ item.getTitle() }}</p>
-                            </td>
-
                             {% if( item.hasRelatedInventoryItem() ) %}
+                                <td>
+                                    <p class="main-title">{{ inventoryItems[item.merchantSku].title }}</p>
+                                    <p class="sub-title">{{ item.getTitle() }}</p>
+                                </td>
                                 <td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
                                 <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
                                 <td>{% if( inventoryItems[item.merchantSku].size1() ) %} {{ inventoryItems[item.merchantSku].size1 }} {% endif %} {% if( inventoryItems[item.merchantSku].size2() ) %} / {{ inventoryItems[item.merchantSku].size2 }} {% endif %} {% if( inventoryItems[item.merchantSku].size3() ) %} / {{ inventoryItems[item.merchantSku].size3 }} {% endif %}</td>
@@ -94,6 +93,10 @@
                                 <td>{{ inventoryItems[item.merchantSku].sku }}</td>
                                 <td>{{ inventoryItems[item.merchantSku].asin }}</td>
                             {% else %}
+                                <td>
+                                    <p class="main-title">Not found in inventory</p>
+                                    <p class="sub-title">{{ item.getTitle() }}</p>
+                                </td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
