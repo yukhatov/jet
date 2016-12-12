@@ -41,7 +41,10 @@
                             {% if order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE') %}
                                 <td class="tracking-number editable" >
                                     <label>
-                                        <input id="tracking-number" type="text" value="{{ trackingNumber }}" onkeypress="saveTN(event)">
+                                        <input disabled id="tracking-number" type="text" value="{{ trackingNumber }}" onkeypress="saveTN(event)">
+                                        <button class="edit">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
                                         <span class="info-text saved" style="display: none;">Saved</span>
                                     </label>
                                 </td>
