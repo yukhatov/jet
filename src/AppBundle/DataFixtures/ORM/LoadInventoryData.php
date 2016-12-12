@@ -8,6 +8,8 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\InventoryItem;
+use AppBundle\Entity\Provider;
+use AppBundle\Entity\Brand;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -15,16 +17,22 @@ class LoadInventoryItemData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $this->newInventoryItem($manager, 'D378333');
-        $this->newInventoryItem($manager, 'D378334');
-        $this->newInventoryItem($manager, 'D378335');
+        $provider = $this->newProvider($manager);
+        $brand = $this->newBrand($manager, $provider);
+
+        $this->newInventoryItem($manager, 'D378333', $brand);
+        $this->newInventoryItem($manager, 'D378334', $brand);
+        $this->newInventoryItem($manager, 'D378335', $brand);
     }
 
-    private function newInventoryItem(ObjectManager $manager, $sku)
+    private function newInventoryItem(ObjectManager $manager, $sku, Brand $brand)
     {
         $item = new InventoryItem();
         $item->setTitle('Ray Ban RB 3300');
-        $item->setBrandName('Ray-Ban');
+        $item->setBrandName($brand->getTitle());
+        $item->setBrand($brand);
+        $item->setProvider($brand->getProvider());
+        $item->setProviderId($brand->getProvider()->getId());
         $item->setColorCode('030');
         $item->setColorTitle('Tortoise');
         $item->setCreated(1479704400);
@@ -43,5 +51,31 @@ class LoadInventoryItemData implements FixtureInterface
 
         $manager->persist($item);
         $manager->flush();
+    }
+
+    private function newProvider(ObjectManager $manager)
+    {
+        $provider = new Provider();
+        $provider->setTitle('Luxotica');
+        $provider->setId(3);
+
+        $manager->persist($provider);
+        $manager->flush();
+
+        return $provider;
+    }
+
+    private function newBrand(ObjectManager $manager, Provider $provider)
+    {
+        $brand = new Brand();
+        $brand->setTitle('Ray-Ban');
+        $brand->setId(85);
+        $brand->setProviderId($provider->getId());
+        $brand->setProvider($provider);
+
+        $manager->persist($brand);
+        $manager->flush();
+
+        return $brand;
     }
 }

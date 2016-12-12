@@ -20,7 +20,6 @@ class Provider {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -33,6 +32,11 @@ class Provider {
      * @OneToMany(targetEntity="Brand", mappedBy="provider")
      */
     private $brands;
+
+    /**
+     * @OneToMany(targetEntity="InventoryItem", mappedBy="provider")
+     */
+    private $inventoryItems;
 
     /**
      * @return mixed
@@ -61,5 +65,13 @@ class Provider {
     public function getBrands()
     {
         return $this->brands;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }

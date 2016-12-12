@@ -11,6 +11,12 @@
         <div class="col-md-12">
             <div class="order-data">
                 <!-- Default panel contents -->
+                <button class="btn btn-purple pull-right" id="button-copy" data-clipboard-text=
+"{{ order.getRecipientName() }}
+{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}
+{{ order.getAddressCity() }}, {{ order.getAddressState() }} {{ order.getAddressZipCode() }}"
+                >Copy address</button>
+
                 <button class="btn btn-purple pull-right" id="button-back">Back</button>
                 <div class="order-data-title">Order: {{ order.referenceOrderId }}</div>
                 <!-- Table -->
@@ -36,7 +42,7 @@
                                 <td class="tracking-number editable" >
                                     <label>
                                         <input id="tracking-number" type="text" value="{{ trackingNumber }}" onkeypress="saveTN(event)">
-                                        <span class="info-text saved">Saved</span>
+                                        <span class="info-text saved" style="display: none;">Saved</span>
                                     </label>
                                 </td>
                             {% else %}
@@ -64,7 +70,10 @@
                         <th>Title</th>
                         <th>Color</th>
                         <th>Color code</th>
+                        <th>Size</th>
                         <th>UPC</th>
+                        <th>SKU</th>
+                        <th>ASIN</th>
                         <th>Price</th>
                         <th>Shipping cost</th>
                         <th>Quantity</th>
@@ -72,13 +81,22 @@
                     </thead>
                     {% for item in items %}
                         <tr>
-                            <td>{{ item.getTitle() }}</td>
+                            <td>
+                                <p class="main-title">{{ item.getTitle() }}</p>
+                                <p class="sub-title">{{ item.getTitle() }}</p>
+                            </td>
 
                             {% if( item.hasRelatedInventoryItem() ) %}
                                 <td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
                                 <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
+                                <td>{% if( inventoryItems[item.merchantSku].size1() ) %} {{ inventoryItems[item.merchantSku].size1 }} {% endif %} {% if( inventoryItems[item.merchantSku].size2() ) %} / {{ inventoryItems[item.merchantSku].size2 }} {% endif %} {% if( inventoryItems[item.merchantSku].size3() ) %} / {{ inventoryItems[item.merchantSku].size3 }} {% endif %}</td>
                                 <td>{{ inventoryItems[item.merchantSku].upc }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].sku }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].asin }}</td>
                             {% else %}
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
                                 <td><font color="#a4a4a4">Not found in inventory</font></td>
@@ -151,5 +169,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/order.js') }}"></script>
 {% endblock %}
+

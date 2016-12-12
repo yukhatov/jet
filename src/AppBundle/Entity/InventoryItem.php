@@ -9,7 +9,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
-use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
@@ -27,82 +27,129 @@ class InventoryItem
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bullet_1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bullet_2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $main_image_url;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fulfillment_node_id;
+
+    /**
+     * @ORM\Column(type="string", length=15, unique=true)
      */
     private $sku;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $fj_status;
+    private $asin;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $fj_sub_status;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $brand_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $provider_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $upc;
 
     /**
-     * @ORM\Column(type="integer", length=50)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fj_status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fj_sub_status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $brand_name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $brand_id;
+
+    /**
+     * @ManyToOne(targetEntity="Brand", inversedBy="inventoyItems")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+     */
+    private $brand;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $provider_id;
+
+    /**
+     * @ManyToOne(targetEntity="Provider", inversedBy="inventoyItems")
+     * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
+     */
+    private $provider;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $provider_name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer", length=50, nullable=true)
      */
     private $created;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default": 0})
      */
     private $price;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default": 0})
      */
     private $whole_price;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $color_title;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $color_code;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $size1;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $size2;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $size3;
 
@@ -110,6 +157,11 @@ class InventoryItem
      * @ORM\Column(type="integer")
      */
     private $stock_count;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $last_update;
 
     /**
      * @return mixed
@@ -256,6 +308,14 @@ class InventoryItem
     }
 
     /**
+     * @return mixed
+     */
+    public function getAsin()
+    {
+        return $this->asin;
+    }
+
+    /**
      * @param mixed $id
      */
     public function setId($id)
@@ -397,5 +457,53 @@ class InventoryItem
     public function setStockCount($stock_count)
     {
         $this->stock_count = $stock_count;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param mixed $brand
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProviderId()
+    {
+        return $this->provider_id;
+    }
+
+    /**
+     * @param mixed $provider_id
+     */
+    public function setProviderId($provider_id)
+    {
+        $this->provider_id = $provider_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @param mixed $provider
+     */
+    public function setProvider($provider)
+    {
+        $this->provider = $provider;
     }
 }
