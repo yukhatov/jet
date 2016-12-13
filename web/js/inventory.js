@@ -2,13 +2,20 @@ $(document).ready(function() {
 
 	$("#inventory-table").dataTable({
 		// "dom": 'ftirpl',
+		"processing": true,
+		"serverSide": true,
+		"ajax": Routing.generate('inventoryTable'),
+		"columns": [
+			{ "data": "upc" },
+		],
+
 		"dom": "ftr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
 		"pageLength": 50,
 		"language": {
 			search: "_INPUT_",				// search filter
-			searchPlaceholder: 'Search Orders',
+			searchPlaceholder: 'Search',
 			"paginate": {							// pagination
 				"previous": '<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>',
 				"next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'

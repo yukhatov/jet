@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class InventoryController extends Controller
 {
@@ -45,7 +46,31 @@ class InventoryController extends Controller
             }
         }
 
-        return $this->render('inventory/inventory.html.twig', array('inventory' => $inventory, 'providers' => $providers, 'brands' => $brands, 'params' => $params));
+        return $this->render('inventory/inventory.html.twig', array('inventory' => /*$inventory*/0, 'providers' => $providers, 'brands' => $brands, 'params' => $params));
+    }
+
+    /**
+     * @Route("/inventoryTable", options={"expose"=true}, name="inventoryTable")
+     */
+    public function inventoryAction()
+    {
+        $table = 'jet_inventory';
+
+        $primaryKey = 'id';
+
+        $columns = array(
+            array( 'db' => 'upc', 'dt' => 0 ),
+        );
+
+        $sql_details = array(
+            'user' => 'root',
+            'pass' => '228834228834n',
+            'db'   => 'jet',
+            'host' => 'localhost'
+        );
+
+        return new JsonResponse([$_GET, $sql_details, $table, $primaryKey, $columns]);
+
     }
 
     private function getParameters($providerId, $brandId){
