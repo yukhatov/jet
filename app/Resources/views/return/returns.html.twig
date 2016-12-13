@@ -18,7 +18,6 @@
                     <th>City</th>
                     <th>State</th>
                     <th>Zip code</th>
-                    <th>Delivery date</th>
                     <th>Shipping method</th>
                     <th>Details</th>
                 </thead>
@@ -34,8 +33,7 @@
                             <td>{{ return.order.getAddressCity() }}</td>
                             <td>{{ return.order.getAddressState() }}</td>
                             <td>{{ return.order.getAddressZipCode() }}</td>
-                            <td>{{ (return.order.getExpectedDeliveryDate() != 0) ? return.order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
-                            <td>{{ return.order.requestShippingMethod }}</td>
+                            <td>{{ return.returnShippingCarrier }}</td>
                             <td align="center"><a href="{{ path('return', { 'id': return.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
                         </tr>
                     {% endfor %}
