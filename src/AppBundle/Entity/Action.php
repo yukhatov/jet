@@ -7,6 +7,7 @@
  */
 namespace AppBundle\Entity;
 
+use AppBundle\Controller\OrderController;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +22,12 @@ class Action
         if($status){
             $actionBody = ['acknowledgement_status' => $status->getStatus(), 'order_id' => $orderId];
         }else{
-            $actionBody = ['order_id' => $orderId];
+            if($actionType == OrderController::ACTION_TYPE_RETURN)
+            {
+                $actionBody = ['return_id' => $orderId];
+            }else{
+                $actionBody = ['order_id' => $orderId];
+            }
         }
 
         $this->setActionBody(json_encode($actionBody));

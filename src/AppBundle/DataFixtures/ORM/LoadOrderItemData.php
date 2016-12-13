@@ -9,6 +9,7 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\OrderItem;
 use AppBundle\Entity\Order;
+use AppBundle\Entity\OrderReturn;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -26,6 +27,8 @@ class LoadOrderItemData implements FixtureInterface
         $this->newItem($order1, $manager);
         $this->newItem($order2, $manager);
         $this->newItem($order3, $manager);
+
+        $this->newOrderReturn($order1, $manager);
     }
 
     private function newItem(Order $order, ObjectManager $manager)
@@ -70,5 +73,18 @@ class LoadOrderItemData implements FixtureInterface
         $manager->flush();
 
         return $order;
+    }
+
+    private function newOrderReturn(Order $order, ObjectManager $manager)
+    {
+        $orderReturn = new OrderReturn();
+        $orderReturn->setOrder($order);
+        $orderReturn->setOrderId($order->getId());
+        $orderReturn->setReturnTrackingNumber('test');
+        $orderReturn->setMerchantReturnCharge(0);
+        $orderReturn->setInnerReturnDate(1478642400);
+
+        $manager->persist($orderReturn);
+        $manager->flush();
     }
 }

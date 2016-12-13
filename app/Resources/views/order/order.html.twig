@@ -108,7 +108,7 @@
                             <td>${{ item.getPrice() }}</td>
                             <td>${{ item.getShippingCost() }}</td>
                             <td>
-                                <select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}">
+                                <select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}" data-action="{{ constant('AppBundle\\Controller\\OrderController::ACTION_TYPE_CANCEL') }}">
                                     {% for value in item.getSelectValues %}
                                         {% if(value == item.getSelectedValue()) %}
                                             <option selected>{{ value }}</option>

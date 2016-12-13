@@ -62,10 +62,27 @@ $('#cancel-order').on('click', function(){
 
     var data = {};
     data['orderId'] = $('#select-quantity').data('order-id');
+    data['action'] = $('#select-quantity').data('action');
 
+    createAction(data);
+});
+
+$('#return-order').on('click', function(){
+    if($(this).hasClass('disabled')){
+        return;
+    }
+
+    var data = {};
+    data['orderId'] = $('.order-data-title').data('return-id');
+    data['action'] = $('.order-data-title').data('action');
+
+    createAction(data);
+});
+
+function createAction(data){
     $.ajax({
         'type': 'post',
-        'url': Routing.generate('cancel'),
+        'url': Routing.generate('createAction'),
         'dataType': 'json',
         'data': data
     }).success(function(json) {
@@ -75,7 +92,7 @@ $('#cancel-order').on('click', function(){
             notification(false);
         }
     });
-});
+}
 
 $('#ship-order').on('click', function() {
 

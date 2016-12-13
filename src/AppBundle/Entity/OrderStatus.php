@@ -23,6 +23,7 @@ class OrderStatus{
     const STATUS_IN_PROGRESS = 'inprogress';
     const STATUS_COMPLETE = 'complete';
     const STATUS_REJECTED = 'rejected';
+    const STATUS_COMPLETED_BY_MERCHANT = 'completed by merchant';
 
     /**
      * @ORM\Column(type="integer")
