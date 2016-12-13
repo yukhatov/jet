@@ -33,7 +33,7 @@
                     <tbody>
                         <tr>
                             <td>{{ return.returnStatus() }}</td>
-                            <td>{{ return.order.getRequestShippingMethod() }}</td>
+                            <td>{{ return.getReturnShippingCarrier() }}</td>
                             <td>{{ return.returnTrackingNumber }}</td>
                             <td>${{ return.order.basePrice }}</td>
                             <td>{{ return.order.getRecipientName() }}</td>
