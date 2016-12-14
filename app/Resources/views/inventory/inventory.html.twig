@@ -31,38 +31,18 @@
                 <thead>
                     <th>Brand</th>
                     <th>Provider</th>
-                    <th>Title</th>
+                    {#<th>Title</th>#}
                     <th>UPC</th>
                     <th>SKU</th>
-                    <th>ASIN</th>
+{#                    <th>ASIN</th>
                     <th>Color</th>
                     <th>Color Code</th>
                     <th>Size</th>
-                {#<th>Status</th>#}
                     <th>Whole Price</th>
                     <th>Price</th>
                     <th>Stock Count</th>
-                    <th>Created At</th>
+                    <th>Created At</th>#}
                 </thead>
-                <tbody>
-                    {% for item in inventory %}
-                        <tr>
-                            <td>{{ item.getBrand().getTitle() }}</td>
-                            <td>{{ item.getProvider().getTitle() }}</td>
-                            <td>{{ item.getTitle() }}</td>
-                            <td>{{ item.upc }}</td>
-                            <td>{{ item.sku }}</td>
-                            <td>{{ item.asin }}</td>
-                            <td>{{ item.colorTitle }}</td>
-                            <td>{{ item.colorCode }}</td>
-                            <td>{% if( item.size1() ) %} {{ item.size1 }} {% endif %} {% if( item.size2() ) %} / {{ item.size2 }} {% endif %} {% if( item.size3() ) %} / {{ item.size3 }} {% endif %}</td>
-                            <td>${{ item.getWholePrice() }}</td>
-                            <td>${{ item.getPrice() }}</td>
-                            <td>{{ item.getStockCount() }}</td>
-                            <td>{{ item.getCreatedDate() }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
             </table>
         </div>
     </div>

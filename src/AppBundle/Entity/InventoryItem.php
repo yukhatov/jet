@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\InventoryItemRepository")
  * @ORM\Table(name="jet_inventory")
  */
 
@@ -82,9 +82,9 @@ class InventoryItem
     private $fj_sub_status_2;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="brand_name")
      */
-    private $brand_name;
+    private $brandName;
 
     /**
      * @ORM\Column(type="integer")
@@ -109,9 +109,9 @@ class InventoryItem
     private $provider;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="provider_name")
      */
-    private $provider_name;
+    private $providerName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -202,7 +202,7 @@ class InventoryItem
      */
     public function getBrandName()
     {
-        return $this->brand_name;
+        return $this->brand->getTitle();
     }
 
     /**
@@ -210,7 +210,7 @@ class InventoryItem
      */
     public function getProviderName()
     {
-        return $this->provider_name;
+        return $this->provider->getTitle();
     }
 
     /**
@@ -360,17 +360,17 @@ class InventoryItem
     /**
      * @param mixed $brand_name
      */
-    public function setBrandName($brand_name)
+    public function setBrandName($brandName)
     {
-        $this->brand_name = $brand_name;
+        $this->brandName = $brandName;
     }
 
     /**
      * @param mixed $provider_name
      */
-    public function setProviderName($provider_name)
+    public function setProviderName($providerName)
     {
-        $this->provider_name = $provider_name;
+        $this->providerName = $providerName;
     }
 
     /**

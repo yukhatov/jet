@@ -11,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class InventoryController extends Controller
 {
@@ -29,7 +33,7 @@ class InventoryController extends Controller
             ->getRepository('AppBundle:Brand')
             ->findBy(['providerId' => $providerId]);
 
-        if($brandId){
+       /* if($brandId){
             $inventory = $this->getDoctrine()
                 ->getRepository('AppBundle:InventoryItem')
                 ->findBy(['brand_id' => $brandId]);
@@ -44,33 +48,52 @@ class InventoryController extends Controller
                     ->getRepository('AppBundle:InventoryItem')
                     ->findAll();
             }
-        }
+        }*/
 
-        return $this->render('inventory/inventory.html.twig', array('inventory' => /*$inventory*/0, 'providers' => $providers, 'brands' => $brands, 'params' => $params));
+        return $this->render('inventory/inventory.html.twig', array(/*'inventory' => $inventory,*/ 'providers' => $providers, 'brands' => $brands, 'params' => $params));
     }
 
     /**
-     * @Route("/inventoryTable", options={"expose"=true}, name="inventoryTable")
+     * @Route("/inventoryTableData", options={"expose"=true}, name="inventoryTableData")
      */
-    public function inventoryAction()
+    public function inventoryDataAction(Request $request)
     {
-        $table = 'jet_inventory';
+        $get = $request->query->all();
 
-        $primaryKey = 'id';
+        $inventory = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->findByParams($get);
 
-        $columns = array(
-            array( 'db' => 'upc', 'dt' => 0 ),
+        $inventoryTotalByParamsCount = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->getTotalCountByParams($get);
+
+        $inventoryTotalCount = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->getTotalInventoryCount();
+
+        $inventory = $this->serializeInvetory($inventory);
+
+        $output = array(
+            "draw" =>  intval($get['draw']),
+            "recordsTotal" => $inventoryTotalCount,
+            "recordsFiltered" => $inventoryTotalByParamsCount,
+            "data" => $inventory,
+            "requestParameters" => $get,
         );
 
-        $sql_details = array(
-            'user' => 'root',
-            'pass' => '228834228834n',
-            'db'   => 'jet',
-            'host' => 'localhost'
-        );
+        return new JsonResponse($output);
+    }
 
-        return new JsonResponse([$_GET, $sql_details, $table, $primaryKey, $columns]);
+    private function serializeInvetory($inventory){
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(array('brand', 'provider'));
+        $serializer = new Serializer([$normalizer], $encoders);
 
+        $content = json_decode($serializer->serialize($inventory, 'json'));
+
+        return $content;
     }
 
     private function getParameters($providerId, $brandId){
