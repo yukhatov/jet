@@ -34,7 +34,7 @@ $(document).ready(function() {
 		"dom": "f<'backend-filters'>tr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "asc"]],
-		"pageLength": 10,
+		"pageLength": 25,
 		"language": {
 			search: "_INPUT_",				// search filter
 			searchPlaceholder: 'Search by UPC, ASIN, Title',
