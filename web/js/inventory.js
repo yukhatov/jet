@@ -1,5 +1,6 @@
 var inventoryTable,
-	selectBrands = document.getElementById("js-brand");
+		selectProvider = document.getElementById("js-provider"),
+		selectBrand = document.getElementById("js-brand");
 
 $(document).ready(function() {
 	inventoryTable = $("#inventory-table").DataTable({
@@ -30,7 +31,7 @@ $(document).ready(function() {
 			{ "data": "createdDate" },
 		],
 
-		"dom": "ftr" +							// https://datatables.net/reference/option/dom
+		"dom": "f<'backend-filters'>tr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
 		"pageLength": 10,
@@ -43,16 +44,18 @@ $(document).ready(function() {
 			}
 		},
 	});
+
+	$("#inventory-table_filter").append(selectProvider, selectBrand);
 });
 
 function fnCallback(response){
 	if(response.json.requestParameters.brandId == 0){
-		fillSelectBrands(response.json.brands);
+		fillSelectBrand(response.json.brands);
 	}
 }
 
 $('select[id=js-provider]').change(function(){
-	resetSelectBrands();
+	resetSelectBrand();
 	inventoryTable.ajax.reload();
 });
 
@@ -60,23 +63,22 @@ $('select[id=js-brand]').change(function(){
 	inventoryTable.ajax.reload();
 });
 
-function fillSelectBrands(brands){
-	if(brands.length)
-	{
+function fillSelectBrand(brands){
+	if(brands.length) {
 		brands.forEach(function(brand, i, brands) {
 			var option = document.createElement("option");
 
 			option.text = brand.title;
 			option.value = brand.id;
 
-			selectBrands.appendChild(option);
+			selectBrand.appendChild(option);
 		});
 	}
 }
 
-function resetSelectBrands(){
-	while (selectBrands.firstChild) {
-		selectBrands.removeChild(selectBrands.firstChild);
+function resetSelectBrand(){
+	while (selectBrand.firstChild) {
+		selectBrand.removeChild(selectBrand.firstChild);
 	}
 
 	var singleOption = document.createElement("option");
@@ -84,5 +86,5 @@ function resetSelectBrands(){
 	singleOption.text = 'All brands';
 	singleOption.value = 0;
 
-	selectBrands.appendChild(singleOption);
+	selectBrand.appendChild(singleOption);
 }

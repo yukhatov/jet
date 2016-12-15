@@ -6,13 +6,13 @@
 
     <div clas="row">
         <div class="col-md-12">
-            <select class="form-control input-sm" id="js-provider">
+            <select class="form-control input-sm column-filter" id="js-provider">
                 <option value="0">All providers</option>
                 {% for provider in providers %}
                         <option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
                 {% endfor %}
             </select>
-            <select class="form-control input-sm" id="js-brand">
+            <select class="form-control input-sm column-filter" id="js-brand">
                 <option value="0">All brands</option>
             </select>
 
