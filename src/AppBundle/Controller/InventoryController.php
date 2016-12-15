@@ -19,38 +19,15 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class InventoryController extends Controller
 {
     /**
-     * @Route("/inventory/{providerId}/{brandId}", options={"expose"=true}, name="inventory")
+     * @Route("/inventory", options={"expose"=true}, name="inventory")
      */
-    public function listAction($providerId = 0, $brandId = 0)
+    public function listAction()
     {
-        $params = $this->getParameters($providerId, $brandId);
-
         $providers = $this->getDoctrine()
             ->getRepository('AppBundle:Provider')
             ->findAll();
 
-        $brands = $this->getDoctrine()
-            ->getRepository('AppBundle:Brand')
-            ->findBy(['providerId' => $providerId]);
-
-       /* if($brandId){
-            $inventory = $this->getDoctrine()
-                ->getRepository('AppBundle:InventoryItem')
-                ->findBy(['brand_id' => $brandId]);
-        }else{
-            if($providerId)
-            {
-                $inventory = $this->getDoctrine()
-                    ->getRepository('AppBundle:InventoryItem')
-                    ->findBy(['provider_id' => $providerId]);
-            }else{
-                $inventory = $this->getDoctrine()
-                    ->getRepository('AppBundle:InventoryItem')
-                    ->findAll();
-            }
-        }*/
-
-        return $this->render('inventory/inventory.html.twig', array(/*'inventory' => $inventory,*/ 'providers' => $providers, 'brands' => $brands, 'params' => $params));
+        return $this->render('inventory/inventory.html.twig', array('providers' => $providers));
     }
 
     /**
@@ -82,6 +59,14 @@ class InventoryController extends Controller
             "requestParameters" => $get,
         );
 
+        if(isset($get['providerId'])){
+            $output['brands'] = $this->serializeBrands(
+                $this->getDoctrine()
+                ->getRepository('AppBundle:Brand')
+                ->findBy(['providerId' => $get['providerId']])
+            );
+        }
+
         return new JsonResponse($output);
     }
 
@@ -96,9 +81,14 @@ class InventoryController extends Controller
         return $content;
     }
 
-    private function getParameters($providerId, $brandId){
-        return ['selectedProvider' => $providerId,
-                'selectedBrand' => $brandId
-        ];
+    private function serializeBrands($brands){
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(array('provider', 'inventoryItems'));
+        $serializer = new Serializer([$normalizer], $encoders);
+
+        $content = json_decode($serializer->serialize($brands, 'json'));
+
+        return $content;
     }
 }

@@ -288,6 +288,31 @@ class InventoryItem
     /**
      * @return mixed
      */
+    public function getSize()
+    {
+        $size = '';
+
+        if($this->size1)
+        {
+            $size = $this->size1;
+        }
+
+        if($this->size2)
+        {
+            $size = $size . '/' . $this->size2;
+        }
+
+        if($this->size3)
+        {
+            $size = $size .  '/' . $this->size3;
+        }
+
+        return $size;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getSize1()
     {
         return $this->size1;

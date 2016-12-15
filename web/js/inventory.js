@@ -1,25 +1,33 @@
-var inventoryTable;
+var inventoryTable,
+	selectBrands = document.getElementById("js-brand");
 
 $(document).ready(function() {
-
-	inventoryTable =
-
-	$("#inventory-table").DataTable({
+	inventoryTable = $("#inventory-table").DataTable({
 		// "dom": 'ftirpl',
 		"processing": true,
 		"serverSide": true,
 		"ajax": {
 			"url": Routing.generate('inventoryTableData'),
 			"data": function (d) {
-				d.providerId = $('select[name=provider] option:selected').val(),
-				d.brandId = $('select[name=brand] option:selected').val()
-			}
+				d.providerId = $('select[id=js-provider] option:selected').val(),
+				d.brandId = $('select[id=js-brand] option:selected').val()
+			},
 		},
+		"drawCallback": fnCallback,
 		"columns": [
 			{ "data": "brandName" },
 			{ "data": "providerName" },
+			{ "data": "title" },
 			{ "data": "upc" },
 			{ "data": "sku" },
+			{ "data": "asin" },
+			{ "data": "colorTitle" },
+			{ "data": "colorCode" },
+			{ "data": "size" },
+			{ "data": "price" },
+			{ "data": "wholePrice" },
+			{ "data": "stockCount" },
+			{ "data": "createdDate" },
 		],
 
 		"dom": "ftr" +							// https://datatables.net/reference/option/dom
@@ -37,19 +45,44 @@ $(document).ready(function() {
 	});
 });
 
+function fnCallback(response){
+	if(response.json.requestParameters.brandId == 0){
+		fillSelectBrands(response.json.brands);
+	}
+}
 
-
-$('select[name=provider], select[name=brand]').change(function(){
-	//filter();
-	console.log(inventoryTable);
-
+$('select[id=js-provider]').change(function(){
+	resetSelectBrands();
 	inventoryTable.ajax.reload();
 });
 
-function filter()
-{
-	var selectedProvider = $('select[name=provider] option:selected').val(),
-		selectedBrand = $('select[name=brand] option:selected').val();
+$('select[id=js-brand]').change(function(){
+	inventoryTable.ajax.reload();
+});
 
-	window.location.href = Routing.generate('inventory') + '/' + selectedProvider + '/' + selectedBrand;
+function fillSelectBrands(brands){
+	if(brands.length)
+	{
+		brands.forEach(function(brand, i, brands) {
+			var option = document.createElement("option");
+
+			option.text = brand.title;
+			option.value = brand.id;
+
+			selectBrands.appendChild(option);
+		});
+	}
+}
+
+function resetSelectBrands(){
+	while (selectBrands.firstChild) {
+		selectBrands.removeChild(selectBrands.firstChild);
+	}
+
+	var singleOption = document.createElement("option");
+
+	singleOption.text = 'All brands';
+	singleOption.value = 0;
+
+	selectBrands.appendChild(singleOption);
 }

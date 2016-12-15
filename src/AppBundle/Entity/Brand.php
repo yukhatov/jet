@@ -11,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="jet_brand")
@@ -122,11 +127,14 @@ class Brand {
         return $this->provider;
     }
 
-    /**
-     * @return mixed
-     */
-   /* public function getReports()
-    {
-        return $this->reports;
-    }*/
+    public function serialize(){
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(array('provider', 'inventoryItems'));
+        $serializer = new Serializer([$normalizer], $encoders);
+
+        $content = json_decode($serializer->serialize($this, 'json'));
+
+        return $content;
+    }
 }
