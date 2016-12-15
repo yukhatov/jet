@@ -1,57 +1,88 @@
-$(document).ready(function() {
+var inventoryTable,
+	selectBrands = document.getElementById("js-brand");
 
-	$("#inventory-table").dataTable({
+$(document).ready(function() {
+	inventoryTable = $("#inventory-table").DataTable({
 		// "dom": 'ftirpl',
+		"processing": true,
+		"serverSide": true,
+		"ajax": {
+			"url": Routing.generate('inventoryTableData'),
+			"data": function (d) {
+				d.providerId = $('select[id=js-provider] option:selected').val(),
+				d.brandId = $('select[id=js-brand] option:selected').val()
+			},
+		},
+		"drawCallback": fnCallback,
+		"columns": [
+			{ "data": "brandName" },
+			{ "data": "providerName" },
+			{ "data": "title" },
+			{ "data": "upc" },
+			{ "data": "sku" },
+			{ "data": "asin" },
+			{ "data": "colorTitle" },
+			{ "data": "colorCode" },
+			{ "data": "size" },
+			{ "data": "price" },
+			{ "data": "wholePrice" },
+			{ "data": "stockCount" },
+			{ "data": "createdDate" },
+		],
+
 		"dom": "ftr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
-		"pageLength": 50,
+		"pageLength": 10,
 		"language": {
 			search: "_INPUT_",				// search filter
-			searchPlaceholder: 'Search Orders',
+			searchPlaceholder: 'Search by UPC',
 			"paginate": {							// pagination
 				"previous": '<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>',
 				"next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
 			}
 		},
-		initComplete: function () {
-			/*this.api().columns([0, 1]).every( function () {
-				var column = this;
-				var select = $('<select><option value=""></option></select>')
-					.appendTo('#inventory-table_filter')
-					.addClass('form-control input-sm')
-					.on( 'change', function () {
-						var val = $.fn.dataTable.util.escapeRegex(
-							$(this).val()
-						);
-						column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-					} )
-					.wrap('<div class="column-filter">');
-
-				var title = $( column.header() ).text();			// get column's title
-				select.before('<span>' +title+ ' </span>');		// set column's title before its filter
-
-				column.data().unique().sort().each( function ( d, j ) {
-					select
-						.append( '<option value="'+d+'">'+d+'</option>' )
-						.find('option:first').text('All');
-				});
-			});*/
-		}
 	});
-
 });
 
-$('select[name=provider], select[name=brand]').change(function(){
-	filter();
+function fnCallback(response){
+	if(response.json.requestParameters.brandId == 0){
+		fillSelectBrands(response.json.brands);
+	}
+}
+
+$('select[id=js-provider]').change(function(){
+	resetSelectBrands();
+	inventoryTable.ajax.reload();
 });
 
-function filter()
-{
-	var selectedProvider = $('select[name=provider] option:selected').val(),
-		selectedBrand = $('select[name=brand] option:selected').val();
+$('select[id=js-brand]').change(function(){
+	inventoryTable.ajax.reload();
+});
 
-	window.location.href = Routing.generate('inventory') + '/' + selectedProvider + '/' + selectedBrand;
+function fillSelectBrands(brands){
+	if(brands.length)
+	{
+		brands.forEach(function(brand, i, brands) {
+			var option = document.createElement("option");
+
+			option.text = brand.title;
+			option.value = brand.id;
+
+			selectBrands.appendChild(option);
+		});
+	}
+}
+
+function resetSelectBrands(){
+	while (selectBrands.firstChild) {
+		selectBrands.removeChild(selectBrands.firstChild);
+	}
+
+	var singleOption = document.createElement("option");
+
+	singleOption.text = 'All brands';
+	singleOption.value = 0;
+
+	selectBrands.appendChild(singleOption);
 }

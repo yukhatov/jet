@@ -6,25 +6,14 @@
 
     <div clas="row">
         <div class="col-md-12">
-            <select class="form-control" name="provider">
+            <select class="form-control input-sm" id="js-provider">
                 <option value="0">All providers</option>
                 {% for provider in providers %}
-                    {% if(provider.getId() == params['selectedProvider']) %}
-                        <option value="{{ provider.getId() }}" selected>{{ provider.getTitle() }}</option>
-                    {% else %}
                         <option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
-                    {% endif %}
                 {% endfor %}
             </select>
-            <select class="form-control" name="brand">
+            <select class="form-control input-sm" id="js-brand">
                 <option value="0">All brands</option>
-                {% for brand in brands %}
-                    {% if(brand.getId() == params['selectedBrand']) %}
-                        <option value="{{ brand.getId() }}" selected>{{ brand.getTitle() }}</option>
-                    {% else %}
-                        <option value="{{ brand.getId() }}">{{ brand.getTitle() }}</option>
-                    {% endif %}
-                {% endfor %}
             </select>
 
             <table id="inventory-table" class="table">
@@ -36,35 +25,13 @@
                     <th>SKU</th>
                     <th>ASIN</th>
                     <th>Color</th>
-                    <th>Color Code</th>
+                    <th>CCode</th>
                     <th>Size</th>
-                {#<th>Status</th>#}
-                    <th>Whole Price</th>
                     <th>Price</th>
-                    <th>Stock Count</th>
+                    <th>Whole Price</th>
+                    <th>Stock</th>
                     <th>Created At</th>
                 </thead>
-                <tbody>
-                    {% for item in inventory %}
-                        <tr>
-                            <td>{{ item.getBrand().getTitle() }}</td>
-                            <td>{{ item.getProvider().getTitle() }}</td>
-                            <td>{{ item.getTitle() }}</td>
-                            <td>{{ item.upc }}</td>
-                            <td>{{ item.sku }}</td>
-                            <td>{{ item.asin }}</td>
-                            <td>{{ item.colorTitle }}</td>
-                            <td>{{ item.colorCode }}</td>
-                            {#<td>{{ item.size1 }} / {{ item.size2 }} / {{ item.size3 }}</td>#}
-                            <td>{% if( item.size1() ) %} {{ item.size1 }} {% endif %} {% if( item.size2() ) %} / {{ item.size2 }} {% endif %} {% if( item.size3() ) %} / {{ item.size3 }} {% endif %}</td>
-                            {#<td>{{ item.getStatus() }} {% if item.getSubStatus() %}: {{ item.getSubStatus() }} {% endif %}</td>#}
-                            <td>${{ item.getWholePrice() }}</td>
-                            <td>${{ item.getPrice() }}</td>
-                            <td>{{ item.getStockCount() }}</td>
-                            <td>{{ item.getCreatedDate() }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
             </table>
         </div>
     </div>
