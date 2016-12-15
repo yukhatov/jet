@@ -200,6 +200,14 @@ class InventoryItem
     /**
      * @return mixed
      */
+    public function getFullStatus()
+    {
+        return $this->fj_sub_status ? $this->fj_status . ' : ' . $this->fj_sub_status : $this->fj_status;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBrandName()
     {
         return $this->brand->getTitle();
@@ -242,7 +250,7 @@ class InventoryItem
      */
     public function getCreatedDate()
     {
-        return date("Y-m-d H:i", $this->created);
+        return date("Y-m-d", $this->created);
     }
 
     /**

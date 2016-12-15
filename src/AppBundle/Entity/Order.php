@@ -515,7 +515,7 @@ class Order
     {
         if($mode != 'TIMESTAMP')
         {
-            return date("Y-m-d H:i", intval($this->expected_delivery_date));
+            return date("Y-m-d", intval($this->expected_delivery_date));
         }
 
         return $this->expected_delivery_date;

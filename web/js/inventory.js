@@ -15,28 +15,28 @@ $(document).ready(function() {
 		},
 		"drawCallback": fnCallback,
 		"columns": [
-			{ "data": "brandName" },
 			{ "data": "providerName" },
+			{ "data": "brandName" },
 			{ "data": "title" },
-			{ "data": "upc" },
-			{ "data": "sku" },
-			{ "data": "asin" },
 			{ "data": "colorTitle" },
 			{ "data": "colorCode" },
 			{ "data": "size" },
+			{ "data": "upc" },
+			{ "data": "sku" },
+			{ "data": "asin" },
 			{ "data": "price" },
 			{ "data": "wholePrice" },
 			{ "data": "stockCount" },
+			{ "data": "fullStatus" },
 			{ "data": "createdDate" },
 		],
-
-		"dom": "ftr" +							// https://datatables.net/reference/option/dom
+		"dom": "zftr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
-		"order": [[0, "desc"]],
+		"order": [[0, "asc"]],
 		"pageLength": 10,
 		"language": {
 			search: "_INPUT_",				// search filter
-			searchPlaceholder: 'Search by UPC',
+			searchPlaceholder: 'Search by UPC, ASIN, Title',
 			"paginate": {							// pagination
 				"previous": '<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>',
 				"next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'

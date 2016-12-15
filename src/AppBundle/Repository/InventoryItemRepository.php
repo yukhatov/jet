@@ -78,6 +78,21 @@ class InventoryItemRepository extends EntityRepository
 
     private function getColumns()
     {
-        return ['b.title', 'p.title', 'i.title', 'i.upc', 'i.sku', 'i.asin', 'i.color_title', 'i.color_code', 'i.size1', 'i.price', 'i.whole_price', 'i.stock_count', 'i.created'];
+        return [
+            'p.title',
+            'b.title',
+            'i.title',
+            'i.color_title',
+            'i.color_code',
+            'i.size1',
+            'i.upc',
+            'i.sku',
+            'i.asin',
+            'i.price',
+            'i.whole_price',
+            'i.stock_count',
+            'i.fj_status',
+            'i.created'
+        ];
     }
 }
