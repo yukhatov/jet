@@ -22,6 +22,7 @@ class OrderController extends Controller
     const ACTION_TYPE_SHIP = 'try_ship_order';
     const ACTION_TYPE_CANCEL = 'try_cancel_order';
     const ACTION_TYPE_UPDATE = 'try_update_order';
+    const ACTION_TYPE_RETURN = 'try_return_order';
 
     /**
      * @Route("/orders", name="orders")
@@ -163,13 +164,13 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/cancel", options={"expose"=true}, name="cancel")
+     * @Route("/createAction", options={"expose"=true}, name="createAction")
      */
-    public function cancelAction(Request $request)
+    public function createActionAction(Request $request)
     {
-        if($request->get('orderId') != null)
+        if($request->get('orderId') != null and $request->get('action') != null)
         {
-            if($this->actionCreate($request->get('orderId'), self::ACTION_TYPE_CANCEL))
+            if($this->actionCreate($request->get('orderId'), $request->get('action')))
             {
                 return new JsonResponse(array('success' => true));
             }

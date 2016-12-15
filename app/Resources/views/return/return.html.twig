@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set activeTab = 'returns' %}
+    {{ parent() }}
+
+    <div clas="row">
+        <div class="col-md-12">
+            <div class="order-data">
+                <!-- Default panel contents -->
+                <button class="btn btn-purple pull-right" id="button-copy" data-clipboard-text=
+"{{ return.order.getRecipientName() }}
+{{ return.order.getAddressLine1() }} {{ return.order.getAddressLine2() }}
+{{ return.order.getAddressCity() }}, {{ return.order.getAddressState() }} {{ return.order.getAddressZipCode() }}"
+                >Copy address</button>
+
+                <button class="btn btn-purple pull-right" id="button-back">Back</button>
+                <div class="order-data-title" data-action="{{ constant('AppBundle\\Controller\\OrderController::ACTION_TYPE_RETURN') }}" data-return-id="{{ return.getId() }}">Order: {{ return.order.referenceOrderId }}</div>
+                <!-- Table -->
+                <table class="table">
+                    <thead class="center">
+                        <th>Status</th>
+                        <th>Shipping method</th>
+                        <th>Return Tracking number</th>
+                        <th>Total</th>
+                        <th>Recipient</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip code</th>
+                        <th>Phone</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ return.returnStatus() }}</td>
+                            <td>{{ return.returnShippingCarrier }}</td>
+                            <td>{{ return.returnTrackingNumber }}</td>
+                            <td>${{ return.order.basePrice }}</td>
+                            <td>{{ return.order.getRecipientName() }}</td>
+                            <td>{{ return.order.getAddressLine1() }} {{ return.order.getAddressLine2() }}</td>
+                            <td>{{ return.order.getAddressCity() }}</td>
+                            <td>{{ return.order.getAddressState() }}</td>
+                            <td>{{ return.order.getAddressZipCode() }}</td>
+                            <td>{{ return.order.getRecipientPhoneNumber() }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="order-items">
+                <!-- Default panel contents -->
+                <div class="order-items-title">Items:</div>
+                <!-- Table -->
+                <table class="table">
+                    <thead class="center">
+                        <th>Title / Jet interpretation title</th>
+                        <th>Color</th>
+                        <th>Color code</th>
+                        <th>Size</th>
+                        <th>UPC</th>
+                        <th>SKU</th>
+                        <th>ASIN</th>
+                        <th>Price</th>
+                        <th>Shipping cost</th>
+                        <th>Quantity</th>
+                    </thead>
+                    {% for item in items %}
+                        <tr>
+                            {% if( item.hasRelatedInventoryItem() ) %}
+                                <td>
+                                    <p class="main-title">{{ inventoryItems[item.merchantSku].title }}</p>
+                                    <p class="sub-title">{{ item.getTitle() }}</p>
+                                </td>
+                                <td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
+                                <td>{% if( inventoryItems[item.merchantSku].size1() ) %} {{ inventoryItems[item.merchantSku].size1 }} {% endif %} {% if( inventoryItems[item.merchantSku].size2() ) %} / {{ inventoryItems[item.merchantSku].size2 }} {% endif %} {% if( inventoryItems[item.merchantSku].size3() ) %} / {{ inventoryItems[item.merchantSku].size3 }} {% endif %}</td>
+                                <td>{{ inventoryItems[item.merchantSku].upc }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].sku }}</td>
+                                <td>{{ inventoryItems[item.merchantSku].asin }}</td>
+                            {% else %}
+                                <td>
+                                    <p class="main-title">Not found in inventory</p>
+                                    <p class="sub-title">{{ item.getTitle() }}</p>
+                                </td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                                <td><font color="#a4a4a4">Not found in inventory</font></td>
+                            {% endif %}
+
+                            <td>${{ item.getPrice() }}</td>
+                            <td>${{ item.getShippingCost() }}</td>
+                            <td>{{ item.getQuantity() }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div>
+                {% if(return.returnStatus == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
+                    <button type="button" class="btn btn-default" style="width: 170px" id="return-order">Accept return</button>
+                {% else %}
+                    <button type="button" class="btn btn-default disabled" style="width: 170px" id="return-order">Accept return</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/order.js') }}"></script>
+{% endblock %}
+

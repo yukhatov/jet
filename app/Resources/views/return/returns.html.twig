@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set activeTab = 'returns' %}
+    {{ parent() }}
+
+    <div clas="row">
+        <div class="col-md-12">
+            <table id="orders-table" class="table table-hover">
+                <thead>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Tracking number</th>
+                    <th>Merchant order</th>
+                    <th>QTY.</th>
+                    <th>Recipient</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip code</th>
+                    <th>Shipping method</th>
+                    <th>Details</th>
+                </thead>
+                    {% for return in ordersReturn %}
+                        <tr>
+                            <td>{{ return.innerReturnDate }}</td>
+                            <td>{{ return.returnStatus }}</td>
+                            <td>{{ return.returnTrackingNumber }}</td>
+                            <td><a href="{{ path('return', { 'id': return.id }) }}">{{ return.referenceOrderId }}</a></td>
+                            <td>{{ return.order.itemsCount }}</td>
+                            <td>{{ return.order.recipientName }}</td>
+                            <td>{{ return.order.addressLine1 }} {{ return.order.addressLine2 }}</td>
+                            <td>{{ return.order.getAddressCity() }}</td>
+                            <td>{{ return.order.getAddressState() }}</td>
+                            <td>{{ return.order.getAddressZipCode() }}</td>
+                            <td>{{ return.returnShippingCarrier }}</td>
+                            <td align="center"><a href="{{ path('return', { 'id': return.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
+                        </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/orders.js') }}"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+{% endblock %}
