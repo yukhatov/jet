@@ -1,6 +1,6 @@
 var inventoryTable,
-		selectProvider = document.getElementById("js-provider"),
-		selectBrand = document.getElementById("js-brand");
+	selectProvider = document.getElementById("js-provider"),
+	selectBrand = document.getElementById("js-brand");
 
 $(document).ready(function() {
 	inventoryTable = $("#inventory-table").DataTable({

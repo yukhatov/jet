@@ -63,18 +63,12 @@ class InventoryItemRepository extends EntityRepository
 
         if(!empty($params['search']['value'])){
             $value = $params['search']['value'];
-            $column = $this->getColumns()[self::TITLE_COLUMN];
 
-            if(preg_match('/([0-9]{12,13})/', $value))
-            {
-                $column = $this->getColumns()[self::UPC_COLUMN];
-            }elseif (preg_match('/(D[0-9]+)/', $value)){
-                $column = $this->getColumns()[self::SKU_COLUMN];
-            }elseif (preg_match('/([0-9A-Z]{10})/', $value)){
-                $column = $this->getColumns()[self::ASIN_COLUMN];
-            }
-
-            $query->where($query->expr()->like($column, ':value'))
+            $query
+                ->where($query->expr()->like($this->getColumns()[self::TITLE_COLUMN], ':value'))
+                ->orWhere($query->expr()->like($this->getColumns()[self::UPC_COLUMN], ':value'))
+                ->orWhere($query->expr()->like($this->getColumns()[self::SKU_COLUMN], ':value'))
+                ->orWhere($query->expr()->like($this->getColumns()[self::ASIN_COLUMN], ':value'))
                 ->setParameters(['value' => '%' . $value . '%']);
         }
 
