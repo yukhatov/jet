@@ -56,6 +56,18 @@ class InventoryItemRepository extends EntityRepository
             ->getResult();
     }
 
+    public function getBrands($providerId)
+    {
+        $query = $this->createQueryBuilder('i')
+            ->select(['b.id', 'b.title'])
+            ->join('i.brand', 'b')
+            ->where('i.provider_id = ' . $providerId)
+            ->groupBy('i.brand_id');
+
+        return $query->getQuery()
+            ->getResult();
+    }
+
     private function getQueryByParams($params)
     {
         $query = $this->createQueryBuilder('i')
@@ -94,7 +106,7 @@ class InventoryItemRepository extends EntityRepository
         if($params['stock']){
             if($params['stock'] == 1){
                 $query->andWhere('i.stock_count >= 1');
-            }elseif ($params['stock'] == 2){
+            }else{
                 $query->andWhere('i.stock_count < 1');
             }
         }

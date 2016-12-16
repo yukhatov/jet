@@ -61,14 +61,13 @@ class InventoryController extends Controller
             "recordsFiltered" => $inventoryTotalByParamsCount,
             "data" => $inventory,
             "requestParameters" => $get,
+            'brands' => array()
         );
 
-        if(isset($get['providerId'])){
-            $output['brands'] = $this->serializeBrands(
-                $this->getDoctrine()
-                ->getRepository('AppBundle:Brand')
-                ->findBy(['providerId' => $get['providerId']])
-            );
+        if($get['providerId']){
+            $output['brands'] = $this->getDoctrine()
+                ->getRepository('AppBundle:InventoryItem')
+                ->getBrands($get['providerId']);
         }
 
         return new JsonResponse($output);
