@@ -27,7 +27,11 @@ class InventoryController extends Controller
             ->getRepository('AppBundle:Provider')
             ->findAll();
 
-        return $this->render('inventory/inventory.html.twig', array('providers' => $providers));
+        $statuses = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->getStatuses();
+
+        return $this->render('inventory/inventory.html.twig', array('providers' => $providers, 'statuses' => $statuses));
     }
 
     /**

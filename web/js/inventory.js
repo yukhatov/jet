@@ -1,4 +1,6 @@
 var inventoryTable,
+	selectStock = document.getElementById("js-stock"),
+	selectStatus = document.getElementById("js-status"),
 	selectProvider = document.getElementById("js-provider"),
 	selectBrand = document.getElementById("js-brand");
 
@@ -11,7 +13,9 @@ $(document).ready(function() {
 			"url": Routing.generate('inventoryTableData'),
 			"data": function (d) {
 				d.providerId = $('select[id=js-provider] option:selected').val(),
-				d.brandId = $('select[id=js-brand] option:selected').val()
+				d.brandId = $('select[id=js-brand] option:selected').val(),
+				d.stock = $('select[id=js-stock] option:selected').val(),
+				d.status = $('select[id=js-status] option:selected').val()
 			},
 		},
 		"drawCallback": fnCallback,
@@ -31,9 +35,9 @@ $(document).ready(function() {
 			{ "data": "fullStatus" },
 			{ "data": "createdDate" },
 		],
-		"oLanguage": {
+		/*"oLanguage": {
 			"sProcessing": "<b>Processing</b>"
-		},
+		},*/
 		"dom": "f<'backend-filters'>tr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "asc"]],
@@ -48,7 +52,7 @@ $(document).ready(function() {
 		},
 	});
 
-	$("#inventory-table_filter").append(selectProvider, selectBrand);
+	$("#inventory-table_filter").append(selectProvider, selectBrand, selectStock, selectStatus);
 });
 
 function fnCallback(response){
@@ -63,6 +67,14 @@ $('select[id=js-provider]').change(function(){
 });
 
 $('select[id=js-brand]').change(function(){
+	inventoryTable.ajax.reload();
+});
+
+$('select[id=js-stock]').change(function(){
+	inventoryTable.ajax.reload();
+});
+
+$('select[id=js-status]').change(function(){
 	inventoryTable.ajax.reload();
 });
 

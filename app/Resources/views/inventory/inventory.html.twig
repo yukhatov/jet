@@ -15,6 +15,17 @@
             <select class="form-control input-sm column-filter" id="js-brand">
                 <option value="0">All brands</option>
             </select>
+            <select class="form-control input-sm column-filter" id="js-stock">
+                <option value="0">All stock</option>
+                <option value="1">Instock</option>
+                <option value="2">Outstock</option>
+            </select>
+            <select class="form-control input-sm column-filter" id="js-status">
+                <option value="0">All statuses</option>
+                {% for status in statuses %}
+                    <option>{{ status[1] }}</option>
+                {% endfor %}
+            </select>
 
             <table id="inventory-table" class="table">
                 <thead>
