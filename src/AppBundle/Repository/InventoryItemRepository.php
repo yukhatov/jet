@@ -85,7 +85,7 @@ class InventoryItemRepository extends EntityRepository
         return $query;
     }
 
-    private function getColumns()
+    private function getColumns() // Должны быть в таком же кол-ве и порядке как обьявленные колонки datatable в inventory.js
     {
         return [
             'p.title',

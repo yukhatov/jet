@@ -15,7 +15,7 @@ $(document).ready(function() {
 			},
 		},
 		"drawCallback": fnCallback,
-		"columns": [
+		"columns": [ // Должны быть в таком же кол-ве и порядке как обьявленные колонки в InventoryItemRepository. (Сортировка)
 			{ "data": "providerName" },
 			{ "data": "brandName" },
 			{ "data": "title" },
@@ -31,6 +31,9 @@ $(document).ready(function() {
 			{ "data": "fullStatus" },
 			{ "data": "createdDate" },
 		],
+		"oLanguage": {
+			"sProcessing": "<b>Processing</b>"
+		},
 		"dom": "f<'backend-filters'>tr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "asc"]],
