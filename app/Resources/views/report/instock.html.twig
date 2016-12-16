@@ -1,50 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% set activeTab = 'reports' %}
-    {{ parent() }}
+	{% set activeTab = 'reports' %}
+	{{ parent() }}
 
-    <div class="col-md-3">
-        <input type="text" id="daterange" value="{{ params['startDate'] }} - {{ params['endDate'] }}" />
+	<div class="container-fluid"><div class="row">
+		<div class="col-md-12">
+			<div class="instock-filters">
+				<input type="text" id="daterange" class="input-sm" value="{{ params['startDate'] }} - {{ params['endDate'] }}" />
 
-        <select class="form-control" name="provider">
-            <option value="0">All providers</option>
-            {% for provider in providers %}
-                {% if(provider.getId() == params['selectedProvider']) %}
-                    <option value="{{ provider.getId() }}" selected>{{ provider.getTitle() }}</option>
-                {% else %}
-                    <option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <select class="form-control" name="brand">
-            <option value="0">All brands</option>
-            {% for brand in brands %}
-                {% if(brand.getId() == params['selectedBrand']) %}
-                    <option value="{{ brand.getId() }}" selected>{{ brand.getTitle() }}</option>
-                {% else %}
-                    <option value="{{ brand.getId() }}">{{ brand.getTitle() }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-    </div>
-    <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+				<select class="input-sm column-filter" name="provider">
+					<option value="0">All providers</option>
+					{% for provider in providers %}
+						{% if(provider.getId() == params['selectedProvider']) %}
+							<option value="{{ provider.getId() }}" selected>{{ provider.getTitle() }}</option>
+						{% else %}
+							<option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+				<select class="input-sm column-filter" name="brand">
+					<option value="0">All brands</option>
+					{% for brand in brands %}
+						{% if(brand.getId() == params['selectedBrand']) %}
+							<option value="{{ brand.getId() }}" selected>{{ brand.getTitle() }}</option>
+						{% else %}
+							<option value="{{ brand.getId() }}">{{ brand.getTitle() }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</div></div>
+	<div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/reportInstock.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/reportInstock.js') }}"></script>
 
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
-    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
-    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
-    <script type="text/javascript">
-        {{ chart(chart) }}
-    </script>
+	<script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+	<script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
+	<script type="text/javascript">
+		{{ chart(chart) }}
+	</script>
 {% endblock %}
-

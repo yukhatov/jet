@@ -1,50 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% set activeTab = 'inventory' %}
-    {{ parent() }}
+	{% set activeTab = 'inventory' %}
+	{{ parent() }}
 
-    <div clas="row">
-        <div class="col-md-12">
-            <select class="form-control input-sm column-filter" id="js-provider">
-                <option value="0">All providers</option>
-                {% for provider in providers %}
-                        <option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
-                {% endfor %}
-            </select>
-            <select class="form-control input-sm column-filter" id="js-brand">
-                <option value="0">All brands</option>
-            </select>
+	<div class="container-fluid"><div class="row">
+		<div class="col-md-12">
+			<select class="form-control input-sm column-filter" id="js-provider">
+				<option value="0">All providers</option>
+				{% for provider in providers %}
+						<option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
+				{% endfor %}
+			</select>
+			<select class="form-control input-sm column-filter" id="js-brand">
+				<option value="0">All brands</option>
+			</select>
 
-            <table id="inventory-table" class="table">
-                <thead>
-                    <th>Provider</th>
-                    <th>Brand</th>
-                    <th>Title</th>
-                    <th>Color</th>
-                    <th>CCode</th>
-                    <th>Size</th>
-                    <th>UPC</th>
-                    <th>SKU</th>
-                    <th>ASIN</th>
-                    <th>Price</th>
-                    <th>Whole Pr.</th>
-                    <th>Stock</th>
-                    <th>Status</th>
-                    <th>Created At</th>
-                </thead>
-            </table>
-        </div>
-    </div>
+			<table id="inventory-table" class="table">
+				<thead>
+					<th>Provider</th>
+					<th>Brand</th>
+					<th>Title</th>
+					<th>Color</th>
+					<th>CCode</th>
+					<th>Size</th>
+					<th>UPC</th>
+					<th>SKU</th>
+					<th>ASIN</th>
+					<th>Price</th>
+					<th>Whole Pr.</th>
+					<th>Stock</th>
+					<th>Status</th>
+					<th>Created At</th>
+				</thead>
+			</table>
+		</div>
+	</div></div>
 
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/inventory.js') }}"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ asset('js/inventory.js') }}"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 {% endblock %}

@@ -31,7 +31,7 @@ $(document).ready(function() {
 			{ "data": "fullStatus" },
 			{ "data": "createdDate" },
 		],
-		"dom": "f<'backend-filters'>tr" +							// https://datatables.net/reference/option/dom
+		"dom": "ftr" +							// https://datatables.net/reference/option/dom
 					 "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "asc"]],
 		"pageLength": 25,
@@ -43,25 +43,15 @@ $(document).ready(function() {
 				"next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
 			},
 			// processing : "<i class='fa fa-spinner fa-spin fa-3x fa-fw preloader-spinner'></i>"
-			processing :  ' <div class="preloader-spinner"> ' +
-										'   <svg version="1.1" id="preloader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" ' +
-										'    width="50px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve"> ' +
-										'   <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946 ' +
-										'     s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634 ' +
-										'     c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/> ' +
-										'   <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 ' +
-										'     C22.32,8.481,24.301,9.057,26.013,10.047z"> ' +
-										'     <animateTransform attributeType="xml" ' +
-										'       attributeName="transform" ' +
-										'       type="rotate" ' +
-										'       from="0 20 20" ' +
-										'       to="360 20 20" ' +
-										'       dur="1s" ' +
-										'       repeatCount="indefinite"/> ' +
-										'     </path> ' +
-										'   </svg> ' +
-										' </div> ' +
-										' <p><strong>Processing...</strong></p>'
+			processing : 
+				'	<div class="preloader-spinner">	'+
+				'		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" fill="white">	'+
+				'			<path opacity=".2" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"/>	'+
+				'			<path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z">	'+
+				'				<animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="0.8s" repeatCount="indefinite" />	'+
+				'			</path>	'+
+				'		</svg>	'+
+				'	</div>	'
 		},
 	});
 
