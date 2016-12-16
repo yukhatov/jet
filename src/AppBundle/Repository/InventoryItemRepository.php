@@ -47,6 +47,27 @@ class InventoryItemRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getStatuses()
+    {
+        $query = $this->createQueryBuilder('i')
+            ->select('distinct(i.fj_status)');
+
+        return $query->getQuery()
+            ->getResult();
+    }
+
+    public function getBrands($providerId)
+    {
+        $query = $this->createQueryBuilder('i')
+            ->select(['b.id', 'b.title'])
+            ->join('i.brand', 'b')
+            ->where('i.provider_id = ' . $providerId)
+            ->groupBy('i.brand_id');
+
+        return $query->getQuery()
+            ->getResult();
+    }
+
     private function getQueryByParams($params)
     {
         $query = $this->createQueryBuilder('i')
@@ -65,21 +86,34 @@ class InventoryItemRepository extends EntityRepository
             $value = $params['search']['value'];
 
             $query
-                ->where($query->expr()->like($this->getColumns()[self::TITLE_COLUMN], ':value'))
+                ->andWhere($query->expr()->like($this->getColumns()[self::TITLE_COLUMN], ':value'))
                 ->orWhere($query->expr()->like($this->getColumns()[self::UPC_COLUMN], ':value'))
                 ->orWhere($query->expr()->like($this->getColumns()[self::SKU_COLUMN], ':value'))
                 ->orWhere($query->expr()->like($this->getColumns()[self::ASIN_COLUMN], ':value'))
-                ->setParameters(['value' => '%' . $value . '%']);
+                ->setParameter('value', '%' . $value . '%');
         }
 
         if($params['brandId']){
-            $query->where('i.brand_id = :brandId')
-                ->setParameters(['brandId' => $params['brandId']]);
+            $query->andWhere('i.brand_id = :brandId')
+                ->setParameter('brandId', $params['brandId']);
         }else{
             if($params['providerId']){
-                $query->where('i.provider_id = :providerId')
-                    ->setParameters(['providerId' => $params['providerId']]);
+                $query->andWhere('i.provider_id = :providerId')
+                    ->setParameter('providerId', $params['providerId']);
             }
+        }
+
+        if($params['stock']){
+            if($params['stock'] == 1){
+                $query->andWhere('i.stock_count >= 1');
+            }else{
+                $query->andWhere('i.stock_count < 1');
+            }
+        }
+
+        if($params['status']){
+            $query->andWhere($query->expr()->like('i.fj_status', ':status'))
+                ->setParameter('status', $params['status']);
         }
 
         return $query;

@@ -4,17 +4,28 @@
 	{% set activeTab = 'inventory' %}
 	{{ parent() }}
 
-	<div class="container-fluid"><div class="row">
-		<div class="col-md-12">
-			<select class="form-control input-sm column-filter" id="js-provider">
-				<option value="0">All providers</option>
-				{% for provider in providers %}
-						<option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
-				{% endfor %}
-			</select>
-			<select class="form-control input-sm column-filter" id="js-brand">
-				<option value="0">All brands</option>
-			</select>
+    <div class="container-fluid"><div clas="row">
+        <div class="col-md-12">
+            <select class="form-control input-sm column-filter" id="js-provider">
+                <option value="0">All providers</option>
+                {% for provider in providers %}
+                        <option value="{{ provider.getId() }}">{{ provider.getTitle() }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-control input-sm column-filter" id="js-brand">
+                <option value="0">All brands</option>
+            </select>
+            <select class="form-control input-sm column-filter" id="js-stock">
+                <option value="0">All stock</option>
+                <option value="1">Instock</option>
+                <option value="2">Outstock</option>
+            </select>
+            <select class="form-control input-sm column-filter" id="js-status">
+                <option value="0">All statuses</option>
+                {% for status in statuses %}
+                    <option>{{ status[1] }}</option>
+                {% endfor %}
+            </select>
 
 			<table id="inventory-table" class="table">
 				<thead>
