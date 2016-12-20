@@ -1,172 +1,172 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% set activeTab = 'orders' %}
-    {% if order.updatedShipmentTrackingNumber %} {% set trackingNumber = order.updatedShipmentTrackingNumber  %} {% else %} {% set trackingNumber = order.shipmentTrackingNumber %}{% endif %}
-    {{ parent() }}
+	{% set activeTab = 'orders' %}
+	{% if order.updatedShipmentTrackingNumber %} {% set trackingNumber = order.updatedShipmentTrackingNumber  %} {% else %} {% set trackingNumber = order.shipmentTrackingNumber %}{% endif %}
+	{{ parent() }}
 
-    {% form_theme form 'Form/bootstrap_3_horizontal_layout.html.twig' %}
+	{% form_theme form 'Form/bootstrap_3_horizontal_layout.html.twig' %}
 
-    <div clas="row">
-        <div class="col-md-12">
-            <div class="order-data">
-                <!-- Default panel contents -->
-                <button class="btn btn-purple pull-right" id="button-copy" data-clipboard-text=
-"{{ order.getRecipientName() }}
-{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}
-{{ order.getAddressCity() }}, {{ order.getAddressState() }} {{ order.getAddressZipCode() }}"
-                >Copy address</button>
+	<div class="container-fluid"><div class="row">
+		<div class="col-md-12">
+			<div class="order-data">
+				<!-- Default panel contents -->
+				<button class="btn btn-purple pull-right" id="button-copy" data-clipboard-text=
+					"{{ order.getRecipientName() }}
+					{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}
+					{{ order.getAddressCity() }}, {{ order.getAddressState() }} {{ order.getAddressZipCode() }}"
+				>Copy address</button>
 
-                <button class="btn btn-purple pull-right" id="button-back">Back</button>
-                <div class="order-data-title">Order: {{ order.referenceOrderId }}</div>
-                <!-- Table -->
-                <table class="table">
-                    <thead class="center">
-                        <th>Status</th>
-                        <th>Shipping method</th>
-                        <th>Tracking number</th>
-                        <th>Total</th>
-                        <th>Recipient</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip code</th>
-                        <th>Phone</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ order.getStatus() }}</td>
-                            <td>{{ order.getRequestShippingMethod() }}</td>
+				<button class="btn btn-purple pull-right" id="button-back">Back</button>
+				<div class="order-data-title">Order: {{ order.referenceOrderId }}</div>
+				<!-- Table -->
+				<table class="table">
+					<thead class="center">
+						<th>Status</th>
+						<th>Shipping method</th>
+						<th>Tracking number</th>
+						<th>Total</th>
+						<th>Recipient</th>
+						<th>Address</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Zip code</th>
+						<th>Phone</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ order.getStatus() }}</td>
+							<td>{{ order.getRequestShippingMethod() }}</td>
 
-                            {% if order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE') %}
-                                <td class="tracking-number editable" >
-                                    <label>
-                                        <input disabled id="tracking-number" type="text" value="{{ trackingNumber }}" onkeypress="saveTN(event)">
-                                        <button class="edit">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </button>
-                                        <span class="info-text saved" style="display: none;">Saved</span>
-                                    </label>
-                                </td>
-                            {% else %}
-                                <td>{{ trackingNumber }}</td>
-                            {% endif %}
+							{% if order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE') %}
+								<td class="tracking-number editable" >
+									<label>
+										<input disabled id="tracking-number" type="text" value="{{ trackingNumber }}" onkeypress="saveTN(event)">
+										<button class="edit">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+										</button>
+										<span class="info-text saved" style="display: none;">Saved</span>
+									</label>
+								</td>
+							{% else %}
+								<td>{{ trackingNumber }}</td>
+							{% endif %}
 
-                            <td>${{ order.basePrice }}</td>
-                            <td>{{ order.getRecipientName() }}</td>
-                            <td>{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}</td>
-                            <td>{{ order.getAddressCity() }}</td>
-                            <td>{{ order.getAddressState() }}</td>
-                            <td>{{ order.getAddressZipCode() }}</td>
-                            <td>{{ order.getRecipientPhoneNumber() }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+							<td>${{ order.basePrice }}</td>
+							<td>{{ order.getRecipientName() }}</td>
+							<td>{{ order.getAddressLine1() }} {{ order.getAddressLine2() }}</td>
+							<td>{{ order.getAddressCity() }}</td>
+							<td>{{ order.getAddressState() }}</td>
+							<td>{{ order.getAddressZipCode() }}</td>
+							<td>{{ order.getRecipientPhoneNumber() }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
-            <div class="order-items">
-                <!-- Default panel contents -->
-                <div class="order-items-title">Items:</div>
-                <!-- Table -->
-                <table class="table">
-                    <thead class="center">
-                        <th>Title / Jet interpretation title</th>
-                        <th>Color</th>
-                        <th>Color code</th>
-                        <th>Size</th>
-                        <th>UPC</th>
-                        <th>SKU</th>
-                        <th>ASIN</th>
-                        <th>Price</th>
-                        <th>Shipping cost</th>
-                        <th>Quantity</th>
-                        <th style="text-align:center;">Action</th>
-                    </thead>
-                    {% for item in items %}
-                        <tr>
-                            {% if( item.hasRelatedInventoryItem() ) %}
-                                <td>
-                                    <p class="main-title">{{ inventoryItems[item.merchantSku].title }}</p>
-                                    <p class="sub-title">{{ item.getTitle() }}</p>
-                                </td>
-                                <td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
-                                <td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
-                                <td>{% if( inventoryItems[item.merchantSku].size1() ) %} {{ inventoryItems[item.merchantSku].size1 }} {% endif %} {% if( inventoryItems[item.merchantSku].size2() ) %} / {{ inventoryItems[item.merchantSku].size2 }} {% endif %} {% if( inventoryItems[item.merchantSku].size3() ) %} / {{ inventoryItems[item.merchantSku].size3 }} {% endif %}</td>
-                                <td>{{ inventoryItems[item.merchantSku].upc }}</td>
-                                <td>{{ inventoryItems[item.merchantSku].sku }}</td>
-                                <td>{{ inventoryItems[item.merchantSku].asin }}</td>
-                            {% else %}
-                                <td>
-                                    <p class="main-title">Not found in inventory</p>
-                                    <p class="sub-title">{{ item.getTitle() }}</p>
-                                </td>
-                                <td><font color="#a4a4a4">Not found in inventory</font></td>
-                                <td><font color="#a4a4a4">Not found in inventory</font></td>
-                                <td><font color="#a4a4a4">Not found in inventory</font></td>
-                                <td><font color="#a4a4a4">Not found in inventory</font></td>
-                                <td><font color="#a4a4a4">Not found in inventory</font></td>
-                                <td><font color="#a4a4a4">Not found in inventory</font></td>
-                            {% endif %}
+			<div class="order-items">
+				<!-- Default panel contents -->
+				<div class="order-items-title">Items:</div>
+				<!-- Table -->
+				<table class="table">
+					<thead class="center">
+						<th>Title / Jet interpretation title</th>
+						<th>Color</th>
+						<th>Color code</th>
+						<th>Size</th>
+						<th>UPC</th>
+						<th>SKU</th>
+						<th>ASIN</th>
+						<th>Price</th>
+						<th>Shipping cost</th>
+						<th>Quantity</th>
+						<th style="text-align:center;">Action</th>
+					</thead>
+					{% for item in items %}
+						<tr>
+							{% if( item.hasRelatedInventoryItem() ) %}
+								<td>
+									<p class="main-title">{{ inventoryItems[item.merchantSku].title }}</p>
+									<p class="sub-title">{{ item.getTitle() }}</p>
+								</td>
+								<td>{{ inventoryItems[item.merchantSku].colorTitle }}</td>
+								<td>{{ inventoryItems[item.merchantSku].colorCode }}</td>
+								<td>{% if( inventoryItems[item.merchantSku].size1() ) %} {{ inventoryItems[item.merchantSku].size1 }} {% endif %} {% if( inventoryItems[item.merchantSku].size2() ) %} / {{ inventoryItems[item.merchantSku].size2 }} {% endif %} {% if( inventoryItems[item.merchantSku].size3() ) %} / {{ inventoryItems[item.merchantSku].size3 }} {% endif %}</td>
+								<td>{{ inventoryItems[item.merchantSku].upc }}</td>
+								<td>{{ inventoryItems[item.merchantSku].sku }}</td>
+								<td>{{ inventoryItems[item.merchantSku].asin }}</td>
+							{% else %}
+								<td>
+									<p class="main-title">Not found in inventory</p>
+									<p class="sub-title">{{ item.getTitle() }}</p>
+								</td>
+								<td><font color="#a4a4a4">Not found in inventory</font></td>
+								<td><font color="#a4a4a4">Not found in inventory</font></td>
+								<td><font color="#a4a4a4">Not found in inventory</font></td>
+								<td><font color="#a4a4a4">Not found in inventory</font></td>
+								<td><font color="#a4a4a4">Not found in inventory</font></td>
+								<td><font color="#a4a4a4">Not found in inventory</font></td>
+							{% endif %}
 
-                            <td>${{ item.getPrice() }}</td>
-                            <td>${{ item.getShippingCost() }}</td>
-                            <td>
-                                <select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}" data-action="{{ constant('AppBundle\\Controller\\OrderController::ACTION_TYPE_CANCEL') }}">
-                                    {% for value in item.getSelectValues %}
-                                        {% if(value == item.getSelectedValue()) %}
-                                            <option selected>{{ value }}</option>
-                                        {% else %}
-                                            <option>{{ value }}</option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                            </td>
-                            <td style="text-align:center;">
-                                <button type="button" class="btn btn-purple button-save">Save changes</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
+							<td>${{ item.getPrice() }}</td>
+							<td>${{ item.getShippingCost() }}</td>
+							<td>
+								<select class="form-control error" id="select-quantity" data-item-id="{{ item.getId() }}" data-order-id="{{ order.getId() }}" data-action="{{ constant('AppBundle\\Controller\\OrderController::ACTION_TYPE_CANCEL') }}">
+									{% for value in item.getSelectValues %}
+										{% if(value == item.getSelectedValue()) %}
+											<option selected>{{ value }}</option>
+										{% else %}
+											<option>{{ value }}</option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</td>
+							<td style="text-align:center;">
+								<button type="button" class="btn btn-purple button-save">Save changes</button>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
 
-            {# <div class="btn-group pull-right"> #}
-            <div>
-                {% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_REJECTED')) %}
-                    <button type="button" class="btn btn-cyan approve-order disabled" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept Order</button>
-                    <button type="button" class="btn btn-orange disabled pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
-                {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
-                    <button type="button" class="btn btn-cyan approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
-                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
-                {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_READY')) %}
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-cyan approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li id="ship-order"><a href="#">Ship Order</a></li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
-                {% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_IN_PROGRESS') or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE')) %}
-                    <button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
-                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
-                {% else %}
-                    <button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
-                    <button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
-                {% endif %}
-            </div>
-        </div>
+			{# <div class="btn-group pull-right"> #}
+			<div>
+				{% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_REJECTED')) %}
+					<button type="button" class="btn btn-cyan approve-order disabled" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept Order</button>
+					<button type="button" class="btn btn-orange disabled pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
+				{% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_CREATED')) %}
+					<button type="button" class="btn btn-cyan approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+					<button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
+				{% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_READY')) %}
+					<div class="btn-group" role="group" aria-label="...">
+						<button type="button" class="btn btn-cyan approve-order" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept order</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li id="ship-order"><a href="#">Ship Order</a></li>
+						</ul>
+					</div>
+					<button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
+				{% elseif(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_IN_PROGRESS') or order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_COMPLETE')) %}
+					<button type="button" class="btn btn-default disabled" style="width: 170px" id="ship-order">Ship Order</button>
+					<button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
+				{% else %}
+					<button type="button" class="btn btn-default" style="width: 170px" id="ship-order">Ship Order</button>
+					<button type="button" class="btn btn-orange pull-right" style="width: 170px" id="cancel-order">Cancel Order</button>
+				{% endif %}
+			</div>
+		</div>
 
-        <div class="col-md-7" style="display: none;" id="order-form">
-            <div class="panel panel-default">
-                <div class="panel-heading">Ship order form:</div>
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </div>
+		<div class="col-md-7" style="display: none;" id="order-form">
+			<div class="panel panel-default">
+				<div class="panel-heading">Ship order form:</div>
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div></div>
 
 {% endblock %}
 
@@ -175,7 +175,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
-    <script type="text/javascript" src="{{ asset('js/order.js') }}"></script>
+	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+	<script type="text/javascript" src="{{ asset('js/order.js') }}"></script>
 {% endblock %}
-
