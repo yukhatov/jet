@@ -170,6 +170,9 @@ function saveTN(e){
         });
     }
 }
+$('.edit').on('click', function(e){
+
+});
 
 function notification(flag)
 {

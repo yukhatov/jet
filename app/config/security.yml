@@ -9,6 +9,13 @@ security:
                         password: zfM1kemJYU
                         roles: 'ROLE_ADMIN'
 
+   # firewalls:
+    #    main:
+     #       anonymous:
+      #      logout:
+       #         path:   /logout
+        #        target: /
+
     encoders:
             Symfony\Component\Security\Core\User\User: plaintext
 

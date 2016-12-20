@@ -17,6 +17,13 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction(Request $request)
+    {
+    }
+
+    /**
      * @Route("/admin")
      */
     public function adminAction($productId = 1)

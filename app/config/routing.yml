@@ -3,3 +3,5 @@ fos_js_routing:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+logout:
+    path: /logout
