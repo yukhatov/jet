@@ -142,12 +142,25 @@ function validateForm(e)
     return true;
 }
 
+$('.edit').on('click', function(e){
+    var input = document.getElementById('tracking-number');
+
+    input.removeAttribute("disabled");
+    input.focus();
+});
+
 $('#tracking-number').on('blur', function(e) {
     saveTN(e);
 });
 
 function saveTN(e){
     if(e.keyCode === 13 || e.type == 'blur'){
+        if(e.keyCode === 13)
+        {
+            document.getElementById('tracking-number').blur();
+            return;
+        }
+
         var tn = $('#tracking-number').val();
 
         var data = {};
@@ -166,13 +179,12 @@ function saveTN(e){
                 setTimeout(function(){
                     $(".info-text").fadeOut(1000);
                 }, 1000);
+
+                document.getElementById('tracking-number').disabled = true;
             }
         });
     }
 }
-$('.edit').on('click', function(e){
-
-});
 
 function notification(flag)
 {
