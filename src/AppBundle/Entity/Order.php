@@ -281,7 +281,13 @@ class Order
      */
     public function getRequestShippingMethod()
     {
-        return $this->request_shipping_method;
+        if(strlen($this->request_shipping_method) < 10){
+            return $this->request_shipping_method;
+        }else{
+            preg_match('/([\S]+)/', $this->request_shipping_method, $match);
+
+            return $match[1];
+        }
     }
 
     /**
