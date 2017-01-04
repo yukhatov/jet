@@ -24,7 +24,7 @@
 				</thead>
 					{% for order in orders %}
 						<tr>
-							<td>{{ order.orderPlacedDate }}</td>
+							<td class="date">{{ order.orderPlacedDate }}</td>
 							<td>{{ order.status }}</td>
 							<td><a href="{{ path('order', { 'id': order.id }) }}">{{ order.referenceOrderId }}</a></td>
 							<td>{{ order.shipmentTrackingNumber }}</td>
@@ -34,7 +34,7 @@
 							<td>{{ order.getAddressCity() }}</td>
 							<td>{{ order.getAddressState() }}</td>
 							<td>{{ order.getAddressZipCode() }}</td>
-							<td>{{ (order.getExpectedDeliveryDate() != 0) ? order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
+							<td class="date">{{ (order.getExpectedDeliveryDate() != 0) ? order.getExpectedDeliveryDate('DATE') : 'not set'}}</td>
 							<td>{{ order.requestShippingMethod }}</td>
 							<td align="center"><a href="{{ path('order', { 'id': order.id }) }}"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></td>
 						</tr>
