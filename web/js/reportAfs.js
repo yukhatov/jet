@@ -2,11 +2,12 @@
  * Created by artur on 05.01.17.
  */
 $(document).ready(function() {
-    $("#afs-report-table").DataTable({
+    var table = $("#afs-report-table").DataTable({
         "dom": "ftr" +							// https://datatables.net/reference/option/dom
             "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
         "order": [[0, "asc"]],
-        "pageLength": 25,
+        "pageLength": -1,
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
         "language": {
             search: "_INPUT_",				// search filter
             searchPlaceholder: 'Search',
@@ -23,16 +24,52 @@ $(document).ready(function() {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();
             var last=null;
-
+            //  for totals
+            var colonne = api.row(0).data().length;
+            var groupid = -1;
+            var subtotale = new Array();
+            //
             api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                 if ( last !== group ) {
+                    groupid++;
                     $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="8">'+group+'</td></tr>'
+                        '<tr class="group"><td>'+group+'</td></tr>'
                     );
 
                     last = group;
                 }
+
+                // counting totals
+                val = api.row(api.row($(rows).eq( i )).index()).data();      //current order index
+                $.each(val,function(index2,val2){
+                    if (typeof subtotale[groupid] =='undefined'){
+                        subtotale[groupid] = new Array();
+                    }
+                    if (typeof subtotale[groupid][index2] =='undefined'){
+                        subtotale[groupid][index2] = 0;
+                    }
+
+                    valore = Number(val2.replace('€',"").replace('.',"").replace(',',"."));
+                    subtotale[groupid][index2] += valore;
+                });
             } );
+
+            //appending totals
+            $('tbody').find('.group').each(function (i,v) {
+                var rowCount = $(this).nextUntil('.group').length;
+                $(this).find('td:first').append($('<span />', { 'class': 'rowCount-grid' }).append($('<b />', { 'text': ' ('+rowCount+')' })));
+
+                console.log(subtotale);
+
+                var subtd = '';
+
+                for (var a = 2; a < colonne; a++)
+                {
+                    subtd += '<td>' + subtotale[i][a] + '</td>';
+                }
+
+                $(this).append(subtd);
+            });
         },
         initComplete: function () {
             this.api().columns([0]).every( function () {
@@ -61,4 +98,6 @@ $(document).ready(function() {
             });
         }
     });
+
 });
+
