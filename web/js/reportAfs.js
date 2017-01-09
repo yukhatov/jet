@@ -3,6 +3,7 @@
  */
 $(document).ready(function() {
     var table = $("#afs-report-table").DataTable({
+        "fixedHeader": true,
         "dom": "ftr" +							// https://datatables.net/reference/option/dom
             "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
         "order": [[0, "asc"]],
@@ -59,8 +60,6 @@ $(document).ready(function() {
                 var rowCount = $(this).nextUntil('.group').length;
                 $(this).find('td:first').append($('<span />', { 'class': 'rowCount-grid' }).append($('<b />', { 'text': ' ('+rowCount+')' })));
 
-                console.log(subtotale);
-
                 var subtd = '';
 
                 for (var a = 2; a < colonne; a++)
@@ -98,6 +97,5 @@ $(document).ready(function() {
             });
         }
     });
-
 });
 
