@@ -4,7 +4,7 @@
 	{% set activeTab = 'inventory' %}
 	{{ parent() }}
 
-    <div class="container-fluid"><div clas="row">
+    <div class="container-fluid"><div class="row">
         <div class="col-md-12">
             <select class="form-control input-sm column-filter" id="js-provider">
                 <option value="0">All providers</option>
@@ -27,7 +27,7 @@
                 {% endfor %}
             </select>
 
-			<table id="inventory-table" class="table">
+			<table id="inventory-table" class="table inventory-type-table">
 				<thead>
 					<th>Provider</th>
 					<th>Brand</th>

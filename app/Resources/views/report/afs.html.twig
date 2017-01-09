@@ -6,7 +6,7 @@
 
 	<div class="container-fluid"><div class="row">
 		<div class="col-md-12">
-			<table id="afs-report-table"  class="table table-hover">
+			<table id="afs-report-table"  class="table inventory-type-table">
 				<thead>
 					<th>Provider</th>
 					<th>Brand</th>
@@ -29,7 +29,7 @@
 						<td>{{ report.getUnderJetReviewCount() }}</td>
 						<td>{{ report.getAfsCount() }}</td>
 						<td>{{ report.getExcludedCount() }}</td>
-                        <td>{{ report.getMissingDataCount() }}</td>
+						<td>{{ report.getMissingDataCount() }}</td>
 					</tr>
 				{% endfor %}
 			</table>
