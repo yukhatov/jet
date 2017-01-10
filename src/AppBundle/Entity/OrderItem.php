@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderItemRepository")
  * @ORM\Table(name="jet_ordered_items")
  */
 
