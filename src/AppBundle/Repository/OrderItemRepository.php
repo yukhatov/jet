@@ -16,10 +16,11 @@ class OrderItemRepository extends EntityRepository
         $sql = 'SELECT 
                     COUNT(DISTINCT jet_orders.id) as orders, 
                     SUM( jet_ordered_items.request_order_quantity ) as items,
-                    provider_id 
+                    jet_provider.title 
                 FROM `jet_ordered_items` 
-                LEFT JOIN jet_orders ON order_id=jet_orders.id
-                JOIN jet_inventory ON merchant_sku = sku
+                JOIN jet_orders ON order_id=jet_orders.id
+                LEFT JOIN jet_inventory ON merchant_sku = sku
+                LEFT JOIN jet_provider ON provider_id=jet_provider.id
                 WHERE inner_order_placed_date >= :from
                 AND inner_order_placed_date <= :to
                 GROUP BY provider_id';

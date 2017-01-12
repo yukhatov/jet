@@ -25,11 +25,16 @@ class OrdersReportController extends Controller
             ->getRepository('AppBundle:OrderItem')
             ->findByDateRange($ydayMidnight, $todayMidnight);
 
-        /*echo "<pre>";
-        print_r($reports);
-        die('stop');*/
-
-
         return $this->render('report/orders.html.twig', ['reports' => $reports]);
     }
+
+    /**
+     * @Route("/ordersReportDetailed", name="ordersReportDetailed")
+     */
+    public function listAction()
+    {
+        return $this->render('report/ordersDetailed.html.twig', []);
+    }
+
+
 }

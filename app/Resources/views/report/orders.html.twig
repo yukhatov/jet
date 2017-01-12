@@ -6,15 +6,21 @@
 
 	<div class="container-fluid"><div class="row">
 		<div class="col-md-3">
+			<label>Yesterday order report summary</label>
 			<table id="afs-report-table"  class="table inventory-type-table display">
 				<thead>
 					<th>Provider</th>
 					<th>Orders</th>
 					<th>Items</th>
 				</thead>
+				<tfoot>
+					<tr>
+						<th colspan="3" style="text-align:right"><a href ="{{ path('ordersReportDetailed') }}">Details</a></th>
+					</tr>
+				</tfoot>
 				{% for report in reports %}
 					<tr>
-						<td>{{ report['provider_id'] }}</td>
+						<td>{% if report['title'] %}{{ report['title'] }}{% else %}Unknown{% endif %}</td>
 						<td>{{ report['orders'] }}</td>
 						<td>{{ report['items'] }}</td>
 					</tr>
