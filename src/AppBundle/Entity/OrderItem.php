@@ -29,7 +29,7 @@ class OrderItem
     private $id ;
 
     /**
-     * @ManyToOne(targetEntity="Order", inversedBy="items")
+     * @ManyToOne(targetEntity="Order", inversedBy="items", cascade={"all"}, fetch="EAGER")
      */
     private $order;
 
@@ -291,4 +291,23 @@ class OrderItem
         $this->order = $order;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOrderItemPrice()
+    {
+        return $this->order_item_price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function getClearOrderPrice(){ // -15%
+        return $this->order_item_price * 0.85;
+    }
 }
