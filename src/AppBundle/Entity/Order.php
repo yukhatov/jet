@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderRepository")
  * @ORM\Table(name="jet_orders")
  */
 
@@ -509,9 +509,9 @@ class Order
     /**
      * @return mixed
      */
-    public function getOrderPlacedDate()
+    public function getOrderPlacedDate($format = "Y-m-d H:i")
     {
-        return date("Y-m-d H:i", $this->inner_order_placed_date);
+        return date($format, $this->inner_order_placed_date);
     }
 
     /**
