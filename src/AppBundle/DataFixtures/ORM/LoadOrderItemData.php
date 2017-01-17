@@ -42,6 +42,7 @@ class LoadOrderItemData implements FixtureInterface
         $item->setOrderItemPrice(99.2);
         $item->setOrderItemShippingCost(6.9);
         $item->setProductTitle('Ray Ban RB 3300');
+        $item->setReturnQuantity(0);
 
         $manager->persist($item);
         $manager->flush();
