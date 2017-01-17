@@ -62,7 +62,7 @@
                         <th>ASIN</th>
                         <th>Price</th>
                         <th>Shipping cost</th>
-                        <th>Quantity</th>
+                        <th>Return Qty</th>
                     </thead>
                     {% for item in items %}
                         <tr>
@@ -92,7 +92,7 @@
 
                             <td>${{ item.getPrice() }}</td>
                             <td>${{ item.getShippingCost() }}</td>
-                            <td>{{ item.getQuantity() }}</td>
+                            <td>{{ item.getReturnQuantity() }}</td>
                         </tr>
                     {% endfor %}
                 </table>

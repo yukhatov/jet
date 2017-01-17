@@ -79,6 +79,11 @@ class OrderItem
     private $final_quantity;
 
     /**
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     */
+    private $return_quantity;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $request_order_cancel_qty;
@@ -281,6 +286,22 @@ class OrderItem
     public function setProductTitle($product_title)
     {
         $this->product_title = $product_title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReturnQuantity()
+    {
+        return $this->return_quantity;
+    }
+
+    /**
+     * @param mixed $return_quantity
+     */
+    public function setReturnQuantity($return_quantity)
+    {
+        $this->return_quantity = $return_quantity;
     }
 
     /**

@@ -559,6 +559,17 @@ class Order
         return $count;
     }
 
+    public function getReturnItemsCount()
+    {
+        $count = 0;
+
+        foreach ( $this->items as $item) {
+            $count += $item->getReturnQuantity();
+        }
+
+        return $count;
+    }
+
     /**
      * @return mixed
      */

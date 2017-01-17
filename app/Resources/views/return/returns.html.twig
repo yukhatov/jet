@@ -27,7 +27,7 @@
                             <td>{{ return.returnStatus }}</td>
                             <td>{{ return.returnTrackingNumber }}</td>
                             <td><a href="{{ path('return', { 'id': return.id }) }}">{{ return.referenceOrderId }}</a></td>
-                            <td>{{ return.order.itemsCount }}</td>
+                            <td>{{ return.order.returnItemsCount }}</td>
                             <td>{{ return.order.recipientName }}</td>
                             <td>{{ return.order.addressLine1 }} {{ return.order.addressLine2 }}</td>
                             <td>{{ return.order.getAddressCity() }}</td>
