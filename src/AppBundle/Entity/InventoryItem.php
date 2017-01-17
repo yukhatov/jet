@@ -562,6 +562,7 @@ class InventoryItem
         $object->wholePrice = $cap;
         $object->clearIncome = $cap;
         $object->incomePercentage = $cap;
+        $object->asin = $cap;
 
         return $object;
     }

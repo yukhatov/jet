@@ -14,10 +14,7 @@ $( document ).ready(function() {
 	summary = $("#orders-report-summary-table").DataTable({
 		"dom": '',
 		'initComplete': function (){
-			console.log(this.api().columns());
-
 			this.api().columns($('.sum')).every(function(){
-				console.log('OK');
 				var column = this;
 
 				var sum = column
@@ -39,7 +36,11 @@ $( document ).ready(function() {
 
 	table = $("#orders-report-table").DataTable({
 		"buttons": [
-			'excel'
+			{
+				extend: 'excel',
+				text: 'Export',
+				footer: 'true'
+			}
 		],
 		"processing": true,
 		"serverSide": true,
@@ -57,7 +58,7 @@ $( document ).ready(function() {
 		"columns": [
 			{ "data": "order.orderPlacedDate" },
 			{ "data": "title" },
-			{ "data": "order.shipmentTrackingNumber" },
+			{ "data": "inventory.asin" },
 			{ "data": "quantity" },
 			{ "data": "inventory.wholePrice"},
 			{ "data": "shippingCost"},
@@ -75,7 +76,28 @@ $( document ).ready(function() {
 				"next": 	'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
 			},
 		},
+		'initComplete': function (){
+			// calculating sums
+			this.api().columns('.sum').every(function(){
+				var column = this;
 
+				var sum = column
+					.data()
+					.reduce(function (a, b) {
+						a = parseFloat(a);
+						if(isNaN(a)){ a = 0; }
+
+						b = parseFloat(b);
+						if(isNaN(b)){ b = 0; }
+
+						return a + b;
+					});
+
+				$(column.footer()).html(sum.toFixed(2));
+			});
+
+			setPercentTotal();
+		}
 	});
 
 	table.buttons().container()
@@ -86,3 +108,10 @@ $( document ).ready(function() {
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 	table.ajax.reload();
 });
+
+function setPercentTotal(){ // calculating income percent total
+	var priceTotal = parseFloat($('#js-price-total').html()),
+		incomeTotal = parseFloat($('#js-income-total').html());
+
+	$('#js-perc-total').html((incomeTotal / priceTotal).toFixed(2) * 100);
+}
