@@ -107,8 +107,8 @@ class OrderItemRepository extends EntityRepository
     private function getColumns() // Должны быть в таком же кол-ве и порядке как обьявленные колонки datatable
     {
         return [
-            0 =>'o.product_title',
-            1 =>'d.inner_order_placed_date',
+            0 =>'d.inner_order_placed_date',
+            1 =>'o.product_title',
             2 =>'d.shipment_tracking_number',
             3 =>'o.qauntity',
             5 =>'o.order_item_shipping_cost',
