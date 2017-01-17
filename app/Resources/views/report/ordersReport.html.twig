@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% set activeTab = 'reports' %}
+	{{ parent() }}
+
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-offset-3 col-md-9">
+			<div class="reports-filters">
+				<input type="text" id="daterange" class="input-sm" value="{{ defaultDates['from'] }} - {{ defaultDates['to'] }}" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<p class="table-header">Yesterday order report summary</p>
+			<table class="table inventory-type-table display">
+				<thead>
+					<th>Provider</th>
+					<th>Orders</th>
+					<th>Items</th>
+				</thead>
+				{% for report in reports %}
+					<tr>
+						<td>{% if report['title'] %}{{ report['title'] }}{% else %}Unknown{% endif %}</td>
+						<td>{{ report['orders'] }}</td>
+						<td>{{ report['items'] }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<div class="col-md-9">
+			<table id="orders-report-table" class="table inventory-type-table display nowrap">
+				<thead>
+					<th>Title</th>
+					<th>Order date</th>
+					<th>Status</th>
+					<th>TN</th>
+					<th>Qty</th>
+					<th>Whole price</th>
+					<th>Shipping price</th>
+					<th>Sold for (-15%)</th>
+					<th>Clear income</th>
+					<th>Income percentage</th>
+				</thead>
+			</table>
+		</div>
+	</div></div>
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('js/reportOrders.js') }}"></script>
+
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+{% endblock %}
