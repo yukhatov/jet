@@ -67,7 +67,7 @@ $( document ).ready(function() {
 		],
 		"dom": "Brt" +							// https://datatables.net/reference/option/dom
 		"<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
-		"order": [[1, "asc"]],
+		"order": [[0, "asc"]],
 		"pageLength": 25,
 		"language": {
 			"paginate": {							// pagination
