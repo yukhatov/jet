@@ -329,6 +329,6 @@ class OrderItem
     }
 
     public function getClearOrderPrice(){ // -15%
-        return $this->order_item_price * 0.85;
+        return round($this->order_item_price * 0.85, 2);
     }
 }
