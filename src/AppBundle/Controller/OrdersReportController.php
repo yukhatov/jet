@@ -82,8 +82,8 @@ class OrdersReportController extends Controller
                     $item->inventory->clearIncome = $item->clearOrderPrice - $inventoryItem->wholePrice;
                     $item->inventory->incomePercentage = $item->inventory->clearIncome / $inventoryItem->wholePrice;
                 }else{
-                    $item->inventory->clearIncome = '<b>undefined whole price</b>';
-                    $item->inventory->incomePercentage = '<b>undefined whole price</b>';
+                    $item->inventory->clearIncome = '<b>undef whole pr.</b>';
+                    $item->inventory->incomePercentage = '<b>undef whole pr.</b>';
                 }
             }else{
                 $item->inventory = InventoryItem::getEmpty();

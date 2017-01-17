@@ -28,8 +28,8 @@ $( document ).ready(function() {
 			"orderable": false
 		} ],
 		"columns": [
-			{ "data": "title" },
 			{ "data": "order.orderPlacedDate" },
+			{ "data": "title" },
 			{ "data": "order.status" },
 			{ "data": "order.shipmentTrackingNumber" },
 			{ "data": "quantity" },
