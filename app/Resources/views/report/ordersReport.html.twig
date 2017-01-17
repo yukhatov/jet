@@ -15,12 +15,21 @@
 	<div class="row">
 		<div class="col-md-3">
 			<p class="table-header">Yesterday order report summary</p>
-			<table class="table inventory-type-table display">
+			<table id="orders-report-summary-table" class="table inventory-type-table display">
 				<thead>
-					<th>Provider</th>
-					<th>Orders</th>
-					<th>Items</th>
+					<tr>
+						<th>Provider</th>
+						<th class='sum'>Orders</th>
+						<th class='sum'>Items</th>
+					</tr>
 				</thead>
+				<tfoot>
+					<tr>
+						<th>Total: </th>
+						<th></th>
+						<th></th>
+					</tr>
+				</tfoot>
 				{% for report in reports %}
 					<tr>
 						<td>{% if report['title'] %}{{ report['title'] }}{% else %}Unknown{% endif %}</td>

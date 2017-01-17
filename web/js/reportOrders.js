@@ -1,5 +1,6 @@
 
-var table;
+var table,
+	summary;
 
 $( document ).ready(function() {
 	$('input[id="daterange"]').daterangepicker(
@@ -9,6 +10,32 @@ $( document ).ready(function() {
 			}
 		}
 	);
+
+	summary = $("#orders-report-summary-table").DataTable({
+		"dom": '',
+		'initComplete': function (){
+			console.log(this.api().columns());
+
+			this.api().columns($('.sum')).every(function(){
+				console.log('OK');
+				var column = this;
+
+				var sum = column
+					.data()
+					.reduce(function (a, b) {
+						a = parseInt(a, 10);
+						if(isNaN(a)){ a = 0; }
+
+						b = parseInt(b, 10);
+						if(isNaN(b)){ b = 0; }
+
+						return a + b;
+					});
+
+				$(column.footer()).html(sum);
+			});
+		}
+	});
 
 	table = $("#orders-report-table").DataTable({
 		"buttons": [
@@ -49,12 +76,12 @@ $( document ).ready(function() {
 				"next": 	'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
 			},
 		},
+
 	});
 
 	table.buttons().container()
 		.appendTo('.reports-filters')
 		.find('.buttons-excel').prepend('<i class="fa fa-lg fa-file-excel-o" aria-hidden="true"></i>')
-
 });
 
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {

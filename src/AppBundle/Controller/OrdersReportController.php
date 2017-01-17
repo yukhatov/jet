@@ -80,7 +80,7 @@ class OrdersReportController extends Controller
                 if($inventoryItem->wholePrice != 0)
                 {
                     $item->inventory->clearIncome = $item->clearOrderPrice - $inventoryItem->wholePrice;
-                    $item->inventory->incomePercentage = $item->inventory->clearIncome / $inventoryItem->wholePrice;
+                    $item->inventory->incomePercentage = round($item->inventory->clearIncome / $inventoryItem->wholePrice, 2) . '%';
                 }else{
                     $item->inventory->clearIncome = '<b>undef whole pr.</b>';
                     $item->inventory->incomePercentage = '<b>undef whole pr.</b>';
