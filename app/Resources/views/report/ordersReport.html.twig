@@ -4,9 +4,17 @@
 	{% set activeTab = 'reports' %}
 	{{ parent() }}
 
-	<div class="container-fluid"><div class="row">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-offset-3 col-md-9">
+			<div class="reports-filters">
+				<input type="text" id="daterange" class="input-sm" value="{{ defaultDates['from'] }} - {{ defaultDates['to'] }}" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-3">
-			<label>Yesterday order report summary</label>
+			<p class="table-header">Yesterday order report summary</p>
 			<table class="table inventory-type-table display">
 				<thead>
 					<th>Provider</th>
@@ -23,10 +31,6 @@
 			</table>
 		</div>
 		<div class="col-md-9">
-			<div class="instock-filters">
-				<input type="text" id="daterange" class="input-sm" value="{{ defaultDates['from'] }} - {{ defaultDates['to'] }}" />
-			</div>
-
 			<table id="orders-report-table" class="table inventory-type-table display nowrap">
 				<thead>
 					<th>Title</th>
