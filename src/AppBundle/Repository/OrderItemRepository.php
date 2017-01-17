@@ -109,11 +109,10 @@ class OrderItemRepository extends EntityRepository
         return [
             0 =>'o.product_title',
             1 =>'d.inner_order_placed_date',
-            2 =>'d.status',
-            3 =>'d.shipment_tracking_number',
-            4 =>'o.qauntity',
-            6 =>'o.order_item_shipping_cost',
-            7 =>'o.order_item_price',
+            2 =>'d.shipment_tracking_number',
+            3 =>'o.qauntity',
+            5 =>'o.order_item_shipping_cost',
+            6 =>'o.order_item_price',
         ];
     }
 }

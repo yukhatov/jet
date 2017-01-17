@@ -51,13 +51,12 @@ $( document ).ready(function() {
 			},
 		},
 		"columnDefs": [ {
-			"targets": [5,8,9],
+			"targets": [4,7,8],
 			"orderable": false
 		} ],
 		"columns": [
 			{ "data": "order.orderPlacedDate" },
 			{ "data": "title" },
-			{ "data": "order.status" },
 			{ "data": "order.shipmentTrackingNumber" },
 			{ "data": "quantity" },
 			{ "data": "inventory.wholePrice"},
