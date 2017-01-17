@@ -65,7 +65,11 @@
                         <th>Return Qty</th>
                     </thead>
                     {% for item in items %}
+                        {% if( item.getReturnQuantity() > 0) %}
                         <tr>
+                        {% else %}
+                        <tr class="row-faint">
+                        {% endif %}
                             {% if( item.hasRelatedInventoryItem() ) %}
                                 <td>
                                     <p class="main-title">{{ inventoryItems[item.merchantSku].title }}</p>
