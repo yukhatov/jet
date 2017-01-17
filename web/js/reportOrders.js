@@ -70,14 +70,15 @@ $( document ).ready(function() {
 		"dom": "Brt" +							// https://datatables.net/reference/option/dom
 		"<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
 		"order": [[0, "desc"]],
-		"pageLength": 25,
+		"pageLength": 10,
+		"lengthMenu": [[2, 10, 50, -1], [2, 10, 50, "All"]],
 		"language": {
 			"paginate": {							// pagination
 				"previous": '<i class="fa fa-3x fa-angle-left" aria-hidden="true"></i>',
 				"next": 	'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
 			},
 		},
-		'initComplete': function (){
+		'footerCallback': function (){
 			// calculating sums
 			this.api().columns('.sum').every(function(){
 				var column = this;
