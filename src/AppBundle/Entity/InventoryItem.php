@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\InventoryItemRepository")
  * @ORM\Table(name="jet_inventory")
@@ -548,5 +553,16 @@ class InventoryItem
     public function setProvider($provider)
     {
         $this->provider = $provider;
+    }
+
+    public static function getEmpty(){
+        $cap = "<b>not found</b>";
+
+        $object = new \stdClass;
+        $object->wholePrice = $cap;
+        $object->clearIncome = $cap;
+        $object->incomePercentage = $cap;
+
+        return $object;
     }
 }

@@ -9,6 +9,12 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 class InventoryItemRepository extends EntityRepository
 {
     const TITLE_COLUMN = 2;
@@ -137,5 +143,17 @@ class InventoryItemRepository extends EntityRepository
             'i.fj_status',
             'i.created'
         ];
+    }
+
+    public function findSerializedOneBy($array)
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(array('brand', 'provider'));
+        $serializer = new Serializer([$normalizer], $encoders);
+
+        $content = json_decode($serializer->serialize($this->findOneBy($array), 'json'));
+
+        return $content;
     }
 }
