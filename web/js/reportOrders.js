@@ -39,7 +39,8 @@ $( document ).ready(function() {
 			{
 				extend: 'excel',
 				text: 'Export',
-				footer: 'true'
+				footer: 'true',
+				title: 'Jet orders report'
 			}
 		],
 		"processing": true,
