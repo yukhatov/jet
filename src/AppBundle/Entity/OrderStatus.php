@@ -24,6 +24,7 @@ class OrderStatus{
     const STATUS_COMPLETE = 'complete';
     const STATUS_REJECTED = 'rejected';
     const STATUS_COMPLETED_BY_MERCHANT = 'completed by merchant';
+    const STATUS_CANCELED = 'canceled';
 
     /**
      * @ORM\Column(type="integer")

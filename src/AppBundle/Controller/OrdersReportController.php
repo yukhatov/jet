@@ -13,11 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-/*use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;*/
-
 class OrdersReportController extends Controller
 {
     /**
@@ -32,7 +27,11 @@ class OrdersReportController extends Controller
             ->getRepository('AppBundle:OrderItem')
             ->findSummaryByDateRange($ydayMidnight, $todayMidnight);
 
-        return $this->render('report/ordersReport.html.twig', ['reports' => $reports, 'defaultDates' => ['from' => date("Y-m-d", time() - 86400), 'to' => date("Y-m-d", time())]]);
+        $ordersCount = $this->getDoctrine()
+            ->getRepository('AppBundle:OrderItem')
+            ->getOrdersCountByDateRange($ydayMidnight, $todayMidnight);
+
+        return $this->render('report/ordersReport.html.twig', ['reports' => $reports, 'ordersCount' => $ordersCount, 'defaultDates' => ['from' => date("Y-m-d", $ydayMidnight), 'to' => date("Y-m-d", $ydayMidnight)]]);
     }
 
     /**

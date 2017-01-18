@@ -52,10 +52,13 @@ $( document ).ready(function() {
 				d.toDate = $('#daterange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 			},
 		},
-		"columnDefs": [ {
-			"targets": [4,7,8],
-			"orderable": false
-		} ],
+		"columnDefs": [
+			{
+				"targets": [4,7,8],
+				"orderable": false
+			},
+			{ className: "text-right", "targets": [4, 5, 6, 7] },
+		],
 		"columns": [
 			{ "data": "order.orderPlacedDate" },
 			{ "data": "title" },
@@ -79,7 +82,7 @@ $( document ).ready(function() {
 		},
 		'footerCallback': function (){
 			// calculating sums
-			this.api().columns('.sum').every(function(){
+			this.api().columns('.sum', { page: 'current' }).every(function(){
 				var column = this;
 
 				var sum = column
@@ -92,7 +95,7 @@ $( document ).ready(function() {
 						if(isNaN(b)){ b = 0; }
 
 						return a + b;
-					});
+					}, 0);
 
 				$(column.footer()).html(sum.toFixed(2));
 			});

@@ -19,21 +19,18 @@
 				<thead>
 					<tr>
 						<th>Provider</th>
-						<th class='sum'>Orders</th>
 						<th class='sum'>Items</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<th>Total: </th>
-						<th></th>
+						<th>Total over {{ ordersCount }} orders: </th>
 						<th></th>
 					</tr>
 				</tfoot>
 				{% for report in reports %}
 					<tr>
 						<td>{% if report['title'] %}{{ report['title'] }}{% else %}Unknown{% endif %}</td>
-						<td>{{ report['orders'] }}</td>
 						<td>{{ report['items'] }}</td>
 					</tr>
 				{% endfor %}
