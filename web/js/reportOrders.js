@@ -61,7 +61,7 @@ $( document ).ready(function() {
 		],
 		"columns": [
 			{ "data": "order.orderPlacedDate" },
-			{ "data": "title" },
+			{ "data": "titleWithOrderLink" },
 			{ "data": "inventory.asin" },
 			{ "data": "quantity" },
 			{ "data": "inventory.wholePrice"},
