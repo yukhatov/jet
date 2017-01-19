@@ -4,9 +4,9 @@ parameters:
 #    parameter1: 1
 
 services:
-#    app.jet.api:
-#        class: AppBundle\Services\JetApi
-#        arguments: ["%parameter1%"]
+#    app.jet.route:
+#        class: AppBundle\Services\MyRoute
+#        arguments: ['%kernel.root_dir%']
 
     app.jet.process:
             class: AppBundle\Controller\ProcessController

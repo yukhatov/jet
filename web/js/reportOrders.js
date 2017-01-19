@@ -2,6 +2,16 @@
 var table,
 	summary;
 
+var col_date = 0,
+	col_title = 1,
+	col_asin = 2,
+	col_qty = 3,
+	col_whole_price = 4,
+	col_ship_price = 5,
+	col_sold = 6,
+	col_income = 7,
+	col_prec = 8;
+
 $( document ).ready(function() {
 	$('input[id="daterange"]').daterangepicker(
 		{
@@ -54,14 +64,21 @@ $( document ).ready(function() {
 		},
 		"columnDefs": [
 			{
-				"targets": [4,7,8],
+				"targets": [col_whole_price, col_income, col_prec],
 				"orderable": false
 			},
-			{ className: "text-right", "targets": [4, 5, 6, 7] },
+			{ className: "text-right", "targets": [col_whole_price, col_ship_price, col_sold, col_income] },
+			{
+				"render": function ( data, type, row ) {
+					var href = Routing.generate("order", { id: row.orderId });
+					return '<a href="' + href + '" target="_blank">' + data + '</a>';
+				},
+				"targets": col_title
+			},
 		],
 		"columns": [
 			{ "data": "order.orderPlacedDate" },
-			{ "data": "titleWithOrderLink" },
+			{ "data": "title" },
 			{ "data": "inventory.asin" },
 			{ "data": "quantity" },
 			{ "data": "inventory.wholePrice"},
@@ -72,7 +89,7 @@ $( document ).ready(function() {
 		],
 		"dom": "Brt" +							// https://datatables.net/reference/option/dom
 		"<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
-		"order": [[0, "desc"]],
+		"order": [[col_date, "desc"]],
 		"pageLength": 25,
 		"language": {
 			"paginate": {							// pagination

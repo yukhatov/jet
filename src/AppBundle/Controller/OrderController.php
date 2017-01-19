@@ -37,7 +37,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/orders/{id}", name="order")
+     * @Route("/orders/{id}", options={"expose"=true},  name="order")
      */
     public function showAction($id, Request $request)
     {
