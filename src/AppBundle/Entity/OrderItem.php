@@ -195,11 +195,6 @@ class OrderItem
     /**
      * @return mixed
      */
-    public function getTitleWithOrderLink()
-    {
-        return sprintf("<a href='/orders/%d'>%s</a>", $this->order_id, $this->product_title);
-    }
-
     public function getSelectValues()
     {
         $values = array();
