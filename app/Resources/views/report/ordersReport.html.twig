@@ -6,13 +6,6 @@
 
 	<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-offset-3 col-md-9">
-			<div class="reports-filters">
-				<input type="text" id="daterange" class="input-sm" value="{{ defaultDates['from'] }} - {{ defaultDates['to'] }}" />
-			</div>
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-md-3">
 			<p class="table-header">Yesterday order report summary</p>
 			<table id="orders-report-summary-table" class="table inventory-type-table display">
@@ -37,6 +30,9 @@
 			</table>
 		</div>
 		<div class="col-md-9">
+			<div class="reports-filters">
+				<input type="text" id="daterange" class="input-sm" value="{{ defaultDates['from'] }} - {{ defaultDates['to'] }}" />
+			</div>
 			<table id="orders-report-table" class="table inventory-type-table display nowrap">
 				<thead>
 					<th>Order date</th>
