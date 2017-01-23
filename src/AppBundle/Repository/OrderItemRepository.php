@@ -29,7 +29,7 @@ class OrderItemRepository extends EntityRepository
                 LEFT JOIN jet_provider ON provider_id=jet_provider.id
                 WHERE inner_order_placed_date >= :from
                 AND inner_order_placed_date <= :to
-                AND NOT((status = "complete" AND (shipment_tracking_number = "" OR shipment_tracking_number IS NULL)) OR status = "canceled")
+                AND NOT((status = "complete" AND (shipment_tracking_number = "" OR shipment_tracking_number IS NULL)) OR status = "cancelled")
                 GROUP BY provider_id';
 
         $params = array(
