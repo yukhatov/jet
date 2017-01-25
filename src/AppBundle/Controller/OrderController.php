@@ -172,6 +172,8 @@ class OrderController extends Controller
         {
             if($this->actionCreate($request->get('orderId'), $request->get('action')))
             {
+                $this->setOrderLocalStatus($request->get('orderId'), $request->get('action'));
+
                 return new JsonResponse(array('success' => true));
             }
         }
@@ -197,6 +199,20 @@ class OrderController extends Controller
             return true;
         }else{
             return false;
+        }
+    }
+
+    protected function setOrderLocalStatus($orderId, $action){
+        if($action == self::ACTION_TYPE_CANCEL)
+        {
+            $order = $this->getDoctrine()
+                ->getRepository('AppBundle:Order')
+                ->findOneBy(['id' => $orderId]);
+
+            $order->setLocalStatus(OrderStatus::STATUS_CANCELED);
+
+            $this->getDoctrine()->getEntityManager()->persist($order);
+            $this->getDoctrine()->getEntityManager()->flush();
         }
     }
 }

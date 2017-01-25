@@ -92,6 +92,11 @@ class Order
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $localStatus;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $exception_state;
 
     /**
@@ -608,6 +613,22 @@ class Order
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocalStatus()
+    {
+        return $this->localStatus;
+    }
+
+    /**
+     * @param mixed $localStatus
+     */
+    public function setLocalStatus($localStatus)
+    {
+        $this->localStatus = $localStatus;
     }
 
     /**
