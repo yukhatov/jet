@@ -9,7 +9,8 @@ var col_date = 0,
 	col_whole_price = 4,
 	col_ship_price = 5,
 	col_sold = 6,
-	col_income = 7,
+	col_sold_clear = 7,
+	col_income = 8,
 	col_prec = 8;
 
 $( document ).ready(function() {
@@ -67,7 +68,7 @@ $( document ).ready(function() {
 				"targets": [col_whole_price, col_income, col_prec],
 				"orderable": false
 			},
-			{ className: "text-right", "targets": [col_whole_price, col_ship_price, col_sold, col_income] },
+			{ className: "text-right", "targets": [col_whole_price, col_ship_price, col_sold_clear, col_income] },
 			{
 				"render": function ( data, type, row ) {
 					var href = Routing.generate("order", { id: row.orderId });
@@ -83,6 +84,7 @@ $( document ).ready(function() {
 			{ "data": "quantity" },
 			{ "data": "inventory.wholePrice"},
 			{ "data": "shippingCost"},
+			{ "data": "price"},
 			{ "data": "clearOrderPrice"},
 			{ "data": "inventory.clearIncome"},
 			{ "data": "inventory.incomePercentage"},
