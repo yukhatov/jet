@@ -68,7 +68,7 @@ $( document ).ready(function() {
 				"targets": [col_whole_price, col_income, col_prec],
 				"orderable": false
 			},
-			{ className: "text-right", "targets": [col_whole_price, col_ship_price, col_sold_clear, col_income] },
+			{ className: "text-right", "targets": [col_whole_price, col_ship_price, col_sold, col_sold_clear, col_income] },
 			{
 				"render": function ( data, type, row ) {
 					var href = Routing.generate("order", { id: row.orderId });
