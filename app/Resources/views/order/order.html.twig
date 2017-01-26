@@ -126,7 +126,7 @@
 					{% endfor %}
 				</table>
 			</div>
-
+			{# разбить на subviews #}
 			<div>
 				{% if(order.status == constant('AppBundle\\Entity\\OrderStatus::STATUS_REJECTED')) %}
 					<button type="button" class="btn btn-cyan approve-order disabled" data-status-id="{{ statuses[0].getId() }}" style="width: 170px">Accept Order</button>
