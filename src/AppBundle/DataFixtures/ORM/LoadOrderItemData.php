@@ -65,10 +65,10 @@ class LoadOrderItemData implements FixtureInterface
         $order->setRequestShippingMethod('UPS');
         $order->setBasePrice(99.99);
         $order->setReferenceOrderId('1');
-        $order->setShipmentTrackingNumber('');
-        $order->setCarrierPickUpDate('');
-        $order->setExpectedDeliveryDate('');
-        $order->setResponseShipmentDate('');
+        $order->setShipmentTrackingNumber(NULL);
+        $order->setCarrierPickUpDate(NULL);
+        $order->setExpectedDeliveryDate(NULL);
+        $order->setResponseShipmentDate(NULL);
 
         $manager->persist($order);
         $manager->flush();

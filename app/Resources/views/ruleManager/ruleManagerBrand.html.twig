@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% set activeTab = 'manager' %}
+	{{ parent() }}
+
+    <div class="container-fluid"><div class="row">
+        <div class="col-md-12">
+			<button class="btn btn-purple pull-right" id="button-back">Back</button>
+			<table id="inventory-rule-table" class="table inventory-type-table" data-brand-id="{{ brandId }}">
+				<thead>
+					<th>rule</th>
+					<th>Title</th>
+					<th>CCode</th>
+					<th>Size</th>
+					<th>UPC</th>
+					<th>Discount</th>
+					<th>Shipping</th>
+					<th>Base Factor</th>
+					<th>Min Factor</th>
+					<th>Max Factor</th>
+					<th>Min Income</th>
+					<th>Min Income Perc</th>
+					<th>Action</th>
+				</thead>
+			</table>
+		</div>
+	</div></div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('js/ruleManagerBrand.js') }}"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+{% endblock %}

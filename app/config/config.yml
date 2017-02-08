@@ -59,6 +59,13 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+services:
+    my.listener:
+        class: AppBundle\EventListener\RuleUpdate
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

@@ -1,8 +1,10 @@
 /**
  * Created by artur on 05.01.17.
  */
+var table;
+
 $(document).ready(function() {
-    var table = $("#afs-report-table").DataTable({
+    table = $("#afs-report-table").DataTable({
         "fixedHeader": true,
         "dom": "ftr" +							// https://datatables.net/reference/option/dom
             "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
@@ -98,4 +100,3 @@ $(document).ready(function() {
         }
     });
 });
-

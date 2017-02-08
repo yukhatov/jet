@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% set activeTab = 'manager' %}
+	{{ parent() }}
+
+	<div class="container-fluid"><div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-purple pull-right" id="show-all-button">Show all</button>
+			<table id="rule-manager-table"  class="table inventory-type-table display grouped-table">
+				<thead>
+					<th>Brand</th>
+					<th>Discount</th>
+					<th>Shipping</th>
+					<th>Base Factor</th>
+					<th>Min Factor</th>
+					<th>Max Factor</th>
+					<th>Min Income</th>
+					<th>Min Income Perc</th>
+					<th>Action</th>
+				</thead>
+				<tbody id="manager-body">
+					{% for provider in providers %}
+						{% set providerRuledItemsCount = provider.getRuledInventoryItemsCount() %}
+
+						<tr class="group" data-provider-id="{{ provider.getId() }}">
+
+							{% if(providerRuledItemsCount) %}
+								<td><a href="" class="provider-group"><i class="fa fa-chevron-down" aria-hidden="true"></i> {{ provider.getTitle() }} <b>({{ providerRuledItemsCount }})</b></a></td>
+							{% else %}
+								<td><a href="" class="provider-group"><i class="fa fa-chevron-down" aria-hidden="true"></i> {{ provider.getTitle() }} </a></td>
+							{% endif %}
+							<td class="editable" >
+								<label>
+									<input disabled id="discount" type="text" value="{{ provider.getRule().getDiscount() }}">
+								</label>
+							</td>
+							<td class="editable" >
+								<label>
+									<input disabled id="shipping" type="text" value="{{ provider.getRule().getShipping() }}">
+								</label>
+							</td>
+							<td class="editable" >
+								<label>
+									<input disabled id="base-factor" type="text" value="{{ provider.getRule().getBaseFactor() }}">
+								</label>
+							</td>
+							<td class="editable" >
+								<label>
+									<input disabled id="min-factor" type="text" value="{{ provider.getRule().getMinFactor() }}">
+								</label>
+							</td>
+							<td class="editable" >
+								<label>
+									<input disabled id="max-factor" type="text" value="{{ provider.getRule().getMaxFactor() }}">
+								</label>
+							</td>
+							<td class="editable" >
+								<label>
+									<input disabled id="min-income" type="text" value="{{ provider.getRule().getMinIncome() }}">
+								</label>
+							</td>
+							<td class="editable" >
+								<label>
+									<input disabled id="min-income-perc" type="text" value="{{ provider.getRule().getMinIncomePerc() }}">
+								</label>
+							</td>
+							<td data-provider-id="{{ provider.getId() }}"><a href="" class="edit" ><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
+						</tr>
+
+						{% for brand in provider.brands %}
+							{% if(brand.getRuleId() != NULL) %}
+								<tr class="bold-row" data-brand-id="{{ brand.getId() }}" data-provider="{{ brand.providerId() }}" data-rule="{{ brand.getRuleId()}}">
+							{% else %}
+								<tr data-brand-id="{{ brand.getId() }}" data-provider="{{ brand.providerId() }}" data-rule="null">
+							{% endif %}
+									{% set brandRuledItemsCount = brand.getRuledInventoryItemsCount() %}
+									{% if(brandRuledItemsCount) %}
+										<td><a href="{{ path('ruleManagerBrand', { 'brandId': brand.id }) }}">{{ brand.getTitle() }} <b>({{ brandRuledItemsCount }})</b></a></td>
+									{% else %}
+										<td><a href="{{ path('ruleManagerBrand', { 'brandId': brand.id }) }}">{{ brand.getTitle() }}</a></td>
+									{% endif %}
+									<td >
+										<label>
+											<input class="editable" disabled id="discount" type="text" value="{{ brand.getRule().getDiscount() }}">
+										</label>
+									</td>
+									<td>
+										<label>
+											<input class="editable"  disabled id="shipping" type="text" value="{{ brand.getRule().getShipping() }}">
+										</label>
+									</td>
+									<td>
+										<label>
+											<input class="editable"  disabled id="base-factor" type="text" value="{{ brand.getRule().getBaseFactor() }}">
+										</label>
+									</td>
+									<td>
+										<label>
+											<input class="editable"  disabled id="min-factor" type="text" value="{{ brand.getRule().getMinFactor() }}">
+										</label>
+									</td>
+									<td>
+										<label>
+											<input class="editable"  disabled id="max-factor" type="text" value="{{ brand.getRule().getMaxFactor() }}">
+										</label>
+									</td>
+									<td>
+										<label>
+											<input class="editable"  disabled id="min-income" type="text" value="{{ brand.getRule().getMinIncome() }}">
+										</label>
+									</td>
+									<td>
+										<label>
+											<input class="editable"  disabled id="min-income-perc" type="text" value="{{ brand.getRule().getMinIncomePerc() }}">
+										</label>
+									</td>
+
+									{% if(brand.getRuleId() != NULL) %}
+										<td class="action"><a href="" class="remove"><i class="fa fa-remove fa-lg" aria-hidden="true"></i></a>  <a href="" class="edit"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
+									{% else %}
+										<td class="action"><a href="" class="edit"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
+									{% endif %}
+								</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div></div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('js/ruleManager.js') }}"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+{% endblock %}

@@ -35,6 +35,9 @@
                                     <li {% if activeTab|default('') == 'inventory' %} class="active"{% endif %} >
                                         <a href="{{ path('inventory') }}"><i class="fa fa-lg fa-shopping-bag" aria-hidden="true"></i>Inventory</a>
                                     </li>
+                                    <li {% if activeTab|default('') == 'manager' %} class="active"{% endif %} >
+                                        <a href="{{ path('ruleManager') }}"><i class="fa fa-lg fa-gears" aria-hidden="true"></i>Rule Manager</a>
+                                    </li>
                                     <li {% if activeTab|default('') == 'providers' %} class="active"{% endif %} >
                                         <a href="{{ path('providers') }}"><i class="fa fa-lg fa-users" aria-hidden="true"></i>Providers</a>
                                     </li>

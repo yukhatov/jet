@@ -109,7 +109,7 @@ class InventoryItemRepository extends EntityRepository
             }
         }
 
-        if($params['stock']){
+        if(!empty($params['stock'])){
             if($params['stock'] == 1){
                 $query->andWhere('i.stock_count >= 1');
             }else{
@@ -117,7 +117,7 @@ class InventoryItemRepository extends EntityRepository
             }
         }
 
-        if($params['status']){
+        if(!empty($params['status'])){
             $query->andWhere($query->expr()->like('i.fj_status', ':status'))
                 ->setParameter('status', $params['status']);
         }
@@ -141,8 +141,20 @@ class InventoryItemRepository extends EntityRepository
             'i.whole_price',
             'i.stock_count',
             'i.fj_status',
-            'i.created'
+            'i.created',
+            'i.ruleId'
         ];
+    }
+
+    public function findByParamsSerialized($params){
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setIgnoredAttributes(array('brand', 'provider'));
+        $serializer = new Serializer([$normalizer], $encoders);
+
+        $content = json_decode($serializer->serialize($this->findByParams($params), 'json'));
+
+        return $content;
     }
 
     public function findSerializedOneBy($array)
