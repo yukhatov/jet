@@ -9,9 +9,10 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProviderRepository")
  * @ORM\Table(name="jet_provider")
  */
 
@@ -29,6 +30,16 @@ class Provider {
     private $title;
 
     /**
+     * @ORM\Column(type="integer", nullable=false, name="rule_id")
+     */
+    private $ruleId;
+
+    /**
+     * @ManyToOne(targetEntity="Rule")
+     */
+    private $rule;
+
+    /**
      * @OneToMany(targetEntity="Brand", mappedBy="provider")
      */
     private $brands;
@@ -37,6 +48,8 @@ class Provider {
      * @OneToMany(targetEntity="InventoryItem", mappedBy="provider")
      */
     private $inventoryItems;
+
+    private $ruledInventoryItemsCount = 0;
 
     /**
      * @return mixed
@@ -73,5 +86,60 @@ class Provider {
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRuleId()
+    {
+        return $this->ruleId;
+    }
+
+    /**
+     * @param mixed $ruleId
+     */
+    public function setRuleId($ruleId)
+    {
+        $this->ruleId = $ruleId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRule()
+    {
+        return $this->rule;
+    }
+
+    /**
+     * @param mixed $rule
+     */
+    public function setRule($rule)
+    {
+        $this->rule = $rule;
+    }
+    /*public function getRuledInventoryItemsCount()
+    {
+        $count = 0;
+
+        foreach ($this->inventoryItems as $item)
+        {
+            if($item->getRuleId())
+            {
+                $count++;
+            }
+        }
+
+        return $count;
+    }*/
+    public function getRuledItemsCount()
+    {
+        return $this->ruledInventoryItemsCount;
+    }
+
+    public function setRuledItemsCount($count)
+    {
+        $this->ruledInventoryItemsCount = $count;
     }
 }

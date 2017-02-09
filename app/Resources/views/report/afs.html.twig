@@ -6,7 +6,7 @@
 
 	<div class="container-fluid"><div class="row">
 		<div class="col-md-12">
-			<table id="afs-report-table"  class="table inventory-type-table afs-report-table display">
+			<table id="afs-report-table"  class="table inventory-type-table display grouped-table">
 				<thead>
 					<th>Provider</th>
 					<th>Brand</th>
@@ -18,19 +18,21 @@
 					<th>Excluded</th>
 					<th>Missing Data</th>
 				</thead>
-				{% for report in reports %}
-					<tr>
-						<td>{{ report.getProviderTitle() }}</td>
-						<td>{{ report.getBrandTitle() }}</td>
-						<td>{{ report.getTotalCount() }}</td>
-						<td>{{ report.getInstockCount() }}</td>
-						<td>{{ report.getOutstockCount() }}</td>
-						<td>{{ report.getUnderJetReviewCount() }}</td>
-						<td>{{ report.getAfsCount() }}</td>
-						<td>{{ report.getExcludedCount() }}</td>
-						<td>{{ report.getMissingDataCount() }}</td>
-					</tr>
-				{% endfor %}
+				<tbody id="afs-body">
+					{% for report in reports %}
+						<tr>
+							<td>{{ report.getProviderTitle() }}</td>
+							<td>{{ report.getBrandTitle() }}</td>
+							<td>{{ report.getTotalCount() }}</td>
+							<td>{{ report.getInstockCount() }}</td>
+							<td>{{ report.getOutstockCount() }}</td>
+							<td>{{ report.getUnderJetReviewCount() }}</td>
+							<td>{{ report.getAfsCount() }}</td>
+							<td>{{ report.getExcludedCount() }}</td>
+							<td>{{ report.getMissingDataCount() }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
 			</table>
 		</div>
 	</div></div>

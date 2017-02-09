@@ -43,7 +43,7 @@ class InventoryController extends Controller
 
         $inventory = $this->getDoctrine()
             ->getRepository('AppBundle:InventoryItem')
-            ->findByParams($get);
+            ->findByParamsSerialized($get);
 
         $inventoryTotalByParamsCount = $this->getDoctrine()
             ->getRepository('AppBundle:InventoryItem')
@@ -52,8 +52,6 @@ class InventoryController extends Controller
         $inventoryTotalCount = $this->getDoctrine()
             ->getRepository('AppBundle:InventoryItem')
             ->getTotalInventoryCount();
-
-        $inventory = $this->serializeInvetory($inventory);
 
         $output = array(
             "draw" =>  intval($get['draw']),
@@ -73,25 +71,102 @@ class InventoryController extends Controller
         return new JsonResponse($output);
     }
 
-    private function serializeInvetory($inventory){
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizer = new ObjectNormalizer();
-        $normalizer->setIgnoredAttributes(array('brand', 'provider'));
-        $serializer = new Serializer([$normalizer], $encoders);
+    /**
+     * @Route("/item/saveRule/{itemId}", options={"expose"=true}, name="itemSaveRule")
+     */
+    public function saveRuleAction($itemId, Request $request)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->findOneBy(['id' => $itemId]);
 
-        $content = json_decode($serializer->serialize($inventory, 'json'));
+        $success = false;
 
-        return $content;
+        if($item){
+            if($item->getRuleId() != 0)
+            {
+                $rule = $this->getDoctrine()
+                    ->getRepository('AppBundle:Rule')
+                    ->findOneBy(['id' => $item->getRuleId()]);
+
+
+                $rule->setRequestData($request);
+                $this->getDoctrine()->getEntityManager()->persist($rule);
+                $this->getDoctrine()->getEntityManager()->flush();
+
+                $success = true;
+            }else{
+                $rule = clone $item->getBrand()->getRule();
+                $rule->setRequestData($request);
+
+                if(serialize($rule) != serialize($item->getBrand()->getRule())){
+                    $item->setRuleId($rule->getId());
+                    $item->setRule($rule);
+
+                    $this->getDoctrine()->getEntityManager()->persist($rule);
+                    $this->getDoctrine()->getEntityManager()->persist($item);
+                    $this->getDoctrine()->getEntityManager()->flush();
+
+                    $success = true;
+                }
+            }
+        }
+
+        return new JsonResponse(array('success' => $success));
     }
 
-    private function serializeBrands($brands){
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizer = new ObjectNormalizer();
-        $normalizer->setIgnoredAttributes(array('provider', 'inventoryItems'));
-        $serializer = new Serializer([$normalizer], $encoders);
+    /**
+     * @Route("/itemRemoveRule/{itemId}", options={"expose"=true}, name="itemRemoveRule")
+     */
+    public function removeRuleAction($itemId)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->findOneBy(['id' => $itemId]);
 
-        $content = json_decode($serializer->serialize($brands, 'json'));
+        if($item){
+            $rule = $this->getDoctrine()
+                ->getRepository('AppBundle:Rule')
+                ->findOneBy(['id' => $item->getRuleId()]);
 
-        return $content;
+            $item->setRuleId(NULL);
+            $this->getDoctrine()->getEntityManager()->persist($item);
+            $this->getDoctrine()->getEntityManager()->remove($rule);
+            $this->getDoctrine()->getEntityManager()->flush();
+
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return new JsonResponse(array('success' => $success));
+    }
+
+    /**
+     * @Route("/item/getRule/{itemId}", options={"expose"=true}, name="itemGetRule")
+     */
+    public function getRuleAction($itemId, Request $request)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:InventoryItem')
+            ->findOneBy(['id' => $itemId]);
+
+        $rule = null;
+
+        if($item)
+        {
+            $rule = [
+                'discount' => $item->getRule()->getDiscount(),
+                'shipping' => $item->getRule()->getShipping(),
+                'baseFactor' => $item->getRule()->getBaseFactor(),
+                'minFactor' => $item->getRule()->getMinFactor(),
+                'maxFactor' => $item->getRule()->getMaxFactor(),
+                'minIncome' => $item->getRule()->getMinIncome(),
+                'minIncomePerc' => $item->getRule()->getMinIncomePerc(),
+                'updatedAt' => $item->getRule()->getUpdatedAt(),
+            ];
+        }
+
+        return new JsonResponse(array('rule' => $rule));
     }
 }

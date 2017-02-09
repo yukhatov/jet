@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BrandRepository")
  * @ORM\Table(name="jet_brand")
  */
 
@@ -50,10 +50,17 @@ class Brand {
      */
     private $inventoryItems;
 
+    private $ruledInventoryItemsCount = 0;
+
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\ReportInstock", mappedBy="brand")
+     * @ORM\Column(type="integer", nullable=true, name="rule_id")
      */
-    /*private $reports;*/
+    private $ruleId;
+
+    /**
+     * @ManyToOne(targetEntity="Rule")
+     */
+    private $rule;
 
     /**
      * @return mixed
@@ -127,6 +134,42 @@ class Brand {
         return $this->provider;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRuleId()
+    {
+        return $this->ruleId;
+    }
+
+    /**
+     * @param mixed $ruleId
+     */
+    public function setRuleId($ruleId)
+    {
+        $this->ruleId = $ruleId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRule()
+    {
+        if(!$this->rule){
+            return $this->provider->getRule();
+        }
+
+        return $this->rule;
+    }
+
+    /**
+     * @param mixed $rule
+     */
+    public function setRule($rule)
+    {
+        $this->rule = $rule;
+    }
+
     public function serialize(){
         $encoders = array(new XmlEncoder(), new JsonEncoder());
         $normalizer = new ObjectNormalizer();
@@ -136,5 +179,29 @@ class Brand {
         $content = json_decode($serializer->serialize($this, 'json'));
 
         return $content;
+    }
+
+    /*public function getRuledInventoryItemsCount()
+    {
+        $count = 0;
+
+        foreach ($this->inventoryItems as $item)
+        {
+            if($item->getRuleId())
+            {
+                $count++;
+            }
+        }
+
+        return $count;
+    }*/
+    public function getRuledItemsCount()
+    {
+        return $this->ruledInventoryItemsCount;
+    }
+
+    public function setRuledItemsCount($count)
+    {
+        $this->ruledInventoryItemsCount = $count;
     }
 }

@@ -87,9 +87,14 @@ class InventoryItem
     private $fj_sub_status_2;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true, name="brand_name")
+     * @ORM\Column(type="integer", nullable=true, name="rule_id")
      */
-    private $brandName;
+    private $ruleId;
+
+    /**
+     * @ManyToOne(targetEntity="Rule")
+     */
+    private $rule;
 
     /**
      * @ORM\Column(type="integer")
@@ -112,6 +117,11 @@ class InventoryItem
      * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
      */
     private $provider;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, name="brand_name")
+     */
+    private $brandName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, name="provider_name")
@@ -553,6 +563,42 @@ class InventoryItem
     public function setProvider($provider)
     {
         $this->provider = $provider;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRuleId()
+    {
+        return $this->ruleId;
+    }
+
+    /**
+     * @param mixed $ruleId
+     */
+    public function setRuleId($ruleId)
+    {
+        $this->ruleId = $ruleId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRule()
+    {
+        if(!$this->rule){
+            return $this->brand->getRule();
+        }
+
+        return $this->rule;
+    }
+
+    /**
+     * @param mixed $rule
+     */
+    public function setRule($rule)
+    {
+        $this->rule = $rule;
     }
 
     public static function getEmpty(){
