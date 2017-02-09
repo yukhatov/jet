@@ -50,6 +50,8 @@ class Brand {
      */
     private $inventoryItems;
 
+    private $ruledInventoryItemsCount = 0;
+
     /**
      * @ORM\Column(type="integer", nullable=true, name="rule_id")
      */
@@ -179,7 +181,7 @@ class Brand {
         return $content;
     }
 
-    public function getRuledInventoryItemsCount()
+    /*public function getRuledInventoryItemsCount()
     {
         $count = 0;
 
@@ -192,5 +194,14 @@ class Brand {
         }
 
         return $count;
+    }*/
+    public function getRuledItemsCount()
+    {
+        return $this->ruledInventoryItemsCount;
+    }
+
+    public function setRuledItemsCount($count)
+    {
+        $this->ruledInventoryItemsCount = $count;
     }
 }

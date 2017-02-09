@@ -49,6 +49,8 @@ class Provider {
      */
     private $inventoryItems;
 
+    private $ruledInventoryItemsCount = 0;
+
     /**
      * @return mixed
      */
@@ -117,7 +119,7 @@ class Provider {
     {
         $this->rule = $rule;
     }
-    public function getRuledInventoryItemsCount()
+    /*public function getRuledInventoryItemsCount()
     {
         $count = 0;
 
@@ -130,5 +132,14 @@ class Provider {
         }
 
         return $count;
+    }*/
+    public function getRuledItemsCount()
+    {
+        return $this->ruledInventoryItemsCount;
+    }
+
+    public function setRuledItemsCount($count)
+    {
+        $this->ruledInventoryItemsCount = $count;
     }
 }

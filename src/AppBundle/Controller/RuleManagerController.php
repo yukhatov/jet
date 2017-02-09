@@ -29,6 +29,17 @@ class RuleManagerController extends Controller
             ->getRepository('AppBundle:Provider')
             ->findAll();
 
+        /**
+         * counting ruled items
+         */
+        foreach ($providers as $provider) {
+            $provider->setRuledItemsCount( $this->getDoctrine()->getRepository('AppBundle:Provider')->getRuledItemsCount($provider->getId()) );
+
+            foreach ($provider->getBrands() as $brand) {
+                $brand->setRuledItemsCount( $this->getDoctrine()->getRepository('AppBundle:Brand')->getRuledItemsCount($brand->getId()) );
+            }
+        }
+
         return $this->render('ruleManager/ruleManager.html.twig', ['providers' => $providers]);
     }
 

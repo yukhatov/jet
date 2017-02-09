@@ -13,11 +13,20 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
 class BrandRepository extends EntityRepository
 {
-    public function findHavingRule()
+    public function getRuledItemsCount($brandId = null)
     {
         $query = $this->createQueryBuilder('b')
-            ->innerJoin('b.rule', 'r');
+            ->join('b.inventoryItems', 'i')
+            ->select('count(i.id)');
 
-        return $query->getQuery()->getResult();
+        $query->where('i.ruleId IS NOT NULL');
+
+        if($brandId)
+        {
+            $query->andWhere('b.id = :brandId');
+            $query->setParameter('brandId', $brandId);
+        }
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 }

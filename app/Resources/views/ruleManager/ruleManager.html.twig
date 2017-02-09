@@ -21,12 +21,10 @@
 				</thead>
 				<tbody id="manager-body">
 					{% for provider in providers %}
-						{% set providerRuledItemsCount = provider.getRuledInventoryItemsCount() %}
-
 						<tr class="group" data-provider-id="{{ provider.getId() }}">
 
-							{% if(providerRuledItemsCount) %}
-								<td><a href="" class="provider-group"><i class="fa fa-chevron-down" aria-hidden="true"></i> {{ provider.getTitle() }} <b>({{ providerRuledItemsCount }})</b></a></td>
+							{% if(provider.ruledItemsCount) %}
+								<td><a href="" class="provider-group"><i class="fa fa-chevron-down" aria-hidden="true"></i> {{ provider.getTitle() }} <b>({{ provider.ruledItemsCount }})</b></a></td>
 							{% else %}
 								<td><a href="" class="provider-group"><i class="fa fa-chevron-down" aria-hidden="true"></i> {{ provider.getTitle() }} </a></td>
 							{% endif %}
@@ -74,9 +72,8 @@
 							{% else %}
 								<tr data-brand-id="{{ brand.getId() }}" data-provider="{{ brand.providerId() }}" data-rule="null">
 							{% endif %}
-									{% set brandRuledItemsCount = brand.getRuledInventoryItemsCount() %}
-									{% if(brandRuledItemsCount) %}
-										<td><a href="{{ path('ruleManagerBrand', { 'brandId': brand.id }) }}">{{ brand.getTitle() }} <b>({{ brandRuledItemsCount }})</b></a></td>
+									{% if(brand.ruledItemsCount) %}
+										<td><a href="{{ path('ruleManagerBrand', { 'brandId': brand.id }) }}">{{ brand.getTitle() }} <b>({{ brand.ruledItemsCount }})</b></a></td>
 									{% else %}
 										<td><a href="{{ path('ruleManagerBrand', { 'brandId': brand.id }) }}">{{ brand.getTitle() }}</a></td>
 									{% endif %}

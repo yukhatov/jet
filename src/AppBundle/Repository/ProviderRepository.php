@@ -12,12 +12,20 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
 class ProviderRepository extends EntityRepository
 {
-    /*public function findAllEager()
+    public function getRuledItemsCount($providerId = null)
     {
         $query = $this->createQueryBuilder('p')
-            ->join('p.brands', 'b')
-            ->join('p.rule', 'r');
+            ->join('p.inventoryItems', 'i')
+            ->select('count(i.id)');
 
-        return $query->getQuery()->getResult();
-    }*/
+        $query->where('i.ruleId IS NOT NULL');
+
+        if($providerId)
+        {
+            $query->andWhere('p.id = :providerId');
+            $query->setParameter('providerId', $providerId);
+        }
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
 }
