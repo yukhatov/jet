@@ -143,12 +143,18 @@ $(document).on('click', '.edit', function(e) {
     {
         $(this).find('i').removeClass("fa fa-edit").addClass( "fa fa-save" )
         tr.removeAttr('disabled');
+
+        /* appending close button */
+        $(this).parent().append('<a href="" class="close"><i class="fa fa-window-close-o" aria-hidden="true"></i></a>');
     }else{
         if(saveRule($(this).closest('tr')))
         {
             $(this).find('i').removeClass("fa fa-save").addClass( "fa fa-edit" )
             tr.attr('disabled', true);
         }
+
+        /* removing close button */
+        $(this).parent().find('a.close').remove();
     }
 });
 
@@ -167,8 +173,31 @@ $(document).on('click', '.remove', function(e) {
 
         // remove styling and 'remove' button
         $(this).closest('tr').removeClass('bold-row');
+
+        if( $(this).parent().find('i.fa-save'))
+        {
+            $(this).parent().find('i.fa-save').removeClass("fa-save").addClass( "fa-edit" );
+
+            isAllRulesSaved = !isAllRulesSaved;
+        }
+
+        $(this).closest('tr').find('input').attr('disabled', true);
+        $(this).parent().find('a.close').remove();
+
         $(this).remove();
     }
+});
+
+$(document).on('click', '.close', function(e) {
+    e.preventDefault();
+
+    isAllRulesSaved = !isAllRulesSaved;
+
+    var tr = $(this).closest('tr').find('input');
+    tr.attr('disabled', true);
+
+    $(this).parent().find('i.fa-save').removeClass("fa-save").addClass( "fa-edit" );
+    $(this).remove();
 });
 
 function saveRule(row){

@@ -54,14 +54,6 @@ $(document).on('click', '#show-all-button', function(e) {
 function tableInit()
 {
     table = $("#rule-manager-table").DataTable({
-        "buttons": [
-            {
-                extend: 'excel',
-                text: 'Export',
-                footer: 'true',
-                title: 'Jet orders report'
-            }
-        ],
         "fixedHeader": true,
         "dom": "ftr" +							// https://datatables.net/reference/option/dom
         "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4'l>>",
@@ -76,7 +68,9 @@ function tableInit()
                 "next": 		'<i class="fa fa-3x fa-angle-right" aria-hidden="true"></i>'
             }
         },
-
+        "columnDefs": [
+            { "width": "4.5%", "targets": 8 }
+        ]
     });
 }
 
@@ -102,6 +96,15 @@ $(document).on('click', '.remove', function(e) {
             $(this).closest('tr').hide();
         }
 
+        if( $(this).parent().find('i.fa-save'))
+        {
+            $(this).parent().find('i.fa-save').removeClass("fa-save").addClass( "fa-edit" );
+
+            isAllRulesSaved = !isAllRulesSaved;
+        }
+
+        $(this).closest('tr').find('input').attr('disabled', true);
+        $(this).parent().find('a.close').remove();
         $(this).remove();
      }
 });
@@ -119,13 +122,31 @@ $(document).on('click', '.edit', function(e) {
         tr.removeAttr('disabled');
         tr.focus();
 
+        /* appending close button */
+        $(this).parent().append('<a href="" class="close"><i class="fa fa-window-close-o" aria-hidden="true"></i></a>');
+
     }else{
         if(saveRule($(this).closest('tr')))
         {
             $(this).find('i').removeClass("fa fa-save").addClass( "fa fa-edit" )
             tr.attr('disabled', true);
         }
+
+        /* removing close button */
+        $(this).parent().find('a.close').remove();
     }
+});
+
+$(document).on('click', '.close', function(e) {
+    e.preventDefault();
+
+    isAllRulesSaved = !isAllRulesSaved;
+
+    var tr = $(this).closest('tr').find('input');
+    tr.attr('disabled', true);
+
+    $(this).parent().find('i.fa-save').removeClass("fa-save").addClass( "fa-edit" );
+    $(this).remove();
 });
 /*
 * Alert before go away
